@@ -25,7 +25,7 @@ public class Client {
     /** @param firstName  - имя клиента 
       * @param secondName - Фамилия клиента 
       */
-    Client(String firstName, String secondName)
+    public Client(String firstName, String secondName)
     {
         this.firstName = firstName;
         this.secondName = secondName;
@@ -55,9 +55,19 @@ public class Client {
         return this.secondName ;
     }
     
+    public void changeFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+    
+    public void changeSecondName(String secondName)
+    {
+        this.secondName = secondName;
+    }
+    
     public void show()
     {
-        System.out.printf("%s %s has %d pets\n", this.firstName, this.firstName,client_pets.size());
+        System.out.printf("%s %s has %d pets\n", this.firstName, this.secondName, client_pets.size());
         for(Pet pet_item : client_pets)
         {
             System.out.printf("%s %s \n", pet_item.getAnimal(), pet_item.getName());

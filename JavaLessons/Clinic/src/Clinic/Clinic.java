@@ -21,14 +21,63 @@ public class Clinic {
         clients_base.add(newClient);
     }
     
+    public List<Client> findClient(final String firstName, final String secondName)
+    {
+        List<Client> clients = new ArrayList<>();
+        
+        for (Client client : clients_base)
+        {
+            if (client.getFirstName().equals(firstName))
+            {
+                if (client.getSecondName().equals(secondName))
+                {
+                    clients.add(client);
+                }
+            }
+        }
+        return clients;
+    }
+    
+    /** 
+     * Поиск по имени или фамилии
+     * @param Name
+     * @return Список найденных клиентов
+     */
+    public List<Client> findClient(final String Name)
+    {
+        List<Client> clients = new ArrayList<>();
+        
+        for (Client client : clients_base)
+        {
+            if (client.getFirstName().equals(Name))
+            {
+                clients.add(client);
+            }
+        }
+        
+        if (clients.isEmpty())
+        {
+            for (Client client : clients_base)
+            {
+                if (client.getFirstName().equals(Name))
+                {
+                    clients.add(client);
+                }
+            }
+        }
+        
+        return clients;
+    }
+    
+    public boolean removeClient(Client client)
+    {
+        boolean result = false;
+
+        return result = clients_base.remove(client);
+    }
+    
     public void start()
     {
-        Client client1 = new Client("Aleksey", "Kostikov");
         
-        client1.addPet(new Pet("Cat", "Timofey"));
-        client1.addPet(new Pet("Dog", "Marti"));
-
-        
-        client1.show();
     }
 }

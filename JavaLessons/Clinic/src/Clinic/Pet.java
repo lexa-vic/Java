@@ -14,8 +14,12 @@ public class Pet {
     private String animal;
     private String name;
     
-    
-    Pet(final String animal, final String name)
+    /**
+     *
+     * @param animal
+     * @param name
+     */
+    public Pet(final String animal, final String name)
     {
         this.animal = animal;
         this.name   = name;
@@ -29,5 +33,11 @@ public class Pet {
     public String getName()
     {
         return this.name;
+    }
+    /**
+     */
+    public void changeName(final String name)
+    {
+        this.name = name;
     }
 }
