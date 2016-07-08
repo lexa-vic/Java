@@ -28,7 +28,7 @@ public class CalculatorTest {
         calc.add(3, 2);
 
         result = calc.getResult();
-        assertThat(5.0, is(result));
+        assertThat(result, is(5.0));
     }
 
     /** Тест вычитания */
@@ -39,7 +39,7 @@ public class CalculatorTest {
         calc.subtract(2, 3);
 
         result = calc.getResult();
-        assertThat(-1.0, is(result));
+        assertThat(result, is(-1.0));
     }
 
     /** Тест деления */
@@ -50,7 +50,7 @@ public class CalculatorTest {
         calc.div(10, 2);
 
         result = calc.getResult();
-        assertThat(5.0, is(result));
+        assertThat(result, is(5.0));
     }
 
     /** Тест умножения */
@@ -61,7 +61,7 @@ public class CalculatorTest {
         calc.mult(6, 6);
 
         result = calc.getResult();
-        assertThat(36.0, is(result));
+        assertThat(result, is(36.0));
     }
 
 }
