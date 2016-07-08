@@ -25,6 +25,7 @@
         <module name="Calculator" />
         <module name="calculator" />
         <module name="HelloWorld" />
+        <module name="Triangle" />
         <module name="Сalculator" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="Calculator" target="1.8" />
       <module name="HelloWorld" target="1.8" />
       <module name="Lessons" target="1.8" />
+      <module name="Triangle" target="1.8" />
       <module name="Сalculator" target="1.8" />
     </bytecodeTargetLevel>
   </component>

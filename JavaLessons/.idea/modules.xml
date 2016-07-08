@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Part 1/Lesson 1 - JVM. Byte code/HelloWorld.iml" filepath="$PROJECT_DIR$/Part 1/Lesson 1 - JVM. Byte code/HelloWorld.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lessons.iml" filepath="$PROJECT_DIR$/Lessons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Part 1/Lesson 3 - Conditions/Triangle.iml" filepath="$PROJECT_DIR$/Part 1/Lesson 3 - Conditions/Triangle.iml" />
       <module fileurl="file://$PROJECT_DIR$/Part 1/Lesson 2 - Types/Сalculator.iml" filepath="$PROJECT_DIR$/Part 1/Lesson 2 - Types/Сalculator.iml" />
     </modules>
   </component>

@@ -14,6 +14,7 @@
     <modules>
         <module>Part 1/Lesson 1 - JVM. Byte code</module>
         <module>Part 1/Lesson 2 - Types</module>
+		<module>Part 1/Lesson 3 - Conditions</module>
     </modules>
   
 
