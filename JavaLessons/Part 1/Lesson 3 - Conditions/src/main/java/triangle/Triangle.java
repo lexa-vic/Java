@@ -6,11 +6,17 @@ import static java.lang.Math.*;
  * Created by Алексей on 08.07.2016.
  */
 public class Triangle {
-
+    /** Вершины треугольника */
     private final Point a;
     private final Point b;
     private final Point c;
 
+    /**
+     * Конструктор с добавлением вершин треугольника
+     * @param a
+     * @param b
+     * @param c
+     */
     Triangle(Point a, Point b, Point c){
         this.a = a;
         this.b = b;
