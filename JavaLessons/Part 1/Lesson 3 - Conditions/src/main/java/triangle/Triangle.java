@@ -17,17 +17,10 @@ public class Triangle {
         this.c = c;
     }
 
-    /**
-     * Периметр треугольника
-     * @return
-     */
-    private double perimeter(){
-        return -1;
-    }
 
     /**
      * Расчет площади треугольника
-     * @return -1 - если такой треугольник нечуществует
+     * @return Площадь; -1 - если такой треугольник не существует
      */
     public double area(){
         // Стороны треугольника
@@ -50,6 +43,39 @@ public class Triangle {
             result = -1;
         }
 
+        return result;
+    }
+
+    /**
+     * Максимальная длина стороны
+     * @return Длина стороны ; -1 - если такой треугольник не существует
+     */
+    public double max(){
+        // Стороны треугольника
+        double ab, bc, ac;
+        double result = 0;
+
+        ab = a.distanceTo(b);
+        bc = b.distanceTo(c);
+        ac = a.distanceTo(c);
+
+        // Условие существование треугольника - сумма любых двух сторон больше третей
+        if ((ab+bc) > ac) {
+            if (ab >= bc && ab >= ac) {
+
+                result = ab;
+            } else if ((bc >= bc && bc >= ac)){
+
+                result = bc;
+            }
+            else{
+
+                result = ac;
+            }
+        }else{
+            // Такой треугольник не существует
+            result = -1;
+        }
         return result;
     }
 
