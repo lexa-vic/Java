@@ -16,5 +16,6 @@ public class TriangleInit {
         Triangle triangle = new Triangle(p1, p2, p3);
 
         System.out.printf("Triangle area is %f\n", triangle.area());
+
     }
 }

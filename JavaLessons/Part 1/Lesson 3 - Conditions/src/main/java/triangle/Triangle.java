@@ -56,6 +56,7 @@ public class Triangle {
      * Максимальная длина стороны
      * @return Длина стороны ; -1 - если такой треугольник не существует
      */
+/*
     public double max(){
         // Стороны треугольника
         double ab, bc, ac;
@@ -84,5 +85,5 @@ public class Triangle {
         }
         return result;
     }
-
+*/
 }
