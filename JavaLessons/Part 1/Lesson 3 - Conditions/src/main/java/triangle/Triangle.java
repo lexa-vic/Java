@@ -10,6 +10,8 @@ public class Triangle {
     private final Point a;
     private final Point b;
     private final Point c;
+    // Стороны треугольника
+    double ab, bc, ac;
 
     /**
      * Конструктор с добавлением вершин треугольника
@@ -29,13 +31,12 @@ public class Triangle {
      * @return Площадь; -1 - если такой треугольник не существует
      */
     public double area(){
-        // Стороны треугольника
-        double ab, bc, ac;
+
         double result = 0;
 
-        ab = a.distanceTo(b);
-        bc = b.distanceTo(c);
-        ac = a.distanceTo(c);
+        this.ab = getSideA();
+        this.bc = getSideB();
+        this.ac = getSideC();
 
         // Условие существование треугольника - сумма любых двух сторон больше третей
         if ((ab+bc) > ac)
@@ -50,6 +51,29 @@ public class Triangle {
         }
 
         return result;
+    }
+
+    /**
+     * Длина стороны А
+     * @return
+     */
+    public double getSideA(){
+        return this.a.distanceTo(this.b);
+    }
+
+    /**
+     * Длина стороны B
+     * @return
+     */
+    public double getSideB(){
+        return this.b.distanceTo(this.c);
+    }
+    /**
+     * Длина стороны С
+     * @return
+     */
+    public double getSideC(){
+        return this.a.distanceTo(this.c);
     }
 
     /**
