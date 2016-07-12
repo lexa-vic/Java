@@ -19,12 +19,14 @@ public class ArrayExampleTest {
     public void sort() throws Exception {
         int[] inBuf     = new int[] {3, 5, 1, 2, 10};
         int[] expectBuf = new int[] {1, 2, 3, 5, 10};
+        boolean result  = false;
 
         ArrayExample arrayChange = new ArrayExample();
 
         arrayChange.sort(inBuf);
+        result = Arrays.equals(inBuf, expectBuf);
 
-        assertThat(Arrays.equals(inBuf, expectBuf), is(true));
+        assertThat(result, is(true));
     }
 
     /**
