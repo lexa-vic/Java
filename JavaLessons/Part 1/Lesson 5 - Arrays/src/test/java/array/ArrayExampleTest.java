@@ -19,14 +19,12 @@ public class ArrayExampleTest {
     public void sort() throws Exception {
         int[] inBuf     = new int[] {3, 5, 1, 2, 10};
         int[] expectBuf = new int[] {1, 2, 3, 5, 10};
-        boolean result  = false;
 
         ArrayExample arrayChange = new ArrayExample();
 
         arrayChange.sort(inBuf);
-        result = Arrays.equals(inBuf, expectBuf);
 
-        assertThat(result, is(true));
+        assertThat(inBuf, is(expectBuf));
     }
 
     /**
@@ -37,17 +35,12 @@ public class ArrayExampleTest {
     public void rotate() throws Exception {
         int[][] inBuf     = new int[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int[][] expectBuf = new int[][] {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
-        boolean result    = false;
-
+ 
         ArrayExample arrayChange = new ArrayExample();
 
         inBuf = arrayChange.rotate(inBuf);
 
-        for(int i = 0; i < inBuf.length; i++){
-            result = Arrays.equals(inBuf[i], expectBuf[i]);
-        }
-
-        assertThat(result, is(true));
+        assertThat(inBuf, is(expectBuf));
     }
 
     /**
@@ -63,7 +56,7 @@ public class ArrayExampleTest {
 
         arrayChange.duplicateDelete(inBuf);
 
-        assertThat(Arrays.equals(inBuf, expectBuf), is(true));
+        assertThat(inBuf, is(expectBuf));
     }
 
 }

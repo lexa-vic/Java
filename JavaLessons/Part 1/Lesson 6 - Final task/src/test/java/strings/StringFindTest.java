@@ -15,15 +15,16 @@ public class StringFindTest {
      */
     @Test
     public void containsTrue() throws Exception {
-        boolean result = false;
-        String origin  = "ab bc cd de ef";
-        String sub     = "de";
+        boolean result     = false;
+        boolean testResult = true;
+        String origin      = "ab bc cd de ef";
+        String sub         = "de";
 
         StringFind stringSub = new StringFind();
 
         result = stringSub.contains(origin, sub);
 
-        assertThat(result, is(true));
+        assertThat(result, is(testResult));
     }
 
     /**
@@ -32,15 +33,16 @@ public class StringFindTest {
      */
     @Test
     public void containsFalse() throws Exception {
-        boolean result = false;
-        String origin  = "ab bc cd de ef";
-        String sub     = "xd";
+        boolean result     = false;
+        boolean testResult = false;
+        String origin      = "ab bc cd de ef";
+        String sub         = "xd";
 
         StringFind stringSub = new StringFind();
 
         result = stringSub.contains(origin, sub);
 
-        assertThat(result, is(false));
+        assertThat(result, is(testResult));
     }
 
     /**
@@ -49,15 +51,16 @@ public class StringFindTest {
      */
     @Test
     public void containsSame() throws Exception {
-        boolean result = false;
-        String origin  = "ab bc cd de ef";
-        String sub     = "ab bc cd de ef";
+        boolean result     = false;
+        boolean testResult = true;
+        String origin      = "ab bc cd de ef";
+        String sub         = "ab bc cd de ef";
 
         StringFind stringSub = new StringFind();
 
         result = stringSub.contains(origin, sub);
 
-        assertThat(result, is(true));
+        assertThat(result, is(testResult));
     }
 
     /**
@@ -66,15 +69,16 @@ public class StringFindTest {
      */
     @Test
     public void containsNull() throws Exception {
-        boolean result = false;
-        String origin  = "ab bc cd de ef";
-        String sub     = "";
+        boolean result     = false;
+        boolean testResult = false;
+        String origin      = "ab bc cd de ef";
+        String sub         = "";
 
         StringFind stringSub = new StringFind();
 
         result = stringSub.contains(origin, sub);
 
-        assertThat(result, is(false));
+        assertThat(result, is(testResult));
     }
 
 }
