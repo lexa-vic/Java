@@ -1,8 +1,9 @@
 package ru.kostikov.start;
 
-import ru.kostikov.models.*;
-import java.util.*;
+import ru.kostikov.models.Item;
 
+import java.util.Arrays;
+import java.util.Random;
 
 
 /**
@@ -35,7 +36,7 @@ public class Tracker {
 
         boolean result = false;
 
-        if (item != null && this.position < this.items.length)
+        if ((item != null) && (this.position < this.items.length))
         {
             item.setId(generateId());
             this.items[this.position++] = item;
@@ -139,24 +140,5 @@ public class Tracker {
         return result;
 
     }
-
-
-    /**
-     * @param item
-     * @param comment
-     * @return
-     */
-    public boolean addComment(Item item, String comment){
-        boolean result = false;
-        for(Item it: items){
-            if(item != null && item.getId().equals(it.getId())){
-                it.addComment(comment);
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
 
 }

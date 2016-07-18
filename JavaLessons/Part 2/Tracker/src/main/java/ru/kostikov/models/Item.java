@@ -1,5 +1,7 @@
 package ru.kostikov.models;
 
+import java.util.Arrays;
+
 /**
  * Created by Алексей on 14.07.2016.
  */
@@ -123,11 +125,12 @@ public class Item {
      * @param comment
      * @return
      */
-    public boolean addComment(String comment){
+    public boolean addComment(Comment comment){
         boolean result = false;
 
         if(comment != null && currentCommentSize < comments.length){
-            this.comments[currentCommentSize] = new Comment(comment);
+            this.comments[currentCommentSize++] = comment;
+            result = true;
         }
         return result;
     }
@@ -136,12 +139,12 @@ public class Item {
      * Чтение всех комментариев
      * @return
      */
-    public String[] getAllComments(){
-        String[] result = new String[currentCommentSize];
+    public Comment[] getAllComments(){
+        Comment[] result = new Comment[currentCommentSize];
 
         for(int i = 0; i < currentCommentSize; i++)
         {
-            result[i] = this.comments[i].getComment();
+            result[i] = this.comments[i];
         }
 
         return result;
