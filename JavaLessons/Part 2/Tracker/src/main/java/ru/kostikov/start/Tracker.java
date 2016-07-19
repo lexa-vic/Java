@@ -13,7 +13,7 @@ public class Tracker {
     /**
      * Размер хранилища заявок
      */
-    private final int storageSize = 20;
+    private int storageSize = 10;
     /**
      * Хранилище заявок
      */
@@ -36,8 +36,15 @@ public class Tracker {
 
         boolean result = false;
 
-        if ((item != null) && (this.position < this.items.length))
+        if (item != null)
         {
+            // Если кол-во заявок перевалило за границу массива, расширяем массив
+            if (this.position >= this.items.length)
+            {
+                storageSize += 20;
+                this.items = Arrays.copyOf(this.items, storageSize);
+            }
+
             item.setId(generateId());
             this.items[this.position++] = item;
             result = true;
@@ -111,7 +118,7 @@ public class Tracker {
                 }
             }
             if (count != 0){
-                Arrays.copyOf(result, count);
+                result = Arrays.copyOf(result, count);
             }
         }
 

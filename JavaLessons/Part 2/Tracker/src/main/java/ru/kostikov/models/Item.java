@@ -31,7 +31,7 @@ public class Item {
     /**
      *  Размер хранилища комментариев к заявке
      */
-    private final int commentStorageSize = 5;
+    private int commentStorageSize = 5;
     /**
      *  Текущее кол-во комментариев
      */
@@ -128,10 +128,16 @@ public class Item {
     public boolean addComment(Comment comment){
         boolean result = false;
 
-        if(comment != null && currentCommentSize < comments.length){
+        if(comment != null){
+            // Если нет места раширяем массив
+            if (currentCommentSize >= comments.length){
+                commentStorageSize += 20;
+                this.comments = Arrays.copyOf(this.comments, commentStorageSize);
+            }
             this.comments[currentCommentSize++] = comment;
             result = true;
         }
+
         return result;
     }
 
