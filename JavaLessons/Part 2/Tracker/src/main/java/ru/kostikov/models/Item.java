@@ -130,11 +130,11 @@ public class Item {
 
         if(comment != null){
             // Если нет места раширяем массив
-            if (currentCommentSize >= comments.length){
-                commentStorageSize += 20;
-                this.comments = Arrays.copyOf(this.comments, commentStorageSize);
+            if (this.currentCommentSize >= this.comments.length){
+                this.commentStorageSize += 20;
+                this.comments = Arrays.copyOf(this.comments, this.commentStorageSize);
             }
-            this.comments[currentCommentSize++] = comment;
+            this.comments[this.currentCommentSize++] = comment;
             result = true;
         }
 
@@ -146,9 +146,9 @@ public class Item {
      * @return
      */
     public Comment[] getAllComments(){
-        Comment[] result = new Comment[currentCommentSize];
+        Comment[] result = new Comment[this.currentCommentSize];
 
-        for(int i = 0; i < currentCommentSize; i++)
+        for(int i = 0; i < this.currentCommentSize; i++)
         {
             result[i] = this.comments[i];
         }

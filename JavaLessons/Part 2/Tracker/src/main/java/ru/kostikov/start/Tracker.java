@@ -41,8 +41,8 @@ public class Tracker {
             // Если кол-во заявок перевалило за границу массива, расширяем массив
             if (this.position >= this.items.length)
             {
-                storageSize += 20;
-                this.items = Arrays.copyOf(this.items, storageSize);
+                this.storageSize += 20;
+                this.items = Arrays.copyOf(this.items, this.storageSize);
             }
 
             item.setId(generateId());
