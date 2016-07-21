@@ -76,19 +76,19 @@ public class StartUITest {
         Item task = new Task("Problem with printer", "Printer do not print");
         this.tracker.add(task);
 
-        expectedString = "1. Add task.\r\n" +
-                         "2. Show all tasks.\r\n" +
-                         "3. Find task.\r\n" +
+        expectedString = "1. Add the new item.\r\n" +
+                         "2. Show all items.\r\n" +
+                         "3. Find item.\r\n" +
                          "4. Exit.\r\n" +
-                         "Please enter the command \r\n" +
+                         "Select: \r\n" +
                          "Task id: "+ task.getId() +
                          " name: Problem with printer, description: Printer do not print \n" +
                          "Please enter any key... \r\n"+
-                         "1. Add task.\r\n" +
-                         "2. Show all tasks.\r\n" +
-                         "3. Find task.\r\n" +
+                         "1. Add the new item.\r\n" +
+                         "2. Show all items.\r\n" +
+                         "3. Find item.\r\n" +
                          "4. Exit.\r\n" +
-                         "Please enter the command \r\n";
+                         "Select: \r\n";
 
         StartUI ui = new StartUI(input, this.tracker);
 
@@ -272,7 +272,6 @@ public class StartUITest {
                 "1",                    // Find menu: "Please choose the task: "
                 "4",                    // Change menu: "4. Del task. "
                 "\n",                    // Task delete. Please enter any key... "
-                "5",                    // Find menu: "5. Exit."
                 "4",                    // Main menu: "4. Exit."
 
         });
