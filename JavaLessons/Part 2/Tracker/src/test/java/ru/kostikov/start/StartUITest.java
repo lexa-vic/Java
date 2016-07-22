@@ -14,6 +14,7 @@ import java.util.Scanner;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+
 /**
  * Created by Алексей on 20.07.2016.
  */
@@ -75,6 +76,8 @@ public class StartUITest {
         });
         Item task = new Task("Problem with printer", "Printer do not print");
         this.tracker.add(task);
+
+        //Jointer.on
 
         expectedString = "1. Add the new item.\r\n" +
                          "2. Show all items.\r\n" +

@@ -29,8 +29,8 @@ public class StartUI {
         menu.fillActions();
         do{
             menu.show();
-            int key = Integer.valueOf(input.ask("Select: "));
-            menu.select(key);
+            //int key = Integer.valueOf(input.ask("Select: ", menu.getMenuRange));
+            menu.select(input.ask("Select: ", menu.getMenuRange()));
         }while(menu.exit() == false);
 
 
@@ -38,7 +38,7 @@ public class StartUI {
 
     public static void main(String[] args) {
 
-        Input input = new ConsoleInput();//new StubInput( new String[]{"Creat stub task"});
+        Input input = new ValidateInput();//new StubInput( new String[]{"Creat stub task"});
         StartUI ui = new StartUI(input, new Tracker());
 
         ui.run();

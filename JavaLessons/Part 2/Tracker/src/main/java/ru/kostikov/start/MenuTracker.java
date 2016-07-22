@@ -4,6 +4,8 @@ import ru.kostikov.models.Comment;
 import ru.kostikov.models.Item;
 import ru.kostikov.models.Task;
 
+import java.util.Arrays;
+
 /**
  * Created by Алексей on 21.07.2016.
  */
@@ -34,6 +36,25 @@ public class MenuTracker {
     }
 
     /**
+     * Создает и возвращает последовательность значений валидных для приема меню
+     * @return
+     */
+    public int[] getMenuRange(){
+        int[] range = new int[this.actions.length];
+        int count = 0;
+        for (count = 0; count < this.actions.length; count++){
+            if (this.actions[count] != null){
+                range[count] = count+1;
+            }else{
+                break;
+            }
+        }
+        range = Arrays.copyOf(range, count+1);
+
+        return range;
+    }
+
+    /**
      * Выбор пункта меню
      * @param key
      */
@@ -42,10 +63,6 @@ public class MenuTracker {
         key -= 1;
         if(key >= 0 && key < this.actions.length){
             this.actions[key].execute(this.input, this.tracker);
-
-            if (this.actions[key] instanceof ExitMenu){
-                this.exit = true;
-            }
         }
 
     }
@@ -65,6 +82,32 @@ public class MenuTracker {
         return this.exit;
     }
 
+    /**
+     *  Класс - выход из главного меню
+     */
+    private class ExitMenu implements UserAction{
+        /**
+         * @return
+         */
+        public int key(){
+            return 4;
+        }
+
+        /**
+         * @param input
+         * @param tracker
+         */
+        public void execute(Input input, Tracker tracker){
+            exit = true;
+        }
+
+        /**
+         * @return
+         */
+        public String info(){
+            return String.format("%s. %s",this.key(), "Exit." );
+        }
+    }
 
 }
 /**
@@ -249,6 +292,25 @@ class FindItem implements UserAction{
         }
 
         /**
+         * Создает и возвращает последовательность значений валидных для приема меню
+         * @return
+         */
+        public int[] getMenuRange(){
+            int[] range = new int[this.subActions.length];
+            int count = 0;
+            for (count = 0; count < this.subActions.length; count++){
+                if (this.subActions[count] != null){
+                    range[count] = count+1;
+                }else{
+                    break;
+                }
+            }
+            range = Arrays.copyOf(range, count+1);
+
+            return range;
+        }
+
+        /**
          * Выбор подпункта
          * @param key
          */
@@ -256,11 +318,6 @@ class FindItem implements UserAction{
             key -= 1;
             if(key >= 0 && key < this.subActions.length) {
                 this.subActions[key].execute(this.input, this.tracker);
-
-                if (this.subActions[key] instanceof ExitSubMenu ||
-                    this.subActions[key] instanceof DeleteItem){
-                    this.exit = true;
-                }
             }
         }
 
@@ -282,8 +339,8 @@ class FindItem implements UserAction{
             this.fillActions();
             do{
                 this.show();
-                int key = Integer.valueOf(input.ask("Select: "));
-                this.select(key);
+                //int key = Integer.valueOf(input.ask("Select: ", getMenuRange()));
+                this.select(input.ask("Select: ", this.getMenuRange()));
             }while(this.exit == false);
         }
 
@@ -382,6 +439,8 @@ class FindItem implements UserAction{
             public void execute(Input input, Tracker tracker){
                 tracker.del(item);
                 input.ask("Task delete. Please enter any key... ");
+
+                exit = true;
             }
 
             /**
@@ -407,7 +466,7 @@ class FindItem implements UserAction{
              * @param tracker
              */
             public void execute(Input input, Tracker tracker){
-
+                exit = true;
             }
 
             /**
@@ -421,29 +480,4 @@ class FindItem implements UserAction{
     }
 }
 
-/**
- *  Класс - выход из главного меню
- */
-class ExitMenu implements UserAction{
-    /**
-     * @return
-     */
-    public int key(){
-        return 4;
-    }
 
-    /**
-     * @param input
-     * @param tracker
-     */
-    public void execute(Input input, Tracker tracker){
-
-    }
-
-    /**
-     * @return
-     */
-    public String info(){
-        return String.format("%s. %s",this.key(), "Exit." );
-    }
-}
