@@ -1,18 +1,18 @@
 package ru.kostikov.start;
 
-import org.junit.Before;
 import org.junit.Test;
 import ru.kostikov.models.Comment;
 import ru.kostikov.models.Item;
 import ru.kostikov.models.Task;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
+
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+
+import com.google.common.base.Joiner;
 
 
 /**
@@ -77,21 +77,33 @@ public class StartUITest {
         Item task = new Task("Problem with printer", "Printer do not print");
         this.tracker.add(task);
 
-        //Jointer.on
+        expectedString = Joiner.on("").join("1. Add the new item.\r\n",
+                                            "2. Show all items.\r\n",
+                                            "3. Find item.\r\n",
+                                            "4. Exit.\r\n",
+                                            "Select: \r\n",
+                                            "Task id: "+ task.getId(),
+                                            " name: Problem with printer, description: Printer do not print \n",
+                                            "Please enter any key... \r\n",
+                                            "1. Add the new item.\r\n",
+                                            "2. Show all items.\r\n",
+                                            "3. Find item.\r\n",
+                                            "4. Exit.\r\n",
+                                            "Select: \r\n");
 
-        expectedString = "1. Add the new item.\r\n" +
-                         "2. Show all items.\r\n" +
-                         "3. Find item.\r\n" +
-                         "4. Exit.\r\n" +
-                         "Select: \r\n" +
-                         "Task id: "+ task.getId() +
-                         " name: Problem with printer, description: Printer do not print \n" +
-                         "Please enter any key... \r\n"+
-                         "1. Add the new item.\r\n" +
-                         "2. Show all items.\r\n" +
-                         "3. Find item.\r\n" +
-                         "4. Exit.\r\n" +
-                         "Select: \r\n";
+//        expectedString = "1. Add the new item.\r\n" +
+//                         "2. Show all items.\r\n" +
+//                         "3. Find item.\r\n" +
+//                         "4. Exit.\r\n" +
+//                         "Select: \r\n" +
+//                         "Task id: "+ task.getId() +
+//                         " name: Problem with printer, description: Printer do not print \n" +
+//                         "Please enter any key... \r\n"+
+//                         "1. Add the new item.\r\n" +
+//                         "2. Show all items.\r\n" +
+//                         "3. Find item.\r\n" +
+//                         "4. Exit.\r\n" +
+//                         "Select: \r\n";
 
         StartUI ui = new StartUI(input, this.tracker);
 

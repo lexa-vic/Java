@@ -18,6 +18,19 @@ public class StubInput implements Input {
         return this.answers[this.position++];
     }
     public int ask(String question, int[] range){
-        throw  new UnsupportedOperationException("Operation not supported");
+        int key  = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+
+        for (int value: range){
+            if (value == key){
+                exist = true;
+                break;
+            }
+        }
+        if (!exist){
+            throw new MenuOutException("Out of range menu");
+        }
+        return key;
     }
+
 }
