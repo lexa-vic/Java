@@ -82,7 +82,7 @@ public class StartUITest {
                                             "3. Find item.\r\n",
                                             "4. Exit.\r\n",
                                             "Select: \r\n",
-                                            "Task id: "+ task.getId(),
+                                            "Task id: ", task.getId(),
                                             " name: Problem with printer, description: Printer do not print \n",
                                             "Please enter any key... \r\n",
                                             "1. Add the new item.\r\n",

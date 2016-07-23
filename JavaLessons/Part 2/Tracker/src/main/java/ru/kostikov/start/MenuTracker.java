@@ -239,7 +239,7 @@ class FindItem implements UserAction{
             for (Item item: findItem){
                 if (item != null){
                     count++;
-                    System.out.printf(count + ". Task id: %s name: %s, description: %s \n", item.getId(), item.getName(), item.getDescription());
+                    System.out.printf("%d. Task id: %s name: %s, description: %s \n",count, item.getId(), item.getName(), item.getDescription());
                     for(Comment comment : item.getAllComments()){
                         System.out.println("Comment: " + comment.getComment());
                     }
