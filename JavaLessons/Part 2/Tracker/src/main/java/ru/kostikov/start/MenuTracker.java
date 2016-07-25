@@ -234,11 +234,13 @@ class FindItem implements UserAction{
         String findSubString = input.ask("Please enter task's name or description: ");
 
         Item[] findItem = tracker.findByFilter(findSubString);
+        /** Последовательность допустимых значений ввода при выборе нужной задачи */
+        int[]  findCountRange = new int[findItem.length];
 
         if (findItem.length != 0){
             for (Item item: findItem){
                 if (item != null){
-                    count++;
+                    findCountRange[count] = ++count;
                     System.out.printf("%d. Task id: %s name: %s, description: %s \n",count, item.getId(), item.getName(), item.getDescription());
                     for(Comment comment : item.getAllComments()){
                         System.out.println("Comment: " + comment.getComment());
@@ -246,7 +248,8 @@ class FindItem implements UserAction{
                 }
             }
             if (count != 0){
-                count = Integer.valueOf(input.ask("Please choose the task: ")) ;
+                findCountRange = Arrays.copyOf(findCountRange, count);
+                count = input.ask("Please choose the task: ",findCountRange );
                 EditSubMenu subMenu = new EditSubMenu(findItem[count-1], input, tracker );
 
                 subMenu.run();
