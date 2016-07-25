@@ -29,10 +29,10 @@ public class MenuTracker {
      *  Добавление подклассов(пунктов) в меню
      */
     public void fillActions(){
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowItems();
-        this.actions[2] = new FindItem();
-        this.actions[3] = new ExitMenu();
+        this.actions[0] = new AddItem  ("Add the new item." );
+        this.actions[1] = new ShowItems("Show all items." );
+        this.actions[2] = new FindItem ("Find item.");
+        this.actions[3] = new ExitMenu ("Exit." );
     }
 
     /**
@@ -85,7 +85,14 @@ public class MenuTracker {
     /**
      *  Класс - выход из главного меню
      */
-    private class ExitMenu implements UserAction{
+    private class ExitMenu extends BaseAction{
+        /**
+         * Добавляем имя меню
+         * @param name
+         */
+        ExitMenu(String name){
+            super(name);
+        }
         /**
          * @return
          */
@@ -101,12 +108,6 @@ public class MenuTracker {
             exit = true;
         }
 
-        /**
-         * @return
-         */
-        public String info(){
-            return String.format("%s. %s",this.key(), "Exit." );
-        }
     }
 
 }
@@ -114,7 +115,15 @@ public class MenuTracker {
  * Пункт меню добавления заявки
  *
  */
-class AddItem implements UserAction{
+class AddItem extends BaseAction{
+
+    /**
+     * Добавляем имя меню
+     * @param name
+     */
+    AddItem(String name){
+        super(name);
+    }
     /**
      * Получение ключа пункта - место в хранилище пунктов меню
      * @return
@@ -161,19 +170,19 @@ class AddItem implements UserAction{
 
     }
 
-    /**
-     * Описание - отображение пункта
-     * @return
-     */
-    public String info(){
-        return String.format("%s. %s",this.key(), "Add the new item." );
-    }
 }
 /**
  * Пункт меню отображения всех заявок
  *
  */
- class ShowItems implements UserAction{
+ class ShowItems extends BaseAction{
+    /**
+     * Добавляем имя меню
+     * @param name
+     */
+    ShowItems(String name){
+        super(name);
+    }
     /**
      * Получение ключа пункта - место в хранилище пунктов меню
      * @return
@@ -201,20 +210,21 @@ class AddItem implements UserAction{
             input.ask("Task list is empty. Please enter any key... ");
         }
     }
-    /**
-     * Описание - отображение пункта
-     * @return
-     */
-    public String info(){
-        return String.format("%s. %s",this.key(), "Show all items." );
-    }
+
 }
 
 /**
  * Пункт меню поиска заявки
  *
  */
-class FindItem implements UserAction{
+class FindItem extends BaseAction{
+    /**
+     * Добавляем имя меню
+     * @param name
+     */
+    FindItem(String name){
+        super(name);
+    }
     /**
      * Получение ключа пункта - место в хранилище пунктов меню
      * @return
@@ -258,15 +268,7 @@ class FindItem implements UserAction{
             input.ask("Task not found...Please enter any key... ");
         }
     }
-    /**
-     * Описание - отображение пункта
-     * @return
-     */
-    public String info(){
-        return String.format("%s. %s",this.key(), "Find item." );
-    }
-
-    /**
+     /**
      *  Подменю после выбора конкретной заявки
      *  Выполняем операции модификации или удаления
      */
@@ -287,11 +289,11 @@ class FindItem implements UserAction{
          *  Добавление подклассов(пунктов) в меню
          */
         private void fillActions(){
-            this.subActions[0] = new ChangeName();
-            this.subActions[1] = new ChangeDesc();
-            this.subActions[2] = new AddComment();
-            this.subActions[3] = new DeleteItem();
-            this.subActions[4] = new ExitSubMenu();
+            this.subActions[0] = new ChangeName("Change name.");
+            this.subActions[1] = new ChangeDesc("Change description.");
+            this.subActions[2] = new AddComment("Add comment.");
+            this.subActions[3] = new DeleteItem("Delete task.");
+            this.subActions[4] = new ExitSubMenu("Exit.");
         }
 
         /**
@@ -350,7 +352,14 @@ class FindItem implements UserAction{
         /**
          *  Класс - пункт подменю изменения имени заявки
          */
-        private class ChangeName implements UserAction{
+        private class ChangeName extends BaseAction{
+            /**
+             * Добавляем имя меню
+             * @param name
+             */
+            ChangeName(String name){
+                super(name);
+            }
             /**
              * @return
              */
@@ -366,18 +375,18 @@ class FindItem implements UserAction{
                 String name = input.ask("Please enter new task's name ");
                 item.setName(name);
             }
-
-            /**
-             * @return
-             */
-            public String info(){
-                return String.format("%s. %s",this.key(), "Change name." );
-            }
         }
         /**
          *  Класс - пункт подменю изменения описания заявки
          */
-        private class ChangeDesc implements UserAction{
+        private class ChangeDesc extends BaseAction{
+            /**
+             * Добавляем имя меню
+             * @param name
+             */
+            ChangeDesc(String name){
+                super(name);
+            }
             public int key(){
                 return 2;
             }
@@ -386,15 +395,18 @@ class FindItem implements UserAction{
                 String desc = input.ask("Please enter new task's description ");
                 item.setDescription(desc);
             }
-
-            public String info(){
-                return String.format("%s. %s",this.key(), "Change description." );
-            }
         }
         /**
          *  Класс - пункт подменю добавления комментария к заявке
          */
-        private class AddComment implements UserAction{
+        private class AddComment extends BaseAction{
+            /**
+             * Добавляем имя меню
+             * @param name
+             */
+            AddComment(String name){
+                super(name);
+            }
             /**
              * @return
              */
@@ -417,17 +429,18 @@ class FindItem implements UserAction{
                 }while(anyMore.equals("y"));
             }
 
-            /**
-             * @return
-             */
-            public String info(){
-                return String.format("%s. %s",this.key(), "Add comment." );
-            }
         }
         /**
          *  Класс - пункт подменю удаление заявки
          */
-        private class DeleteItem implements UserAction{
+        private class DeleteItem extends BaseAction{
+            /**
+             * Добавляем имя меню
+             * @param name
+             */
+            DeleteItem(String name){
+                super(name);
+            }
             /**
              * @return
              */
@@ -446,17 +459,18 @@ class FindItem implements UserAction{
                 exit = true;
             }
 
-            /**
-             * @return
-             */
-            public String info(){
-                return String.format("%s. %s",this.key(), "Delete task." );
-            }
         }
         /**
          *  Класс - пункт подменю выход из подменю
          */
-        private class ExitSubMenu implements UserAction{
+        private class ExitSubMenu extends BaseAction{
+            /**
+             * Добавляем имя меню
+             * @param name
+             */
+            ExitSubMenu(String name){
+                super(name);
+            }
             /**
              * @return
              */
@@ -470,13 +484,6 @@ class FindItem implements UserAction{
              */
             public void execute(Input input, Tracker tracker){
                 exit = true;
-            }
-
-            /**
-             * @return
-             */
-            public String info(){
-                return String.format("%s. %s",this.key(), "Exit." );
             }
         }
 
