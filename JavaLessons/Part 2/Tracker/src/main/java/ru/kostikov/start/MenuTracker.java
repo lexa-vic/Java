@@ -344,7 +344,6 @@ class FindItem extends BaseAction{
             this.fillActions();
             do{
                 this.show();
-                //int key = Integer.valueOf(input.ask("Select: ", getMenuRange()));
                 this.select(input.ask("Select: ", this.getMenuRange()));
             }while(this.exit == false);
         }
