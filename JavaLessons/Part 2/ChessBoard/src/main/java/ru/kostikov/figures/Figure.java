@@ -8,14 +8,78 @@ import ru.kostikov.players.Player;
  */
 public abstract class Figure {
 
-    protected Board board;
-    protected Player player;
+    protected Cell[][] board;
+    private   Cell[]   moves = null;
+    protected Cell     cell;
+    protected Player   player;
 
-    Figure(Board board, Player player){
-        this.board  = board;
+
+    /**
+     * Конструктор, принимаем игрока(белые или черные)
+     * @param player
+     */
+    Figure(Player player){
         this.player = player;
     }
 
-    abstract public boolean moveTo(int x, int y);
+    /**
+     * Установка, где находится фигура
+     * @param cell
+     */
+    public void setCell(Cell cell){
+        this.cell = cell;
+    }
+
+    /**
+     * @param cellTo
+     * @return
+     */
+    public boolean moveTo(Cell cellTo) {
+        boolean result = false;
+
+        if (cellTo != null) {
+            // Просчитываем все возможные ходы
+            this.moves = calcAllMoves();
+
+            // Если для эта фгура не стоит на какй-то клетке
+            if (this.cell == null) {
+                // Устанавливаем туда куда ходим
+                result = cellTo.setFigure(this);
+                result = true;
+            }
+            // Если ячейки куда и откуда не равны, можно ходить
+            else if (!this.cell.getName().equals(cellTo.getName())) {
+                if (this.moves != null){
+                    for(Cell move: this.moves){
+                        if(move != null && move.getName() == cellTo.getName()){
+                            Cell preCell = this.cell;
+
+                            result = cellTo.setFigure(this);
+                            if (result){
+                                preCell.clearCell();
+                            }
+                            break;
+
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Устанавливаем поле где находится фигура
+     * @param board
+     */
+    public void setBoard(Cell[][] board){
+        this.board = board;
+    }
+
+    /**
+     * Расчет всех возможных ходов для фигуры в текущей ячейке
+     * @return
+     */
+    abstract protected Cell[] calcAllMoves();
 
 }

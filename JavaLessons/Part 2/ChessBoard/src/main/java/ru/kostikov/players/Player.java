@@ -3,7 +3,11 @@ package ru.kostikov.players;
 /**
  * Created by Алексей on 26.07.2016.
  */
-public interface Player {
+public abstract class Player {
 
-    boolean checkSelfSide(int y);
+    /** Вид фигур белые\черные*/
+    public String name;
+    /**  Начальая позиция пешек по оси Y*/
+    public int defaultPawnPosition;
+
 }
