@@ -9,22 +9,34 @@ import ru.kostikov.players.Player;
  */
 public class Pawn extends Figure {
 
-
+    private final int offsetSideX[] = new int[]{ 0,  0};
+    private final int offsetSideY[] = new int[]{ 1, -1};
+    private int stepsCnt      = 1;
     private boolean firstMove = false;
 
     public Pawn( Player player){
         super(player);
+
         this.firstMove = false;
+        // Устанавливаем поведение пешки: ходит вперед и наза на одну клетку, кроме первого хода
+        super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
+
     }
 
     @Override
     public boolean moveTo(Cell cellTo){
         boolean result = false;
-        if (super.moveTo(cellTo)){
-            this.firstMove = true;
-            result         = true;
-        }
 
+        if (super.moveTo(cellTo)){
+
+            if (!this.firstMove){
+
+                this.firstMove = true;
+                this.stepsCnt  = 1;
+                super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
+            }
+            result = true;
+        }
         return result;
     }
 
@@ -35,29 +47,16 @@ public class Pawn extends Figure {
      * Искулючение первый ход - по вертикали на две клетки
      * @return Cell массив возможных ходов
      */
-    protected Cell[] calcAllMoves(){
-        Cell[] allmoves = new Cell[3];
-        int moveCnt     = 0;
-        int offset = 1;
+    @Override
+    protected Cell[] calcAllMoves() {
 
         // Первый ход пешки может быть через одну клетку
-        if (this.firstMove == false && this.cell.getY() == this.player.defaultPawnPosition ){
-            offset = 2;
-        }
-        // Ищем ход
-        for (int i = -1; i <= offset; i++){
-            if ((this.cell.getY()+i) > 0 &&
-                (this.cell.getY()+i) < this.board[this.cell.getX()].length){
-
-                Cell movingCell = this.board[this.cell.getX()][this.cell.getY()+i];
-                // Если там фигур нет, то можно ходить - добовляем в массив возможных ходов
-                if (movingCell.getFigure() == null){
-                    allmoves[moveCnt++] = movingCell;
-                }
-            }
-
+        if (this.firstMove == false && this.cell.getY() == this.player.defaultPawnPosition) {
+            this.stepsCnt  = 2;
+            super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
         }
 
-        return allmoves;
+        return super.calcAllMoves();
     }
+
 }
