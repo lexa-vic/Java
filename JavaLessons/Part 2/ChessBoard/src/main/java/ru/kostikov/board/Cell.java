@@ -46,7 +46,6 @@ public class Cell {
 
         if (this.figure == null && figure != null){
             this.figure = figure;
-            this.figure.setCell(this);
 
             result = true;
         }

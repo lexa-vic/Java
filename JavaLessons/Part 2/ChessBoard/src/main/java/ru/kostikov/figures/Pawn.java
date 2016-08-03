@@ -24,10 +24,10 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public boolean moveTo(Cell cellTo){
+    public boolean moveTo(Cell cellFrom, Cell cellTo){
         boolean result = false;
 
-        if (super.moveTo(cellTo)){
+        if (super.moveTo(cellFrom, cellTo)){
 
             if (!this.firstMove){
 
@@ -48,15 +48,15 @@ public class Pawn extends Figure {
      * @return Cell массив возможных ходов
      */
     @Override
-    protected Cell[] calcAllMoves() {
+    protected Cell[] calcAllMoves(Cell currentCell) {
 
         // Первый ход пешки может быть через одну клетку
-        if (this.firstMove == false && this.cell.getY() == this.player.defaultPawnPosition) {
+        if (this.firstMove == false && currentCell.getY() == this.player.defaultPawnPosition) {
             this.stepsCnt  = 2;
             super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
         }
 
-        return super.calcAllMoves();
+        return super.calcAllMoves(currentCell);
     }
 
 }

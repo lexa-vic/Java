@@ -13,9 +13,6 @@ public abstract class Figure {
     /** Возможные ходы фигуры */
     private   Cell[]   moves = null;
 
-    /** Ячейка в которой находится фигура */
-    protected Cell     cell;
-
     /** Тип фигуры белые\черные */
     protected Player   player;
 
@@ -39,41 +36,32 @@ public abstract class Figure {
         this.player = player;
     }
 
-    /**
-     * Установка, где находится фигура
-     * @param cell
-     */
-    public void setCell(Cell cell){
-        this.cell = cell;
-    }
-
-    /**
+     /**
      * @param cellTo
      * @return
      */
-    public boolean moveTo(Cell cellTo) {
+    public boolean moveTo(Cell cellFrom, Cell cellTo) {
         boolean result = false;
 
         if (cellTo != null) {
             // Просчитываем все возможные ходы
-            this.moves = calcAllMoves();
+            this.moves = calcAllMoves(cellFrom);
 
             // Если для эта фгура не стоит на какй-то клетке
-            if (this.cell == null) {
+            if (cellFrom == null) {
                 // Устанавливаем туда куда ходим
                 result = cellTo.setFigure(this);
                 result = true;
             }
             // Если ячейки куда и откуда не равны, можно ходить
-            else if (!this.cell.getName().equals(cellTo.getName())) {
+            else if (!cellFrom.getName().equals(cellTo.getName())) {
                 if (this.moves != null){
                     for(Cell move: this.moves){
                         if(move != null && move.getName() == cellTo.getName()){
-                            Cell preCell = this.cell;
 
                             result = cellTo.setFigure(this);
                             if (result){
-                                preCell.clearCell();
+                                cellFrom.clearCell();
                             }
                             break;
                         }
@@ -109,27 +97,30 @@ public abstract class Figure {
      * Расчет всех возможных ходов для фигуры в текущей ячейке
      * @return
      */
-    protected Cell[] calcAllMoves(){
+    protected Cell[] calcAllMoves(Cell currentCell){
         int moveCnt        = 0;
 
-        for(int side = 0; side < this.offsetSideX.length; side++){
-            for(int  i = 1; i <= this.stepsCnt; i++){
-                // Проверяем выход за границы поля
-                if (((this.cell.getX() + this.offsetSideX[side]*i) >= 0 && (this.cell.getX() + this.offsetSideX[side]*i) < this.board.length) &&
-                    ((this.cell.getY() + this.offsetSideY[side]*i) >= 0 && (this.cell.getY() + this.offsetSideY[side]*i) < this.board[this.cell.getX()].length)){
+        if (currentCell != null){
+            for(int side = 0; side < this.offsetSideX.length; side++){
+                for(int  i = 1; i <= this.stepsCnt; i++){
+                    // Проверяем выход за границы поля
+                    if (((currentCell.getX() + this.offsetSideX[side]*i) >= 0 && (currentCell.getX() + this.offsetSideX[side]*i) < this.board.length) &&
+                            ((currentCell.getY() + this.offsetSideY[side]*i) >= 0 && (currentCell.getY() + this.offsetSideY[side]*i) < this.board[currentCell.getX()].length)){
 
-                    Cell movingCell = this.board[this.cell.getX() + this.offsetSideX[side]*i][this.cell.getY() + this.offsetSideY[side]*i];
+                        Cell movingCell = this.board[currentCell.getX() + this.offsetSideX[side]*i][currentCell.getY() + this.offsetSideY[side]*i];
 
-                    if (movingCell.getFigure() == null){
-                        this.allmoves[moveCnt++] = movingCell;
+                        if (movingCell.getFigure() == null){
+                            this.allmoves[moveCnt++] = movingCell;
+                        }else{
+                            break;
+                        }
                     }else{
                         break;
                     }
-                }else{
-                    break;
                 }
             }
         }
+
 
         return this.allmoves;
     }

@@ -100,7 +100,7 @@ public class Board {
             Figure figure = cellF.getFigure();
 
             if (figure != null){
-                result = figure.moveTo(cellT);
+                result = figure.moveTo(cellF, cellT);
             }
         }
 
