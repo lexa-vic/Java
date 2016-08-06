@@ -132,7 +132,7 @@ public class Cell {
 
         if (cellTo != null)
         {
-            cellTo.setFigure(this.getFigure());
+            result = cellTo.setFigure(this.getFigure());
         }
 
         if (result){

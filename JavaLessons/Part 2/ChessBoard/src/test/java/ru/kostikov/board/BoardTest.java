@@ -1,7 +1,6 @@
 package ru.kostikov.board;
 
 import org.junit.Test;
-import ru.kostikov.figures.Castle;
 import ru.kostikov.figures.Pawn;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;

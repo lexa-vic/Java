@@ -12,28 +12,26 @@ public class Board {
     /** Непосредственно сама игровая доска */
     private Cell[][] board = new Cell[BOARD_SIZE][BOARD_SIZE];
 
-    /** Именование ячеек по горизонтали доски */
-    private char[] horizontalAxisNames = new char[BOARD_SIZE];
-
-    /** Именование ячеек по вертикали доски */
-    private char[] vertivalAxisNames   = new char[BOARD_SIZE];
-
     public Board(){
 
         /** Заполняем массив алфавитом по порядку*/
+        /* Именование ячеек по горизонтали доски */
+        char[] horizontalAxisNames = new char[BOARD_SIZE];
         for(int size = 0; size < this.BOARD_SIZE; size++){
-            this.horizontalAxisNames[size] = (char)((int)'a' + size);
+            horizontalAxisNames[size] = (char)((int)'a' + size);
         }
         /** Заполняем массив номерами по порядку*/
+        /* Именование ячеек по вертикали доски */
+        char[] vertivalAxisNames = new char[BOARD_SIZE];
         for(int size = 0; size < this.BOARD_SIZE; size++){
-            this.vertivalAxisNames[size] = (char)((int)'1' + size);
+            vertivalAxisNames[size] = (char)((int)'1' + size);
         }
 
         /** Создаем ячейки поля - присваиваем им имена */
         for(int i = 0; i < BOARD_SIZE; i++){
             for(int j = 0; j < BOARD_SIZE; j++){
 
-                String name = String.valueOf(this.horizontalAxisNames[i]) + String.valueOf(this.vertivalAxisNames[j]);
+                String name = String.valueOf(horizontalAxisNames[i]) + String.valueOf(vertivalAxisNames[j]);
                 this.board[i][j] = new Cell(name, i, j);
             }
         }
