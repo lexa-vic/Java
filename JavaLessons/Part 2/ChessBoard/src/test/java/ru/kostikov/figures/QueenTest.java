@@ -2,6 +2,7 @@ package ru.kostikov.figures;
 
 import org.junit.Test;
 import ru.kostikov.board.Board;
+import ru.kostikov.board.BoardExeption;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
@@ -19,7 +20,11 @@ public class QueenTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Queen(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Queen(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "E5");
 
@@ -32,8 +37,17 @@ public class QueenTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Queen(player), "A1");
-        board.setFigure(new Pawn(player), "B1");
+        try{
+            board.getCell("A1").setFigure(new Queen(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            board.getCell("B1").setFigure(new Queen(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "H1");
 
@@ -46,7 +60,12 @@ public class QueenTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Queen(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Queen(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
 
         moveResult = board.move("A1", "A8");
         moveResult = board.move("A8", "H1");
@@ -60,7 +79,11 @@ public class QueenTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Queen(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Queen(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("qq", "qq");
 

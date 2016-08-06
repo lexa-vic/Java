@@ -1,6 +1,5 @@
 package ru.kostikov.figures;
 
-import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 
 /**
@@ -8,10 +7,20 @@ import ru.kostikov.players.Player;
  */
 public class Queen extends Figure {
 
-    private final int offsetSideX[] = new int[]{-1,  1,  1, -1, -1,  0,  1,  0};
-    private final int offsetSideY[] = new int[]{ 1,  1, -1, -1,  0,  1,  0, -1};
-    private final int stepsCnt      = 8;
+    private final int[] offsetSideX;
+    private final int[] offsetSideY;
+    private final int stepsCnt;
 
+    {
+        this.stepsCnt    = 8;
+        this.offsetSideY = new int[]{1, 1, -1, -1, 0, 1, 0, -1};
+        this.offsetSideX = new int[]{-1, 1, 1, -1, -1, 0, 1, 0};
+    }
+
+    /**
+     * Конструктор фигуры ферзя
+     * @param player Передаем игрока белые/черные
+     */
     public Queen(Player player){
         super(player);
 

@@ -1,8 +1,6 @@
 package ru.kostikov.board;
 
-import ru.kostikov.figures.Figure;
-import ru.kostikov.figures.Pawn;
-import ru.kostikov.players.*;
+import ru.kostikov.board.BoardExeption;
 
 /**
  * Created by Алексей on 26.07.2016.
@@ -63,31 +61,27 @@ public class Board {
         return cell;
     }
 
+
     /**
-     * Установка фигуры на поле
-     * @param figure
-     * @param cellName
-     * @return false - фигура не установлена
+     * Взятие ячейки по имени
+     * @param cellName Имя ячейки
+     * @return Cell    ячейка
+     * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
      */
-    public boolean setFigure(Figure figure, String cellName){
-        boolean result = false;
+    public Cell getCell(String cellName) throws BoardExeption{
+        Cell cell = findCellByName(cellName);
 
-       Cell cell = findCellByName(cellName);
-
-        if (cell != null){
-            // Добавляем в фигуру ссылку на поле
-            figure.setBoard(this.board);
-            // Нашли ячейку, устанавливаем фигуру в ней
-            result  = cell.setFigure(figure);
+        if (cell == null){
+            throw new BoardExeption("Ячейка не найдена");
         }
 
-        return result;
+        return cell;
     }
 
     /**
      * Делаем ход
-     * @param cellFrom
-     * @param cellTo
+     * @param cellFrom Имя ячейки из которой ходим
+     * @param cellTo   Имя ячейки в которую ходим
      * @return false - ход не верный, true ход сделан
      */
     public boolean move(String cellFrom, String cellTo){
@@ -97,15 +91,39 @@ public class Board {
         Cell cellT = findCellByName(cellTo);
 
         if (cellF != null && cellT != null) {
-            Figure figure = cellF.getFigure();
-
-            if (figure != null){
-                result = figure.moveTo(cellF, cellT);
-            }
+            result = this.moveTo(cellF, cellT);
         }
-
-
         return result;
     }
 
+
+    /**
+     * Ход из одной ячейки в другую
+     * @param cellFrom  ячейка из которой делается ход
+     * @param cellTo    ячейка в которую делается ход
+     * @return boolean false - ход не верный, true ход сделан
+     */
+    private boolean moveTo(Cell cellFrom, Cell cellTo) {
+        boolean result = false;
+
+        if (cellTo != null) {
+            /** Возможные ходы фигуры */
+            Cell[] moves = new Cell[25];
+
+            // Просчитываем все возможные ходы
+            cellFrom.calcAllMoves(board, moves);
+
+            // Если ячейки куда и откуда не равны, можно ходить
+            if (!cellFrom.getName().equals(cellTo.getName())) {
+
+                for(Cell move: moves){
+                    if(move != null && move.getName().equals(cellTo.getName())){
+                        result = cellFrom.moveFigure(cellTo);
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
 }

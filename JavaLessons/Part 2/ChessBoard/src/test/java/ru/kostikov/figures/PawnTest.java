@@ -2,6 +2,7 @@ package ru.kostikov.figures;
 
 import org.junit.Test;
 import ru.kostikov.board.Board;
+import ru.kostikov.board.BoardExeption;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
@@ -12,19 +13,7 @@ import static org.junit.Assert.*;
  * Created by Алексей on 31.07.2016.
  */
 public class PawnTest {
-    @Test
-    public void firstMoveTo() throws Exception {
-        boolean moveResult     = false;
-        boolean expectedResult = true;
-        Board board   = new Board();
-        Player player = new White();
 
-        board.setFigure(new Pawn(player), "E2");
-
-        moveResult = board.move("E2", "E4");
-
-        assertThat(expectedResult, is(moveResult));
-    }
     @Test
     public void moveTo() throws Exception {
         boolean moveResult     = false;
@@ -32,7 +21,11 @@ public class PawnTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Pawn(player), "A1");
+        try{
+            board.getCell("a1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "A2");
 
@@ -45,9 +38,17 @@ public class PawnTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Pawn(player), "A1");
-        board.setFigure(new Pawn(player), "A2");
+        try{
+            board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
+        try{
+            board.getCell("A2").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
         moveResult = board.move("A1", "A2");
 
         assertThat(expectedResult, is(moveResult));
@@ -59,7 +60,11 @@ public class PawnTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Pawn(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "A2");
         moveResult = board.move("A2", "A3");
@@ -73,7 +78,12 @@ public class PawnTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Pawn(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
 
         moveResult = board.move("qq", "qq");
 

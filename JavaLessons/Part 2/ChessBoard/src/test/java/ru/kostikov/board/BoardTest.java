@@ -1,6 +1,7 @@
 package ru.kostikov.board;
 
 import org.junit.Test;
+import ru.kostikov.figures.Castle;
 import ru.kostikov.figures.Pawn;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
@@ -19,7 +20,11 @@ public class BoardTest {
         boolean result = false;
         boolean expect = true;
 
-        result = board.setFigure(new Pawn(player), "A1");
+        try{
+            result = board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expect, is(result));
     }

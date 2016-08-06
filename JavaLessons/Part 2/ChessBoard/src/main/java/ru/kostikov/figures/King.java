@@ -1,6 +1,5 @@
 package ru.kostikov.figures;
 
-import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 
 /**
@@ -8,11 +7,20 @@ import ru.kostikov.players.Player;
  */
 public class King extends Figure {
 
-    private final int offsetSideX[] = new int[]{-1,  1,  1, -1, -1,  0,  1,  0};
-    private final int offsetSideY[] = new int[]{ 1,  1, -1, -1,  0,  1,  0, -1};
-    private final int stepsCnt      = 1;
+    private final int[] offsetSideX;
+    private final int[] offsetSideY;
+    private final int   stepsCnt;
 
+    {
+        this.offsetSideX = new int[]{-1, 1, 1, -1, -1, 0, 1, 0};
+        this.offsetSideY = new int[]{1, 1, -1, -1, 0, 1, 0, -1};
+        this.stepsCnt    = 1;
+    }
 
+    /**
+     * Конструктор фигуры короля
+     * @param player Передаем игрока белые/черные
+     */
     public King(Player player){
         super(player);
 

@@ -1,6 +1,5 @@
 package ru.kostikov.figures;
 
-import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 
 /**
@@ -8,10 +7,20 @@ import ru.kostikov.players.Player;
  */
 public class Castle extends Figure{
 
-    private final int offsetSideX[] = new int[]{-1,  0,  1,  0};
-    private final int offsetSideY[] = new int[]{ 0,  1,  0, -1};
-    private final int stepsCnt      = 8;
+    private final int[] offsetSideX;
+    private final int[] offsetSideY;
+    private final int stepsCnt;
 
+    {
+        this.offsetSideX = new int[]{-1, 0, 1, 0};
+        this.offsetSideY = new int[]{0, 1, 0, -1};
+        this.stepsCnt    = 8;
+    }
+
+    /**
+     * Конструктор фигуры ладьи
+     * @param player Передаем игрока белые/черные
+     */
     public Castle(Player player){
         super(player);
 

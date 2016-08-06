@@ -1,6 +1,7 @@
 package ru.kostikov.start;
 
 import ru.kostikov.board.Board;
+import ru.kostikov.board.BoardExeption;
 import ru.kostikov.figures.*;
 import ru.kostikov.players.*;
 
@@ -18,7 +19,12 @@ public class Chess {
         //board.setFigure(new Pawn(player), "A1");
         //board.setFigure(new Pawn(player), "A3");
 
-        board.setFigure(new Castle(player), "a1");
+        try{
+            board.getCell("a1").setFigure(new Castle(player));//setFigure(new Castle(player), "a1");
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
         //board.setFigure(new Castle(player), "A1");
 
         moveResult = board.move("A1", "A5");

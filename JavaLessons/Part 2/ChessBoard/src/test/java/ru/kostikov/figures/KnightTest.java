@@ -2,6 +2,7 @@ package ru.kostikov.figures;
 
 import org.junit.Test;
 import ru.kostikov.board.Board;
+import ru.kostikov.board.BoardExeption;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
@@ -19,9 +20,23 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Knight(player), "A1");
-        board.setFigure(new Pawn(player), "A2");
-        board.setFigure(new Pawn(player), "B1");
+        try{
+            board.getCell("A1").setFigure(new Knight(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            board.getCell("A1").setFigure(new Pawn(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "C2");
 
@@ -34,8 +49,17 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Knight(player), "A1");
-        board.setFigure(new Pawn(player), "B3");
+        try{
+            board.getCell("A1").setFigure(new Knight(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            board.getCell("B3").setFigure(new Knight(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "B3");
 
@@ -48,7 +72,11 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Knight(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Knight(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("A1", "B3");
         moveResult = board.move("B3", "C1");
@@ -62,7 +90,11 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        board.setFigure(new Knight(player), "A1");
+        try{
+            board.getCell("A1").setFigure(new Knight(player));
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         moveResult = board.move("qq", "qq");
 
