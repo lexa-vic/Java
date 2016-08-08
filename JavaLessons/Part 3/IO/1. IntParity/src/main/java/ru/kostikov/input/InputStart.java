@@ -41,8 +41,8 @@ public class InputStart {
      *  Реализует диалог с пользователем
      */
     public void run(){
-        int      value      = 0;
-        String[] cmd        = {"y","n"};
+        int      value = 0;
+        String[] cmd = {"y","n"};
         String   currentCmd = "";
 
         do{

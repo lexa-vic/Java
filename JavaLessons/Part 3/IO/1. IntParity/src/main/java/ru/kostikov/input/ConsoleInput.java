@@ -15,7 +15,7 @@ public class ConsoleInput implements Input {
      * @param input принимаем входной поток для обработки
      */
     public ConsoleInput(Reader input) {
-        this.in    = new Scanner(input);
+        this.in = new Scanner(input);
     }
 
     /**
@@ -25,11 +25,10 @@ public class ConsoleInput implements Input {
      */
     @Override
     public int readInt() {
-        boolean valid  = false;
+        boolean valid = false;
         int     result = 0;
 
-        do
-        {
+        do{
             if (this.in.hasNextInt()){
                 result = in.nextInt();
                 valid = true;
@@ -54,11 +53,10 @@ public class ConsoleInput implements Input {
      */
     @Override
     public String readCmd(String[] cmd) {
-        boolean valid  = false;
+        boolean valid = false;
         String  result = null;
 
-        do
-        {
+        do{
             if (this.in.hasNext()){
                 String currentCmd = in.next();
 
@@ -78,6 +76,41 @@ public class ConsoleInput implements Input {
 
                 if (result == null){
                     String err = "Введите корректную команду";
+                    System.out.println(err);
+                }
+            }
+        }while(valid != true);
+
+        return result;
+    }
+
+    @Override
+    public String readWord(int wordLength) {
+        boolean valid = false;
+        String  result = null;
+
+        do{
+            if (this.in.hasNextLine()){
+                int letterCnt = 0;
+                String word = this.in.nextLine();
+                int readLength = word.length();
+
+                if (readLength == wordLength && !word.contains(" ")){
+
+                    for (letterCnt = 0; letterCnt < readLength; letterCnt++){
+                        if (!Character.isLetter(word.toCharArray()[0])){
+                            break;
+                        }
+                    }
+                    // Все сивмолы в строке буквы
+                    if (letterCnt == wordLength){
+                        result = word;
+                        valid = true;
+                    }
+                }
+
+                if (result == null){
+                    String err = "Введите корректное слово";
                     System.out.println(err);
                 }
             }

@@ -18,4 +18,11 @@ public interface Input {
      * @return String считанная команда
      */
     String readCmd(String [] cmd);
+
+    /**
+     * Прочитать слово с заданной длинной
+     * @param wordLength заданная длина слова
+     * @return корретное слово
+     */
+    String readWord(int wordLength);
 }

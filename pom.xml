@@ -22,6 +22,12 @@
 		<module>JavaLessons/Part 2/Tracker</module>
 		<module>JavaLessons/Part 2/ChessBoard</module>
 		
+		<module>JavaLessons/Part 3/IO/1. IntParity</module>
+		<module>JavaLessons/Part 3/IO/2. IntSum</module>
+		<module>JavaLessons/Part 3/IO/3. IntMin</module>
+		<module>JavaLessons/Part 3/IO/4. WordLength</module>
+		<module>JavaLessons/Part 3/IO/5. Chat</module>
+				
     </modules>
   
 
