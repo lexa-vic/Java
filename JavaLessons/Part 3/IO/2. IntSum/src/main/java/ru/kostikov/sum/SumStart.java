@@ -41,15 +41,15 @@ public class SumStart {
 
         do{
             System.out.println("Введите первое целое число: ");
-            value1 = in.readInt();
+            value1 = this.in.readInt();
 
             System.out.println("Введите второе целое число: ");
-            value2 = in.readInt();
+            value2 = this.in.readInt();
 
             System.out.printf("Сумма: %d\n", (value1+value2));
 
             System.out.println("Ещё раз (y/n): ");
-            currentCmd = in.readCmd(cmd);
+            currentCmd = this.in.readCmd(cmd);
         }while(!currentCmd.equals(cmd[1]));
 
     }

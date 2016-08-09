@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import org.junit.Test;
 import ru.kostikov.board.Board;
 import ru.kostikov.board.BoardExeption;
+import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
@@ -27,18 +28,26 @@ public class KnightTest {
         }
 
         try{
-            board.getCell("A1").setFigure(new Pawn(player));
+            board.getCell("A2").setFigure(new Pawn(player));
         }catch (BoardExeption be){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
-            board.getCell("A1").setFigure(new Pawn(player));
+            board.getCell("B2").setFigure(new Pawn(player));
         }catch (BoardExeption be){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "C2");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("C2");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -61,7 +70,15 @@ public class KnightTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "B3");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("B3");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -78,8 +95,25 @@ public class KnightTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "B3");
-        moveResult = board.move("B3", "C1");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("B3");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            Cell fcellFom = board.getCell("B3");
+            Cell cellTo = board.getCell("C1");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -96,7 +130,15 @@ public class KnightTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("qq", "qq");
+        try{
+            Cell fcellFom = board.getCell("qq");
+            Cell cellTo = board.getCell("qq");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }

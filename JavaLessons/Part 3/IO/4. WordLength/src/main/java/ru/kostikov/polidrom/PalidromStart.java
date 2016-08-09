@@ -60,11 +60,11 @@ public class PalidromStart {
             System.out.println("Введите слово-палидром из пяти букв: ");
             word = this.in.readWord(5);
 
-//            if(this.isPalidrom(word)){
-//                System.out.println("Слово является палидромом");
-//            }else{
-//                System.out.println("Слово не является палидромом");
-//            }
+            if(this.isPalidrom(word)){
+                System.out.println("Слово является палидромом");
+            }else{
+                System.out.println("Слово не является палидромом");
+            }
 
             System.out.println("Ещё раз (y/n): ");
             currentCmd = this.in.readCmd(cmd);

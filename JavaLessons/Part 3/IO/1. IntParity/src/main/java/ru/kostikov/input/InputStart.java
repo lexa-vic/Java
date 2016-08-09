@@ -48,7 +48,7 @@ public class InputStart {
         do{
             System.out.println("Введите целое число: ");
 
-            value = in.readInt();
+            value = this.in.readInt();
 
             if (checkParity(value)){
                 System.out.println("Четное число");
@@ -57,7 +57,7 @@ public class InputStart {
             }
 
             System.out.println("Ещё раз (y/n): ");
-            currentCmd = in.readCmd(cmd);
+            currentCmd = this.in.readCmd(cmd);
         }while(!currentCmd.equals(cmd[1]));
 
     }

@@ -130,8 +130,7 @@ public class Cell {
 
         boolean result = false;
 
-        if (cellTo != null)
-        {
+        if (cellTo != null){
             result = cellTo.setFigure(this.getFigure());
         }
 

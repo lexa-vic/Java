@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import org.junit.Test;
 import ru.kostikov.board.Board;
 import ru.kostikov.board.BoardExeption;
+import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
@@ -26,7 +27,16 @@ public class CastleTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "A8");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("A8");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -49,7 +59,15 @@ public class CastleTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "H1");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("H1");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -66,8 +84,25 @@ public class CastleTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("A1", "A8");
-        moveResult = board.move("A8", "H8");
+        try{
+            Cell fcellFom = board.getCell("A1");
+            Cell cellTo = board.getCell("A8");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
+
+        try{
+            Cell fcellFom = board.getCell("A8");
+            Cell cellTo = board.getCell("H8");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -84,7 +119,15 @@ public class CastleTest {
             System.out.print("Не найдена ячейка с таким именем");
         }
 
-        moveResult = board.move("qq", "qq");
+        try{
+            Cell fcellFom = board.getCell("qq");
+            Cell cellTo = board.getCell("qq");
+
+            moveResult = board.move(fcellFom, cellTo);
+
+        }catch (BoardExeption be){
+            System.out.print("Не найдена ячейка с таким именем");
+        }
 
         assertThat(expectedResult, is(moveResult));
     }

@@ -77,31 +77,12 @@ public class Board {
     }
 
     /**
-     * Делаем ход
-     * @param cellFrom Имя ячейки из которой ходим
-     * @param cellTo   Имя ячейки в которую ходим
-     * @return false - ход не верный, true ход сделан
-     */
-    public boolean move(String cellFrom, String cellTo){
-        boolean result = false;
-
-        Cell cellF = findCellByName(cellFrom);
-        Cell cellT = findCellByName(cellTo);
-
-        if (cellF != null && cellT != null) {
-            result = this.moveTo(cellF, cellT);
-        }
-        return result;
-    }
-
-
-    /**
      * Ход из одной ячейки в другую
      * @param cellFrom  ячейка из которой делается ход
      * @param cellTo    ячейка в которую делается ход
      * @return boolean false - ход не верный, true ход сделан
      */
-    private boolean moveTo(Cell cellFrom, Cell cellTo) {
+    public boolean move(Cell cellFrom, Cell cellTo) {
         boolean result = false;
 
         if (cellTo != null) {
@@ -112,7 +93,7 @@ public class Board {
             cellFrom.calcAllMoves(board, moves);
 
             // Если ячейки куда и откуда не равны, можно ходить
-            if (!cellFrom.getName().equals(cellTo.getName())) {
+            if (!cellFrom.getName().equals(cellTo.getName())){
 
                 for(Cell move: moves){
                     if(move != null && move.getName().equals(cellTo.getName())){

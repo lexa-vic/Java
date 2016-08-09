@@ -32,9 +32,7 @@ public class ConsoleInput implements Input {
             if (this.in.hasNextInt()){
                 result = in.nextInt();
                 valid = true;
-            }
-            else
-            {
+            }else{
                 String err = "Введите корректное число";
                 System.out.println(err);
                 this.in.next();
@@ -58,14 +56,15 @@ public class ConsoleInput implements Input {
 
         do{
             if (this.in.hasNext()){
-                String currentCmd = in.next();
+                String currentCmd = this.in.next();
 
-                if (cmd != null)
-                {
+                if (cmd != null){
                     for(String str: cmd){
                         if(str.equals(currentCmd)){
                             result = currentCmd;
                             valid = true;
+                            // Почему то после приема команды появляется пустая строка
+                            this.in.nextLine();
                             break;
                         }
                     }
@@ -84,6 +83,11 @@ public class ConsoleInput implements Input {
         return result;
     }
 
+    /**
+     * Считывание слова заданной длинны
+     * @param wordLength заданная длина слова
+     * @return считанное корректное слово
+     */
     @Override
     public String readWord(int wordLength) {
         boolean valid = false;
@@ -98,7 +102,7 @@ public class ConsoleInput implements Input {
                 if (readLength == wordLength && !word.contains(" ")){
 
                     for (letterCnt = 0; letterCnt < readLength; letterCnt++){
-                        if (!Character.isLetter(word.toCharArray()[0])){
+                        if (!Character.isLetter(word.toCharArray()[letterCnt])){
                             break;
                         }
                     }
