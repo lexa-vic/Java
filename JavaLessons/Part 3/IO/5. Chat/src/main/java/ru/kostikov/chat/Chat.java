@@ -1,6 +1,11 @@
 package ru.kostikov.chat;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+
+
 
 /**
  * Created by Алексей on 09.08.2016.
@@ -16,13 +21,19 @@ public class Chat {
     /** Массив слов-команд чата*/
     String[] cmd = new String[3];
 
+    /** Входной поток  */
+    BufferedReader input;
+
     /**
      *  Конструктор, устанавливаем слова-командв
      */
-    public Chat(){
+    public Chat(BufferedReader input) {
         this.setPauseCmd("стоп");
         this.setResumeCmd("продолжить");
         this.setExitCmd("закончить");
+
+        this.input = input;
+
     }
 
     /**
@@ -84,7 +95,25 @@ public class Chat {
         return this.exit;
     }
 
+    /**
+     *  Основная логика чата
+     */
     public void run(){
+
+        String line;
+        int lineCount = 0;
+        ArrayList<String> stringBuf = new ArrayList<String>();
+
+        // Читаем кол-во строк в файле
+        try{
+
+            while ((line = this.input.readLine()) != null) {
+                stringBuf.add(line);
+            }
+        }
+        catch (IOException ioe){
+            ioe.getStackTrace();
+        }
 
         do {
 
@@ -93,8 +122,11 @@ public class Chat {
             if (in.hasNextLine()){
                 this.checkCmdWord(in.nextLine());
 
-                if (!this.pause){
-                    System.out.println("Bla");
+                if (!this.pause && !this.exit){
+                    int lineNumber = new Random().nextInt(stringBuf.size());
+                    String word = stringBuf.get(lineNumber);
+
+                    System.out.println(word + lineNumber);
                 }
             }
         }while(!this.exit);
@@ -102,9 +134,19 @@ public class Chat {
     }
 
     public static void main(String[] args) {
-        Chat chat = new Chat();
 
-        chat.run();
+        Chat chat = null;
+
+        try {
+            chat = new Chat(new BufferedReader(new FileReader("answers.txt")));
+            //chat = new Chat(new StringReader("dasda\n"));
+            chat.run();
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден");
+
+        }
+
+
     }
 
 }
