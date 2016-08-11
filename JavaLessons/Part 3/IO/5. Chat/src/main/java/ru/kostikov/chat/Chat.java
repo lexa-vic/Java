@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
 
 
 /**
@@ -19,21 +20,27 @@ public class Chat {
     private boolean exit = false;
 
     /** Массив слов-команд чата*/
-    String[] cmd = new String[3];
+    private String[] cmd = new String[3];
 
-    /** Входной поток  */
-    BufferedReader input;
+    /** Входной поток c ответами */
+    private BufferedReader answers;
+
+    /** Входной поток c сообщениями пользователя*/
+    private Reader input;
+
+    /** Логгер*/
+    private static final Logger log = Logger.getLogger(Chat.class);
 
     /**
      *  Конструктор, устанавливаем слова-командв
      */
-    public Chat(BufferedReader input) {
+    public Chat(BufferedReader answers, Reader input) {
         this.setPauseCmd("стоп");
         this.setResumeCmd("продолжить");
         this.setExitCmd("закончить");
 
-        this.input = input;
-
+        this.answers = answers;
+        this.input   = input;
     }
 
     /**
@@ -107,7 +114,7 @@ public class Chat {
         // Читаем кол-во строк в файле
         try{
 
-            while ((line = this.input.readLine()) != null) {
+            while ((line = this.answers.readLine()) != null) {
                 stringBuf.add(line);
             }
         }
@@ -115,21 +122,34 @@ public class Chat {
             ioe.getStackTrace();
         }
 
+        Scanner in =  new Scanner(this.input);
+
         do {
 
-            Scanner in =  new Scanner(System.in);
-
             if (in.hasNextLine()){
-                this.checkCmdWord(in.nextLine());
+
+                String ourWord = in.nextLine();
+
+                this.checkCmdWord(ourWord);
+
+                log.debug(ourWord);
 
                 if (!this.pause && !this.exit){
                     int lineNumber = new Random().nextInt(stringBuf.size());
                     String word = stringBuf.get(lineNumber);
 
-                    System.out.println(word + lineNumber);
+                    System.out.println(word);
+
+                    log.debug(word);
                 }
             }
         }while(!this.exit);
+
+        try {
+            this.answers.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -138,11 +158,12 @@ public class Chat {
         Chat chat = null;
 
         try {
-            chat = new Chat(new BufferedReader(new FileReader("answers.txt")));
+            chat = new Chat(new BufferedReader(new FileReader("JavaLessons\\Part 3\\IO\\5. Chat\\answers.txt")),
+                            new BufferedReader(new InputStreamReader(System.in)));
             //chat = new Chat(new StringReader("dasda\n"));
             chat.run();
         } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден");
+            System.out.println("Файл c ответами не найден");
 
         }
 
