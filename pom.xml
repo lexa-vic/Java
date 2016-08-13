@@ -27,6 +27,8 @@
 		<module>JavaLessons/Part 3/IO/3. IntMin</module>
 		<module>JavaLessons/Part 3/IO/4. WordLength</module>
 		<module>JavaLessons/Part 3/IO/5. Chat</module>
+
+        <module>JavaLessons/Part 3/Socket</module>
 				
     </modules>
   

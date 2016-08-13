@@ -25,12 +25,13 @@ public class ChatTest {
         boolean result   = false;
 
         // Переназначаем выходной поток в бууффер байт
-        ByteArrayOutputStream outBuf = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outBuf));
+        CharArrayWriter charArray = new CharArrayWriter();
+        Writer output = new BufferedWriter(charArray );
 
         try {
-            chat = new Chat(new BufferedReader(new FileReader("answers.txt")),
-                            new StringReader(questions));
+            chat = new Chat(new StringReader(questions),
+                            output,
+                            new FileReader("answers.txt"));
             chat.run();
         } catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");
@@ -51,7 +52,7 @@ public class ChatTest {
         }
 
         // Переводим результат нашего чата в массив строк
-        String[] lines = new String(outBuf.toString()).split("\r\n");
+        String[] lines = new String(charArray.toString()).split("\r\n");
 
         // Проверяем вхождение полученных строк в наш файл
         for (String line: lines){
@@ -78,12 +79,13 @@ public class ChatTest {
         boolean result   = false;
 
         // Переназначаем выходной поток в бууффер байт
-        ByteArrayOutputStream outBuf = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outBuf));
+        CharArrayWriter charArray = new CharArrayWriter();
+        Writer output = new BufferedWriter(charArray );
 
         try {
-            chat = new Chat(new BufferedReader(new FileReader("answers.txt")),
-                    new StringReader(questions));
+            chat = new Chat(new StringReader(questions),
+                            output,
+                            new FileReader("answers.txt"));
             chat.run();
         } catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");
@@ -104,22 +106,19 @@ public class ChatTest {
         }
 
         // Переводим результат нашего чата в массив строк
-        String[] lines = new String(outBuf.toString()).split("\r\n");
+        String[] lines = new String(charArray.toString()).split("\r\n");
 
-        // Ответ должен состоять из 4-х строк
-        if (lines.length == 4){
-            // Проверяем вхождение полученных строк в наш файл
-            for (String line: lines){
-                for (int i = 0; i < stringBuf.size(); i++){
-                    if (line.equals(stringBuf.get(i))){
-                        result = true;
-                        break;
-                    }
-                    result = false;
+
+        // Проверяем вхождение полученных строк в наш файл
+        for (String line: lines){
+            for (int i = 0; i < stringBuf.size(); i++){
+                if (line.equals(stringBuf.get(i))){
+                    result = true;
+                    break;
                 }
+                result = false;
             }
         }
-
 
         assertThat(expected,  is(result));
     }

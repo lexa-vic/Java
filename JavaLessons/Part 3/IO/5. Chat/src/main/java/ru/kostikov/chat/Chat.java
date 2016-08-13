@@ -1,6 +1,7 @@
 package ru.kostikov.chat;
 
 import java.io.*;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,28 +20,38 @@ public class Chat {
     /** Состояние чата - выход*/
     private boolean exit = false;
 
+    /** Кол-во доступных строк в потоке ответов*/
+    private int linesCnt;
+
     /** Массив слов-команд чата*/
     private String[] cmd = new String[3];
 
     /** Входной поток c ответами */
-    private BufferedReader answers;
+    private Reader answers;
 
     /** Входной поток c сообщениями пользователя*/
     private Reader input;
 
+    /** Выходной поток */
+    private Writer output;
+
     /** Логгер*/
     private static final Logger log = Logger.getLogger(Chat.class);
+
+    /** Массив строк вычитанного файла */
+    private ArrayList<String> stringBuf = new ArrayList<String>();
 
     /**
      *  Конструктор, устанавливаем слова-командв
      */
-    public Chat(BufferedReader answers, Reader input) {
+    public Chat( Reader input, Writer output, Reader answers) {
         this.setPauseCmd("стоп");
         this.setResumeCmd("продолжить");
         this.setExitCmd("закончить");
 
         this.answers = answers;
         this.input   = input;
+        this.output  = output;
     }
 
     /**
@@ -102,45 +113,71 @@ public class Chat {
         return this.exit;
     }
 
+    private void exploreAnswers(){
+
+    }
+
+
+    /** Выдает ответ из потока ответов
+     * @return Считанная рандомная строка из потока
+     */
+    private String getAnswer(){
+
+        String line;
+
+        if (stringBuf.size() == 0){
+            // Читаем кол-во строк в файле
+            try{
+                BufferedReader br = new BufferedReader(this.answers);
+
+
+                while ((line = br.readLine()) != null) {
+                    stringBuf.add(line);
+                }
+            }
+            catch (IOException ioe){
+                ioe.getStackTrace();
+            }
+        }
+
+
+        int lineNumber = new Random().nextInt(stringBuf.size());
+
+        return stringBuf.get(lineNumber);
+    }
+
     /**
      *  Основная логика чата
      */
     public void run(){
-
-        String line;
-        int lineCount = 0;
-        ArrayList<String> stringBuf = new ArrayList<String>();
-
-        // Читаем кол-во строк в файле
-        try{
-
-            while ((line = this.answers.readLine()) != null) {
-                stringBuf.add(line);
-            }
-        }
-        catch (IOException ioe){
-            ioe.getStackTrace();
-        }
-
         Scanner in =  new Scanner(this.input);
 
         do {
 
             if (in.hasNextLine()){
-
                 String ourWord = in.nextLine();
 
                 this.checkCmdWord(ourWord);
-
                 log.debug(ourWord);
 
                 if (!this.pause && !this.exit){
-                    int lineNumber = new Random().nextInt(stringBuf.size());
-                    String word = stringBuf.get(lineNumber);
 
-                    System.out.println(word);
+                    String word = this.getAnswer();
 
+                    try {
+                        this.output.write(word+"\r\n");
+                        this.output.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     log.debug(word);
+                }else{
+                    try {
+                        this.output.write("\r\n");
+                        this.output.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }while(!this.exit);
@@ -158,11 +195,12 @@ public class Chat {
         Chat chat = null;
 
         try {
-            chat = new Chat(new BufferedReader(new FileReader("JavaLessons\\Part 3\\IO\\5. Chat\\answers.txt")),
-                            new BufferedReader(new InputStreamReader(System.in)));
-            //chat = new Chat(new StringReader("dasda\n"));
+            chat = new Chat(new InputStreamReader(System.in),
+                            new BufferedWriter(new OutputStreamWriter(System.out)),
+                            new FileReader("JavaLessons\\Part 3\\IO\\5. Chat\\answers.txt"));
             chat.run();
         } catch (FileNotFoundException e) {
+
             System.out.println("Файл c ответами не найден");
 
         }
