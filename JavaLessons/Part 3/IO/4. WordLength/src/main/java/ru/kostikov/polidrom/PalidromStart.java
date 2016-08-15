@@ -40,7 +40,17 @@ public class PalidromStart {
 
         word = word.toLowerCase();
 
-        if (word.equals(new  StringBuilder(word).reverse().toString())){
+        char[] charArray = word.toCharArray();
+
+        // Переворот строки
+        for(int i = 0; i < charArray.length/2; i++){
+            char tmp;
+
+            tmp = charArray[i];
+            charArray[i] = charArray[charArray.length - 1 - i];
+            charArray[charArray.length - 1 - i] = tmp;
+        }
+           if (word.equals(new String(charArray))){
             result = true;
         }
 
