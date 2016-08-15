@@ -1,3 +1,4 @@
 target
 /.idea/libraries/Maven__log4j_log4j_1_2_17.xml
 /JavaLessons/Part 3/Socket/Socket.iml
+/.idea/libraries/*.xml

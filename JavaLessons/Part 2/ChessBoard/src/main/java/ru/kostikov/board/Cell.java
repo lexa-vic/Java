@@ -1,5 +1,6 @@
 package ru.kostikov.board;
 
+import com.google.common.base.Optional;
 import ru.kostikov.figures.Figure;
 
 
@@ -27,7 +28,6 @@ public class Cell {
         this.x    = x;
         this.y    = y;
     }
-
     /**
      * Вызов имени ячейки
      * @return String name
@@ -35,7 +35,6 @@ public class Cell {
     public String getName(){
         return this.name;
     }
-
 
     /**
      * Установка фигуры в ячейку
@@ -45,22 +44,13 @@ public class Cell {
     public boolean setFigure(Figure figure){
         boolean result = false;
 
-        if (this.figure == null && figure != null){
+        Optional<Figure> figureOptional = Optional.fromNullable(this.figure);
+        if (!figureOptional.isPresent()){
             this.figure = figure;
-
             result = true;
         }
-
         return result;
     }
-
-    /**
-     *  Удаляет фигуру из ячейкм
-     */
-    public void clearCell(){
-        this.figure = null;
-    }
-
     /**
      * Достает фигуру которая находится в ячейке
      * @return Figure
@@ -70,72 +60,55 @@ public class Cell {
     }
 
     /**
-     * Координата х ячейки на поле
-     * @return int x
-     */
-    public int getX(){
-        return this.x;
-    }
-
-    /**
-     * Координата у ячейки на поле
-     * @return int y
-     */
-    public int getY(){
-        return this.y;
-    }
-
-
-    /**
      * Расчет всех возможных ходов для фигуры в текущей ячейке
      * @param board    - поле в котором будут просчитываться ходы
-     * @param allMoves - возможные ходы
+     * @return Cell[] - возможные ходы
      */
-    public void calcAllMoves(Cell[][] board, Cell[] allMoves ){
+    public Cell[] calcAllMoves(Cell[][] board) throws NullPointerException{
 
-        if (this.getFigure() != null && allMoves != null){
+        Cell[] allMoves = new Cell[25];
 
-            int [] offsetSideX = this.getFigure().getOffsetSideX();
-            int [] offsetSideY = this.getFigure().getOffsetSideY();
-            int       stepsCnt = this.getFigure().getSteps();
-            int moveCnt        = 0;
+        // Проверка на Null
+        Optional<Figure> o = Optional.of(this.getFigure());
 
-            for(int side = 0; side < offsetSideX.length; side++){
-                for(int  i = 1; i <= stepsCnt; i++){
-                    // Проверяем выход за границы поля
-                    if (((this.getX() + offsetSideX[side]*i) >= 0 && (this.getX() + offsetSideX[side]*i) < board.length) &&
-                        ((this.getY() + offsetSideY[side]*i) >= 0 && (this.getY() + offsetSideY[side]*i) < board[this.getX()].length)){
+        int[] offsetSideX = this.getFigure().getOffsetSideX();
+        int[] offsetSideY = this.getFigure().getOffsetSideY();
+        int stepsCnt = this.getFigure().getSteps();
+        int moveCnt = 0;
 
-                        Cell movingCell = board[this.getX() + offsetSideX[side]*i][this.getY() + offsetSideY[side]*i];
+        for(int side = 0; side < offsetSideX.length; side++){
+            for(int  i = 1; i <= stepsCnt; i++){
+                // Проверяем выход за границы поля
+                if (((this.x + offsetSideX[side]*i) >= 0 && (this.x + offsetSideX[side]*i) < board.length) &&
+                    ((this.y + offsetSideY[side]*i) >= 0 && (this.y + offsetSideY[side]*i) < board[this.x].length)){
 
-                        if (movingCell.getFigure() == null){
-                            allMoves[moveCnt++] = movingCell;
-                        }else{
-                            break;
-                        }
+                    Cell movingCell = board[this.x + offsetSideX[side]*i][this.y + offsetSideY[side]*i];
+
+                    if (movingCell.getFigure() == null){
+                        allMoves[moveCnt++] = movingCell;
                     }else{
                         break;
                     }
+                }else{
+                    break;
                 }
             }
         }
-    }
 
+        return allMoves;
+    }
     /**
      * Перемещяет фигур с текущей ячейки в ячеку, задаваемую параметром
      * @param cellTo ячека куда перемещается фигура
      * @return boolean - true если фигура переместилась
      */
     public boolean moveFigure(Cell cellTo){
-
         boolean result = false;
 
-        if (cellTo != null){
-            result = cellTo.setFigure(this.getFigure());
-        }
-
+        result = cellTo.setFigure(this.getFigure());
+        // Убираем из этой ячейки
         if (result){
-            this.clearCell();
+            this.figure = null;
         }
         return result;
     }

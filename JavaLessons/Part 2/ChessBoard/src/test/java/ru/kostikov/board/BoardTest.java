@@ -21,7 +21,7 @@ public class BoardTest {
 
         try{
             result = board.getCell("A1").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 

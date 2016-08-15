@@ -23,19 +23,19 @@ public class KnightTest {
 
         try{
             board.getCell("A1").setFigure(new Knight(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("A2").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("B2").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -45,7 +45,7 @@ public class KnightTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -60,13 +60,13 @@ public class KnightTest {
 
         try{
             board.getCell("A1").setFigure(new Knight(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("B3").setFigure(new Knight(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -76,7 +76,7 @@ public class KnightTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -91,7 +91,7 @@ public class KnightTest {
 
         try{
             board.getCell("A1").setFigure(new Knight(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -101,7 +101,7 @@ public class KnightTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -111,7 +111,7 @@ public class KnightTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -126,7 +126,7 @@ public class KnightTest {
 
         try{
             board.getCell("A1").setFigure(new Knight(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -136,7 +136,7 @@ public class KnightTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 

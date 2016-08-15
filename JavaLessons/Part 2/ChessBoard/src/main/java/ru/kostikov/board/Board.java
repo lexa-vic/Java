@@ -2,6 +2,9 @@ package ru.kostikov.board;
 
 import ru.kostikov.board.BoardExeption;
 
+import com.google.common.base.Optional;
+
+
 /**
  * Created by Алексей on 26.07.2016.
  */
@@ -38,11 +41,12 @@ public class Board {
     }
 
     /**
-     * Поиск ячейки по имени
-     * @param cellName
-     * @return  Cell в случае успеха, NULL если не нашли
+     * Взятие ячейки по имени
+     * @param cellName Имя ячейки
+     * @return Cell    ячейка
+     * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
      */
-    private Cell findCellByName(String cellName){
+    public Cell getCell(String cellName) throws NullPointerException{
         Cell cell = null;
 
         for(int i = 0; i < BOARD_SIZE; i++) {
@@ -55,24 +59,8 @@ public class Board {
                 }
             }
         }
-
-        return cell;
-    }
-
-
-    /**
-     * Взятие ячейки по имени
-     * @param cellName Имя ячейки
-     * @return Cell    ячейка
-     * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
-     */
-    public Cell getCell(String cellName) throws BoardExeption{
-        Cell cell = findCellByName(cellName);
-
-        if (cell == null){
-            throw new BoardExeption("Ячейка не найдена");
-        }
-
+        // Проверка на Null
+        Optional<Cell> o = Optional.of(cell);
         return cell;
     }
 
@@ -85,16 +73,13 @@ public class Board {
     public boolean move(Cell cellFrom, Cell cellTo) {
         boolean result = false;
 
-        if (cellTo != null) {
-            /** Возможные ходы фигуры */
-            Cell[] moves = new Cell[25];
-
-            // Просчитываем все возможные ходы
-            cellFrom.calcAllMoves(board, moves);
-
+        /** Возможные ходы фигуры */
+        Cell[] moves;
+        // Просчитываем все возможные ходы
+        try{
+            moves = cellFrom.calcAllMoves(board);
             // Если ячейки куда и откуда не равны, можно ходить
             if (!cellFrom.getName().equals(cellTo.getName())){
-
                 for(Cell move: moves){
                     if(move != null && move.getName().equals(cellTo.getName())){
                         result = cellFrom.moveFigure(cellTo);
@@ -102,7 +87,10 @@ public class Board {
                     }
                 }
             }
+        }catch (NullPointerException npe){
+            System.out.println("Фигура в ячейке не найдена");
         }
+
         return result;
     }
 }

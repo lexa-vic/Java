@@ -24,7 +24,7 @@ public class PawnTest {
 
         try{
             board.getCell("a1").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -34,7 +34,7 @@ public class PawnTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -49,13 +49,13 @@ public class PawnTest {
 
         try{
             board.getCell("A1").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("A2").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -65,7 +65,7 @@ public class PawnTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -80,7 +80,7 @@ public class PawnTest {
 
         try{
             board.getCell("A1").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -90,7 +90,7 @@ public class PawnTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -100,7 +100,7 @@ public class PawnTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -115,7 +115,7 @@ public class PawnTest {
 
         try{
             board.getCell("A1").setFigure(new Pawn(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -126,7 +126,7 @@ public class PawnTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 

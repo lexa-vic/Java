@@ -24,7 +24,7 @@ public class BishopTest {
 
         try{
             board.getCell("A1").setFigure(new Bishop(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -34,7 +34,7 @@ public class BishopTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -51,13 +51,13 @@ public class BishopTest {
 
         try{
             board.getCell("A1").setFigure(new Bishop(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("B2").setFigure(new Bishop(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -67,7 +67,7 @@ public class BishopTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -82,7 +82,7 @@ public class BishopTest {
 
         try{
             board.getCell("A1").setFigure(new Bishop(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -92,7 +92,7 @@ public class BishopTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -102,7 +102,7 @@ public class BishopTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -117,7 +117,7 @@ public class BishopTest {
 
         try{
             board.getCell("A1").setFigure(new Bishop(player));
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -127,7 +127,7 @@ public class BishopTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (BoardExeption be){
+        }catch (NullPointerException npe){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
