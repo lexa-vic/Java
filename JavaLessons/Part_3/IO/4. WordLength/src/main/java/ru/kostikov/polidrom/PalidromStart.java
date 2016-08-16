@@ -27,7 +27,6 @@ public class PalidromStart {
         PalidromStart palidromStart = new PalidromStart(consoleInput);
 
         palidromStart.run();
-
     }
 
     /**
@@ -53,7 +52,6 @@ public class PalidromStart {
            if (word.equals(new String(charArray))){
             result = true;
         }
-
         return result;
     }
 
@@ -79,7 +77,5 @@ public class PalidromStart {
             System.out.println("Ещё раз (y/n): ");
             currentCmd = this.in.readCmd(cmd);
         }while(!currentCmd.equals(cmd[1]));
-
     }
-
 }

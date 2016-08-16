@@ -1,5 +1,6 @@
 package ru.kostikov.board;
 
+import com.google.common.base.Preconditions;
 import ru.kostikov.board.BoardExeption;
 
 import com.google.common.base.Optional;
@@ -46,7 +47,7 @@ public class Board {
      * @return Cell    ячейка
      * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
      */
-    public Cell getCell(String cellName) throws NullPointerException{
+    public Cell getCell(String cellName) throws IllegalArgumentException{
         Cell cell = null;
 
         for(int i = 0; i < BOARD_SIZE; i++) {
@@ -60,7 +61,7 @@ public class Board {
             }
         }
         // Проверка на Null
-        Optional<Cell> o = Optional.of(cell);
+        Preconditions.checkArgument(cell != null);
         return cell;
     }
 
@@ -87,7 +88,7 @@ public class Board {
                     }
                 }
             }
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.println("Фигура в ячейке не найдена");
         }
 

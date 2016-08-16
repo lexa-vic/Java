@@ -19,9 +19,10 @@ public class Chess {
 
         try{
             board.getCell("a1").setFigure(new Castle(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
+
 
         try{
             Cell fcellFom = board.getCell("a1");
@@ -29,7 +30,7 @@ public class Chess {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
     }

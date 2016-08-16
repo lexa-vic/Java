@@ -23,7 +23,7 @@ public class QueenTest {
 
         try{
             board.getCell("A1").setFigure(new Queen(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -33,7 +33,7 @@ public class QueenTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -48,13 +48,13 @@ public class QueenTest {
 
         try{
             board.getCell("A1").setFigure(new Queen(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
         try{
             board.getCell("B1").setFigure(new Queen(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -64,7 +64,7 @@ public class QueenTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -79,7 +79,7 @@ public class QueenTest {
 
         try{
             board.getCell("A1").setFigure(new Queen(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -89,7 +89,7 @@ public class QueenTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -99,7 +99,7 @@ public class QueenTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -114,7 +114,7 @@ public class QueenTest {
 
         try{
             board.getCell("A1").setFigure(new Queen(player));
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 
@@ -124,7 +124,7 @@ public class QueenTest {
 
             moveResult = board.move(fcellFom, cellTo);
 
-        }catch (NullPointerException npe){
+        }catch (IllegalArgumentException iae){
             System.out.print("Не найдена ячейка с таким именем");
         }
 

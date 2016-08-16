@@ -29,9 +29,11 @@ public class ChatTest {
         Writer output = new BufferedWriter(charArray );
 
         try {
+            String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+
             chat = new Chat(new StringReader(questions),
                             output,
-                            new FileReader("answers.txt"));
+                            new FileReader(new File(url)));
             chat.run();
         } catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");
@@ -83,9 +85,11 @@ public class ChatTest {
         Writer output = new BufferedWriter(charArray );
 
         try {
+            String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+
             chat = new Chat(new StringReader(questions),
                             output,
-                            new FileReader("answers.txt"));
+                            new FileReader(new File(url)));
             chat.run();
         } catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");

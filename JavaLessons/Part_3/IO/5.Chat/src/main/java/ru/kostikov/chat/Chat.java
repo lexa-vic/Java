@@ -1,12 +1,13 @@
 package ru.kostikov.chat;
 
 import java.io.*;
-import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
+
+import java.lang.Class;
 
 
 /**
@@ -49,9 +50,9 @@ public class Chat {
         this.setResumeCmd("продолжить");
         this.setExitCmd("закончить");
 
-        this.answers = answers;
         this.input   = input;
         this.output  = output;
+        this.answers = answers;
     }
 
     /**
@@ -97,39 +98,16 @@ public class Chat {
         }
     }
 
-    /**
-     * Проверка состояния паузы чата
-     * @return boolean - true чат в паузе, ответы не отправляются
-     */
-    private boolean checkPause(){
-        return this.pause;
-    }
-
-    /**
-     * Проверка выходы из чата
-     * @return true - требуется выход
-     */
-    private boolean checkExit(){
-        return this.exit;
-    }
-
-    private void exploreAnswers(){
-
-    }
-
-
     /** Выдает ответ из потока ответов
      * @return Считанная рандомная строка из потока
      */
     private String getAnswer(){
 
         String line;
-
         if (stringBuf.size() == 0){
             // Читаем кол-во строк в файле
             try{
                 BufferedReader br = new BufferedReader(this.answers);
-
 
                 while ((line = br.readLine()) != null) {
                     stringBuf.add(line);
@@ -139,21 +117,19 @@ public class Chat {
                 ioe.getStackTrace();
             }
         }
-
-
         int lineNumber = new Random().nextInt(stringBuf.size());
-
         return stringBuf.get(lineNumber);
     }
 
     /**
      *  Основная логика чата
+     *  Ждет ввода строки пользователя.
+     *  Выдает ответ из потока ответов.
      */
     public void run(){
         Scanner in =  new Scanner(this.input);
 
         do {
-
             if (in.hasNextLine()){
                 String ourWord = in.nextLine();
 
@@ -161,9 +137,7 @@ public class Chat {
                 log.debug(ourWord);
 
                 if (!this.pause && !this.exit){
-
                     String word = this.getAnswer();
-
                     try {
                         this.output.write(word+"\r\n");
                         this.output.flush();
@@ -187,25 +161,20 @@ public class Chat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {
 
-        Chat chat = null;
-
         try {
-            chat = new Chat(new InputStreamReader(System.in),
-                            new BufferedWriter(new OutputStreamWriter(System.out)),
-                            new FileReader("JavaLessons\\Part 3\\IO\\5. Chat\\answers.txt"));
+
+            String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+
+            Chat chat = new Chat(new InputStreamReader(System.in),
+                         new BufferedWriter(new OutputStreamWriter(System.out)),
+                         new FileReader(new File(url)));
             chat.run();
         } catch (FileNotFoundException e) {
-
             System.out.println("Файл c ответами не найден");
-
         }
-
-
     }
-
 }
