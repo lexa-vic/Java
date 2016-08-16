@@ -17,17 +17,17 @@ public class Client {
     private static final Logger log = Logger.getLogger(Client.class);
 
     /** Порт сокета */
-    private int servPort;
+    private int socketPort;
 
     /** Ip адрес сервера */
     private String addr = "127.0.0.1";
 
     /**
-     * Установка порта сервера
+     * Установка порта для сокета
      * @param port
      */
-    public void setServerPort(int port){
-        this.servPort = port;
+    public void setSocketPort(int port){
+        this.socketPort = port;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Client {
             InetAddress inetAddress = InetAddress.getByName(this.addr);
 
             System.out.println("Подключаемся к серверу");
-            Socket socket = new Socket(inetAddress, this.servPort);
+            Socket socket = new Socket(inetAddress, this.socketPort);
 
             InputStream socketInpStream = socket.getInputStream();
             OutputStream socketOutStream = socket.getOutputStream();
@@ -79,12 +79,10 @@ public class Client {
     }
 
     public static void main(String[] args) {
-
         Client client = new Client();
 
-        client.setServerPort(5000);
+        client.setSocketPort(5000);
         client.setServerIpAddr("127.0.0.1");
-
         client.start();
     }
 

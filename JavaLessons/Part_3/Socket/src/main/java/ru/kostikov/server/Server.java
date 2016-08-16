@@ -12,12 +12,23 @@ import java.util.Scanner;
  */
 public class Server {
 
-    public static void main(String[] args) {
-        /** Порт для сокета */
-        int port = 5000;
+    /** Порт сокета */
+    private int socketPort;
 
+    /**
+     * Установка порта для сокета
+     * @param port
+     */
+    public void setSocketPort(int port){
+        this.socketPort = port;
+    }
+
+    /**
+     *  Запуск сервера
+     */
+    public void start(){
         try{
-            ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(this.socketPort);
 
             System.out.println("Ждем подключения к серверу");
             Socket socket = serverSocket.accept();
@@ -37,18 +48,24 @@ public class Server {
             Chat chat = null;
 
             try {
+                String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+
                 chat = new Chat(reader,
-                                writer,
-                                new FileReader("JavaLessons\\Part 3\\IO\\5. Chat\\answers.txt"));
+                        writer,
+                        new FileReader(new File(url)));
                 chat.run();
             } catch (FileNotFoundException e) {
-
                 System.out.println("Файл c ответами не найден");
-
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server();
+        server.setSocketPort(5000);
+        server.start();
     }
 }
