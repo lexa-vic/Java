@@ -16,11 +16,11 @@ public class Server {
     private int socketPort;
 
     /**
-     * Установка порта для сокета
-     * @param port
+     * Конструктор
+     * @param socketPort порт сокета
      */
-    public void setSocketPort(int port){
-        this.socketPort = port;
+    public Server(int socketPort){
+        this.socketPort = socketPort;
     }
 
     /**
@@ -40,19 +40,13 @@ public class Server {
             Reader reader = new InputStreamReader(socketInpStream);
             Writer writer = new OutputStreamWriter(socketOutStream);
 
-            DataOutputStream out = new DataOutputStream(socketOutStream);
-            DataInputStream in = new DataInputStream(socketInpStream);
-
-
-            String string = null;
             Chat chat = null;
-
             try {
                 String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
 
                 chat = new Chat(reader,
-                        writer,
-                        new FileReader(new File(url)));
+                                writer,
+                                new FileReader(new File(url)));
                 chat.run();
             } catch (FileNotFoundException e) {
                 System.out.println("Файл c ответами не найден");
@@ -64,8 +58,7 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server server = new Server();
-        server.setSocketPort(5000);
+        Server server = new Server(5000);
         server.start();
     }
 }

@@ -28,9 +28,9 @@ public class ChatTest {
         CharArrayWriter charArray = new CharArrayWriter();
         Writer output = new BufferedWriter(charArray );
 
-        try {
-            String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+        String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
 
+        try {
             chat = new Chat(new StringReader(questions),
                             output,
                             new FileReader(new File(url)));
@@ -43,7 +43,7 @@ public class ChatTest {
         // Читаем еще раз файл и вычитываем его
         BufferedReader fileReader = null;
         try {
-            fileReader = new BufferedReader(new FileReader("answers.txt"));
+            fileReader = new BufferedReader(new FileReader(new File(url)));
         }catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");
 
@@ -84,9 +84,9 @@ public class ChatTest {
         CharArrayWriter charArray = new CharArrayWriter();
         Writer output = new BufferedWriter(charArray );
 
-        try {
-            String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
+        String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
 
+        try {
             chat = new Chat(new StringReader(questions),
                             output,
                             new FileReader(new File(url)));
@@ -99,7 +99,7 @@ public class ChatTest {
         // Читаем еще раз файл и вычитываем его
         BufferedReader fileReader = null;
         try {
-            fileReader = new BufferedReader(new FileReader("answers.txt"));
+            fileReader = new BufferedReader(new FileReader(new File(url)));
         }catch (FileNotFoundException e) {
             System.out.println("Файл c ответами не найден");
 

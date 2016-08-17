@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.google.common.base.Joiner;
 import org.apache.log4j.Logger;
 
 import java.lang.Class;
@@ -24,8 +25,14 @@ public class Chat {
     /** Кол-во доступных строк в потоке ответов*/
     private int linesCnt;
 
-    /** Массив слов-команд чата*/
-    private String[] cmd = new String[3];
+    /** Команда паузы чата */
+    private String pauseCmd = "стоп";
+
+    /** Команда возобновления чата */
+    private String resumeCmd = "продолжить";
+    /** Команда выхода из чата */
+
+    private String exitCmd = "закончить";
 
     /** Входной поток c ответами */
     private Reader answers;
@@ -46,37 +53,9 @@ public class Chat {
      *  Конструктор, устанавливаем слова-командв
      */
     public Chat( Reader input, Writer output, Reader answers) {
-        this.setPauseCmd("стоп");
-        this.setResumeCmd("продолжить");
-        this.setExitCmd("закончить");
-
         this.input   = input;
         this.output  = output;
         this.answers = answers;
-    }
-
-    /**
-     * Установка команды паузы системы
-     * @param word - слово-команда паузы
-     */
-    private void setPauseCmd(String word){
-        this.cmd[0] = word.toLowerCase();
-    }
-
-    /**
-     * Установка команды возобновления работы системы
-     * @param word - слово-команда возобновления работы
-     */
-    private void setResumeCmd(String word){
-        this.cmd[1] = word.toLowerCase();
-    }
-
-    /**
-     * Установка команды выхода из системы
-     * @param word - слово-команда возобновления работы
-     */
-    private void setExitCmd(String word){
-        this.cmd[2] = word.toLowerCase();
     }
 
     /**
@@ -88,27 +67,26 @@ public class Chat {
         if (cmdWord != null){
             cmdWord = cmdWord.toLowerCase();
             // Пришла команда паузы
-            if(this.cmd[0].equals(cmdWord)){
+            if(this.pauseCmd.equals(cmdWord)){
                 this.pause = true;
-            }else if(this.cmd[1].equals(cmdWord)){
+            }else if(this.resumeCmd.equals(cmdWord)){
                 this.pause = false;
-            }else if(this.cmd[2].equals(cmdWord)){
+            }else if(this.exitCmd.equals(cmdWord)){
                 this.exit = true;
             }
         }
     }
 
-    /** Выдает ответ из потока ответов
+    /**
+     *  Выдает ответ из потока ответов
      * @return Считанная рандомная строка из потока
      */
     private String getAnswer(){
-
         String line;
         if (stringBuf.size() == 0){
             // Читаем кол-во строк в файле
             try{
                 BufferedReader br = new BufferedReader(this.answers);
-
                 while ((line = br.readLine()) != null) {
                     stringBuf.add(line);
                 }
@@ -139,7 +117,7 @@ public class Chat {
                 if (!this.pause && !this.exit){
                     String word = this.getAnswer();
                     try {
-                        this.output.write(word+"\r\n");
+                        this.output.write(Joiner.on("").join(word,"\r\n"));
                         this.output.flush();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -166,9 +144,7 @@ public class Chat {
     public static void main(String[] args) {
 
         try {
-
             String url = Chat.class.getClassLoader().getResource("answers.txt").getFile();
-
             Chat chat = new Chat(new InputStreamReader(System.in),
                          new BufferedWriter(new OutputStreamWriter(System.out)),
                          new FileReader(new File(url)));

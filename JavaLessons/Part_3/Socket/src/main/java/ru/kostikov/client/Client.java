@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
+import com.google.common.base.Joiner;
 import org.apache.log4j.Logger;
 
 
@@ -23,18 +24,12 @@ public class Client {
     private String addr = "127.0.0.1";
 
     /**
-     * Установка порта для сокета
-     * @param port
+     * Конструктор
+     * @param port Порт сокета
+     * @param addr Ip адрес сервера
      */
-    public void setSocketPort(int port){
+    public Client(int port, String addr){
         this.socketPort = port;
-    }
-
-    /**
-     *  Установка Ip адреса сервера
-     * @param addr Ip адрес в формате String
-     */
-    public void setServerIpAddr(String addr){
         this.addr = addr;
     }
 
@@ -63,13 +58,13 @@ public class Client {
             while (true){
                 string = reader.readLine();
 
-                serverWriter.write(string+"\r\n");
+                serverWriter.write(Joiner.on("").join(string,"\r\n"));
                 serverWriter.flush();
 
                 log.debug(string);
 
                 response = scanner.nextLine();
-                System.out.println("Сервер прислал: "+ response);
+                System.out.println(Joiner.on("").join("Сервер прислал: ", response));
                 log.debug(response);
             }
 
@@ -79,10 +74,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        Client client = new Client();
-
-        client.setSocketPort(5000);
-        client.setServerIpAddr("127.0.0.1");
+        Client client = new Client(5000, "127.0.0.1");
         client.start();
     }
 

@@ -11,15 +11,11 @@ import static org.junit.Assert.*;
 public class ServerTest {
     @Test
     public void start() throws Exception {
-        Server server = new Server();
-        server.setSocketPort(5000);
+        Server server = new Server(500);
 
         server.start();
 
-        Client client = new Client();
-
-        client.setSocketPort(5000);
-        client.setServerIpAddr("127.0.0.1");
+        Client client = new Client(5000, "127.0.0.1");
 
         client.start();
     }
