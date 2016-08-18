@@ -1,9 +1,6 @@
 package ru.kostikov.board;
 
-import com.google.common.base.Preconditions;
-import ru.kostikov.board.BoardExeption;
-
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 
 /**
@@ -47,22 +44,23 @@ public class Board {
      * @return Cell    ячейка
      * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
      */
-    public Cell getCell(String cellName) throws IllegalArgumentException{
-        Cell cell = null;
 
-        for(int i = 0; i < BOARD_SIZE; i++) {
-            // Ищем ячейку
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                if (this.board[i][j].getName().equals(cellName.toLowerCase())) {
-                    cell = this.board[i][j];
-                    i    = BOARD_SIZE;
+    public Optional<Cell> getCell(String cellName){
+
+        Optional<Cell> result = Optional.empty();
+
+        for (Cell[] cells : this.board) {
+            for (Cell cell : cells) {
+                if (cell.getName().equalsIgnoreCase(cellName)) {
+                    result = Optional.of(cell);
                     break;
                 }
             }
+            if (result.isPresent()) {
+                break;
+            }
         }
-        // Проверка на Null
-        Preconditions.checkArgument(cell != null);
-        return cell;
+        return result;
     }
 
     /**
@@ -77,19 +75,16 @@ public class Board {
         /** Возможные ходы фигуры */
         Cell[] moves;
         // Просчитываем все возможные ходы
-        try{
-            moves = cellFrom.calcAllMoves(board);
-            // Если ячейки куда и откуда не равны, можно ходить
-            if (!cellFrom.getName().equals(cellTo.getName())){
-                for(Cell move: moves){
-                    if(move != null && move.getName().equals(cellTo.getName())){
-                        result = cellFrom.moveFigure(cellTo);
-                        break;
-                    }
+
+        moves = cellFrom.calcAllMoves(board);
+        // Если ячейки куда и откуда не равны, можно ходить
+        if (!cellFrom.getName().equals(cellTo.getName())){
+            for(Cell move: moves){
+                if(move != null && move.getName().equals(cellTo.getName())){
+                    result = cellFrom.moveFigure(cellTo);
+                    break;
                 }
             }
-        }catch (IllegalArgumentException iae){
-            System.out.println("Фигура в ячейке не найдена");
         }
 
         return result;

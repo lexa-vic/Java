@@ -1,7 +1,8 @@
 package ru.kostikov.start;
 
 import ru.kostikov.board.Board;
-import ru.kostikov.board.BoardExeption;
+import java.util.Optional;
+
 import ru.kostikov.board.Cell;
 import ru.kostikov.figures.*;
 import ru.kostikov.players.*;
@@ -17,21 +18,12 @@ public class Chess {
         Board board   = new Board();
         Player player = new White();
 
-        try{
-            board.getCell("a1").setFigure(new Castle(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        board.getCell("a1").ifPresent(x -> x.setFigure(new Castle(player)));
 
-
-        try{
-            Cell fcellFom = board.getCell("a1");
-            Cell cellTo = board.getCell("a5");
-
-            moveResult = board.move(fcellFom, cellTo);
-
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
+        Optional<Cell> fcellFom = board.getCell("a1");
+        Optional<Cell> cellTo = board.getCell("a5");
+        if (fcellFom.isPresent() && cellTo.isPresent()){
+            moveResult = board.move(fcellFom.get(), cellTo.get());
         }
     }
 

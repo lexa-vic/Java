@@ -1,6 +1,7 @@
 package ru.kostikov.board;
 
 import org.junit.Test;
+import ru.kostikov.figures.Figure;
 import ru.kostikov.figures.Pawn;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
@@ -14,17 +15,12 @@ import static org.junit.Assert.*;
 public class BoardTest {
     @Test
     public void setFigure() throws Exception {
-        Board board    = new Board();
-        Player player  = new White();
-        boolean result = false;
-        boolean expect = true;
+        Board board   = new Board();
+        Player player = new White();
+        Figure figure = new Pawn(player);
 
-        try{
-            result = board.getCell("A1").setFigure(new Pawn(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        board.getCell("a1").ifPresent(x -> x.setFigure(figure));
 
-        assertThat(expect, is(result));
+        assertThat(board.getCell("a1").get().getFigure(), is(figure));
     }
 }

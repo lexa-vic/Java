@@ -7,6 +7,8 @@ import ru.kostikov.board.Cell;
 import ru.kostikov.players.Player;
 import ru.kostikov.players.White;
 
+import java.util.Optional;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -21,33 +23,14 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        try{
-            board.getCell("A1").setFigure(new Knight(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        board.getCell("a1").ifPresent(x -> x.setFigure(new Knight(player)));
+        board.getCell("a2").ifPresent(x -> x.setFigure(new Knight(player)));
+        board.getCell("b2").ifPresent(x -> x.setFigure(new Knight(player)));
 
-        try{
-            board.getCell("A2").setFigure(new Pawn(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        Optional<Cell> fcellFom = board.getCell("A1");
+        Optional<Cell> cellTo = board.getCell("C2");
 
-        try{
-            board.getCell("B2").setFigure(new Pawn(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
-
-        try{
-            Cell fcellFom = board.getCell("A1");
-            Cell cellTo = board.getCell("C2");
-
-            moveResult = board.move(fcellFom, cellTo);
-
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        moveResult = board.move(fcellFom.get(), cellTo.get());
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -58,27 +41,13 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        try{
-            board.getCell("A1").setFigure(new Knight(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        board.getCell("a1").ifPresent(x -> x.setFigure(new Knight(player)));
+        board.getCell("b3").ifPresent(x -> x.setFigure(new Knight(player)));
 
-        try{
-            board.getCell("B3").setFigure(new Knight(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        Optional<Cell> fcellFom = board.getCell("A1");
+        Optional<Cell> cellTo = board.getCell("B3");
 
-        try{
-            Cell fcellFom = board.getCell("A1");
-            Cell cellTo = board.getCell("B3");
-
-            moveResult = board.move(fcellFom, cellTo);
-
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        moveResult = board.move(fcellFom.get(), cellTo.get());
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -89,31 +58,16 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        try{
-            board.getCell("A1").setFigure(new Knight(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        board.getCell("a1").ifPresent(x -> x.setFigure(new Knight(player)));
+        Optional<Cell> fcellFom = board.getCell("A1");
+        Optional<Cell> cellTo = board.getCell("B3");
 
-        try{
-            Cell fcellFom = board.getCell("A1");
-            Cell cellTo = board.getCell("B3");
+        moveResult = board.move(fcellFom.get(), cellTo.get());
 
-            moveResult = board.move(fcellFom, cellTo);
+        fcellFom = board.getCell("B3");
+        cellTo = board.getCell("C1");
 
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
-
-        try{
-            Cell fcellFom = board.getCell("B3");
-            Cell cellTo = board.getCell("C1");
-
-            moveResult = board.move(fcellFom, cellTo);
-
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
+        moveResult = board.move(fcellFom.get(), cellTo.get());
 
         assertThat(expectedResult, is(moveResult));
     }
@@ -124,22 +78,13 @@ public class KnightTest {
         Board board   = new Board();
         Player player = new White();
 
-        try{
-            board.getCell("A1").setFigure(new Knight(player));
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
+        board.getCell("a1").ifPresent(x -> x.setFigure(new Knight(player)));
+        Optional<Cell> fcellFom = board.getCell("qq");
+        Optional<Cell> cellTo = board.getCell("qq");
+
+        if (fcellFom.isPresent() && cellTo.isPresent()){
+            moveResult = board.move(fcellFom.get(), cellTo.get());
         }
-
-        try{
-            Cell fcellFom = board.getCell("qq");
-            Cell cellTo = board.getCell("qq");
-
-            moveResult = board.move(fcellFom, cellTo);
-
-        }catch (IllegalArgumentException iae){
-            System.out.print("Не найдена ячейка с таким именем");
-        }
-
         assertThat(expectedResult, is(moveResult));
     }
 
