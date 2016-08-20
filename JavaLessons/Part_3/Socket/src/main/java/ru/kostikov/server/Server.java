@@ -12,15 +12,16 @@ import java.util.Scanner;
  */
 public class Server {
 
-    /** Порт сокета */
-    private int socketPort;
+    /** Сокет сервера */
+    private ServerSocket serverSocket;
 
     /**
      * Конструктор
-     * @param socketPort порт сокета
+     * @param serverSocket соединения
      */
-    public Server(int socketPort){
-        this.socketPort = socketPort;
+    public Server(ServerSocket serverSocket){
+
+        this.serverSocket = serverSocket;
     }
 
     /**
@@ -28,10 +29,9 @@ public class Server {
      */
     public void start(){
         try{
-            ServerSocket serverSocket = new ServerSocket(this.socketPort);
 
             System.out.println("Ждем подключения к серверу");
-            Socket socket = serverSocket.accept();
+            Socket socket = this.serverSocket.accept();
             System.out.println("Подключение состоялось");
 
             InputStream socketInpStream = socket.getInputStream();
@@ -58,7 +58,13 @@ public class Server {
     }
 
     public static void main(String[] args) {
-        Server server = new Server(5000);
-        server.start();
+        Server server = null;
+        try {
+            server = new Server(new ServerSocket(5000));
+            server.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

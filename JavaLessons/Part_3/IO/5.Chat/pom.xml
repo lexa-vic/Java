@@ -50,7 +50,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.kostikov.start.StartUI</mainClass>
+                            <mainClass>ru.kostikov.chat.Chat</mainClass>
                             <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>

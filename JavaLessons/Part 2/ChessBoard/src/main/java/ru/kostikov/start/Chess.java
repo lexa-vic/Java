@@ -1,6 +1,8 @@
 package ru.kostikov.start;
 
 import ru.kostikov.board.Board;
+
+import java.util.Arrays;
 import java.util.Optional;
 
 import ru.kostikov.board.Cell;
@@ -17,8 +19,6 @@ public class Chess {
         boolean moveResult = false;
         Board board   = new Board();
         Player player = new White();
-
-        board.getCell("a1").ifPresent(x -> x.setFigure(new Castle(player)));
 
         Optional<Cell> fcellFom = board.getCell("a1");
         Optional<Cell> cellTo = board.getCell("a5");

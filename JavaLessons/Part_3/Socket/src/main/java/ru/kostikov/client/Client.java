@@ -23,14 +23,36 @@ public class Client {
     /** Ip адрес сервера */
     private String addr = "127.0.0.1";
 
+    /** Объект сокета*/
+    private Socket socket;
+
+    /** Входной поток */
+    private InputStream input;
+
     /**
      * Конструктор
      * @param port Порт сокета
      * @param addr Ip адрес сервера
      */
-    public Client(int port, String addr){
+    public Client(int port, String addr, InputStream input){
         this.socketPort = port;
         this.addr = addr;
+
+        try {
+            InetAddress inetAddress = InetAddress.getByName(this.addr);
+            this.socket = new Socket(inetAddress, this.socketPort);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Конструктор принимающий сам сокет
+     * @param socket
+     */
+    public Client(Socket socket, InputStream input){
+        this.socket = socket;
+        this.input = input;
     }
 
     /**
@@ -38,15 +60,12 @@ public class Client {
      */
     public void start(){
         try {
-            InetAddress inetAddress = InetAddress.getByName(this.addr);
-
             System.out.println("Подключаемся к серверу");
-            Socket socket = new Socket(inetAddress, this.socketPort);
 
-            InputStream socketInpStream = socket.getInputStream();
-            OutputStream socketOutStream = socket.getOutputStream();
+            InputStream socketInpStream = this.socket.getInputStream();
+            OutputStream socketOutStream = this.socket.getOutputStream();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.input));
             Writer serverWriter = new OutputStreamWriter(socketOutStream);
 
             String string = null;
@@ -66,6 +85,11 @@ public class Client {
                 response = scanner.nextLine();
                 System.out.println(Joiner.on("").join("Сервер прислал: ", response));
                 log.debug(response);
+
+                if (string.equals("закончить"))
+                {
+                    break;
+                }
             }
 
         }catch (Exception e){
@@ -74,7 +98,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        Client client = new Client(5000, "127.0.0.1");
+        Client client = new Client(5000, "127.0.0.1", System.in);
         client.start();
     }
 
