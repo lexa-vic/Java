@@ -12,34 +12,52 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 /**
  * Created by Алексей on 22.08.2016.
+ * Класс поисковик файла по маске, имени или регулярному выражению
+ * по заданному адресу
  */
 public class FileFinder extends SimpleFileVisitor<Path> {
 
     /** Мэтчер поиска файлов - услови или маска поиска */
     private Optional<PathMatcher> matcher;
+    /** Имя искомого файла */
+    private Optional<String> fileName;
 
     /** Выходной поток результата */
     private OutputStream output;
 
     /**
      * Конструктор класса
-     * @param matcher - мэтчер поиска файлов
-     * @param output  - выходной поток для результата
+     * @param matcher мэтчер поиска файлов
+     * @param output выходной поток для результата
      */
     public FileFinder(Optional<PathMatcher> matcher, OutputStream output){
         this.matcher = matcher;
         this.output  = output;
+        this.fileName = Optional.empty();
+    }
+
+    /**
+     * Конструктор класса
+     * @param fileName мэтчер поиска файлов
+     * @param output выходной поток для результата
+     */
+    public FileFinder(String fileName, OutputStream output){
+        this.fileName = Optional.of(fileName);
+        this.output  = output;
+        this.matcher = Optional.empty();
     }
 
     /**
      * При нахождении любого файла сраваниет его по матчеру
-     * @param file
+     * @param file путь к файлу
      */
-    private void search(Path file) {
+    private void compare(Path file) {
         final boolean[] res = {false};
         Optional<Path> name = Optional.of(file);
 
-        name.ifPresent( n ->  res[0] = matcher.get().matches(name.get().getFileName()));
+        this.matcher.ifPresent(m -> res[0] = matcher.get().matches(name.get().getFileName()));
+        this.fileName.ifPresent(n -> res[0] = fileName.get().equals(name.get().getFileName().toString()));
+
         if(res[0]){
             try {
 
@@ -60,7 +78,7 @@ public class FileFinder extends SimpleFileVisitor<Path> {
     @Override
      public FileVisitResult visitFile(Path file,
                                      BasicFileAttributes attrs) {
-        search(file);
+        this.compare(file);
         return CONTINUE;
     }
 

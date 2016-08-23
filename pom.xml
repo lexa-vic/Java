@@ -29,6 +29,7 @@
 		<module>JavaLessons/Part_3/IO/5.Chat</module>
 
         <module>JavaLessons/Part_3/Socket</module>
+		<module>JavaLessons/Part_3/FileFinder</module>
 				
     </modules>
   
