@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Optional;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
@@ -18,10 +17,7 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 public class FileFinder extends SimpleFileVisitor<Path> {
 
     /** Мэтчер поиска файлов - услови или маска поиска */
-    private Optional<PathMatcher> matcher;
-    /** Имя искомого файла */
-    private Optional<String> fileName;
-
+    private FindMatcher matcher;
     /** Выходной поток результата */
     private OutputStream output;
 
@@ -30,21 +26,9 @@ public class FileFinder extends SimpleFileVisitor<Path> {
      * @param matcher мэтчер поиска файлов
      * @param output выходной поток для результата
      */
-    public FileFinder(Optional<PathMatcher> matcher, OutputStream output){
+    public FileFinder(FindMatcher matcher, OutputStream output){
         this.matcher = matcher;
         this.output  = output;
-        this.fileName = Optional.empty();
-    }
-
-    /**
-     * Конструктор класса
-     * @param fileName мэтчер поиска файлов
-     * @param output выходной поток для результата
-     */
-    public FileFinder(String fileName, OutputStream output){
-        this.fileName = Optional.of(fileName);
-        this.output  = output;
-        this.matcher = Optional.empty();
     }
 
     /**
@@ -52,23 +36,16 @@ public class FileFinder extends SimpleFileVisitor<Path> {
      * @param file путь к файлу
      */
     private void compare(Path file) {
-        final boolean[] res = {false};
-        Optional<Path> name = Optional.of(file);
-
-        this.matcher.ifPresent(m -> res[0] = matcher.get().matches(name.get().getFileName()));
-        this.fileName.ifPresent(n -> res[0] = fileName.get().equals(name.get().getFileName().toString()));
-
-        if(res[0]){
+        if(this.matcher.compare(file.getFileName().toString())){
             try {
 
-                output.write(Joiner.on("").join(name.get().toString(),"\r\n").getBytes());
+                output.write(Joiner.on("").join(file.toAbsolutePath().toString(),"\r\n").getBytes());
                 output.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
     /**
      * Коллбэк вызываемый при вхождении в файл
      * @param file путь к файлу
@@ -81,8 +58,6 @@ public class FileFinder extends SimpleFileVisitor<Path> {
         this.compare(file);
         return CONTINUE;
     }
-
-
     /**
      * Запуск поиска всех подходящих файлов
      * @param startDict - стартовый путь поиска

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 /**
  * Created by Алексей on 24.08.2016.
  */
-public class GlobMacther implements Matcher {
+public class GlobMacther implements FindMatcher {
 
     PathMatcher globMatcher;
 

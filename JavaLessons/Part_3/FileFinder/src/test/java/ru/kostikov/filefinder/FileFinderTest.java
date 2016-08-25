@@ -9,6 +9,7 @@ import java.nio.file.PathMatcher;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -25,14 +26,11 @@ public class FileFinderTest {
 
         exepect = exepect.substring(1, exepect.length()).replace('/', '\\');
 
-        // Создаем маску - все файлы с расширением class
-        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:*Finder.class");
-
         Path startPath = Paths.get("").toAbsolutePath();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         // Создаем класс, начинаем искать
-        FileFinder fileFinder = new FileFinder(Optional.of(matcher), baos);
+        FileFinder fileFinder = new FileFinder(new GlobMacther("*Finder.class"), baos);
         fileFinder.findFiles(startPath);
 
         Scanner scan = new Scanner(baos.toString());
@@ -58,7 +56,7 @@ public class FileFinderTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         // Создаем класс, начинаем искать
-        FileFinder fileFinder = new FileFinder("FileFinder.class", baos);
+        FileFinder fileFinder = new FileFinder(new FullNameMatcher("FileFinder.class"), baos);
         fileFinder.findFiles(startPath);
 
         Scanner scan = new Scanner(baos.toString());
@@ -86,7 +84,7 @@ public class FileFinderTest {
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("regex:.+\\.(class)");
 
         // Создаем класс, начинаем искать
-        FileFinder fileFinder = new FileFinder("FileFinder.class", baos);
+        FileFinder fileFinder = new FileFinder(new RegExpMatcher(Pattern.compile("FileFinder.class")), baos);
         fileFinder.findFiles(startPath);
 
         Scanner scan = new Scanner(baos.toString());
