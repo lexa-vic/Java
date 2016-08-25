@@ -58,6 +58,12 @@ public class FileFinder extends SimpleFileVisitor<Path> {
         this.compare(file);
         return CONTINUE;
     }
+
+    @Override
+    public FileVisitResult visitFileFailed(Path file,
+                                           IOException exc) {
+        return CONTINUE;
+    }
     /**
      * Запуск поиска всех подходящих файлов
      * @param startDict - стартовый путь поиска
