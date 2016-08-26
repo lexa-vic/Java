@@ -5,6 +5,7 @@
   <groupId>ru.kostikov</groupId>
   <artifactId>FileFinder</artifactId>
   <version>1.0-SNAPSHOT</version>
+    <name>find</name>
   <packaging>jar</packaging>
 
   <properties>
@@ -57,19 +58,35 @@
   </dependencies>
 
     <build>
+        <finalName>find</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
                 <configuration>
+                    <!-- get all project dependencies -->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
                             <mainClass>ru.kostikov.filefinder.FileMain</mainClass>
                         </manifest>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
