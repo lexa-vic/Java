@@ -1,6 +1,7 @@
 package triangle;
 
 /**
+ * Main class creates the triangle and calculate it max side.
  * Created by Алексей on 08.07.2016.
  */
 public class TriangleInit {

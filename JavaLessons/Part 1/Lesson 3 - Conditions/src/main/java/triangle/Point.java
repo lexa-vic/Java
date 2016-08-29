@@ -3,33 +3,33 @@ package triangle;
 import static java.lang.Math.*;
 
 /**
+ * The class implements a point in the triangle.
  * Created by Алексей on 08.07.2016.
  */
 public class Point {
-    /** Координата x */
+    /** The x coordinate */
     public double x;
-    /** Координата y */
+    /** The y coordinate */
     public double y;
 
     /**
-     * @param x Координата x
-     * @param y Координата y
+     * Constructor.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
      */
     Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
-
     /**
-     * Расчет дистанции текущей точки до указанной в параметре
-     * @param b Точка до которой считаем дистанцию
-     * @return Дистанция
+     * Calculates distance from current point to the point in argument.
+     * @param b The end point.
+     * @return Result distance.
      */
     public double distanceTo(Point b){
 
         double dist = 0;
 
-        // Расстояние между точками - корень из суммы квадратов разностей координат
         dist = sqrt(pow((b.x - this.x), 2) + pow((b.y - this.y), 2));
         return dist;
     }

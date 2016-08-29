@@ -3,30 +3,29 @@ package equation;
 import static java.lang.Math.*;
 
 /**
+ * Class implements square equation.
  * Created by Алексей on 10.07.2016.
  */
 public class Square {
-
     private final double a;
     private final double b;
     private final double c;
 
     /**
-     * Указываем коэффициенты уравнения (a != 0)
-     * @param a
-     * @param b
-     * @param c
+     * Constructor. Init coefficients. (a != 0)
+     * @param a coefficient a
+     * @param b coefficient b
+     * @param c coefficient c
      */
     Square(double a, double b, double c){
         this.a = a;
         this.b = b;
         this.c = c;
     }
-
     /**
-     * Вычисление значения функции в точке
-     * @param x точка
-     * @return Значение функции в точке
+     * Calculates the function value in the point.
+     * @param x Point.
+     * @return The function value in the point
      */
     public double calculate(double x){
 

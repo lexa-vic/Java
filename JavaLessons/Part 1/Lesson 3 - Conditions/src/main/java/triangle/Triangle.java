@@ -3,10 +3,11 @@ package triangle;
 import static java.lang.Math.*;
 
 /**
+ * The class implements a triangle and calculates it area.
  * Created by Алексей on 08.07.2016.
  */
 public class Triangle {
-    /** Вершины треугольника */
+    /** The vertices of the triangle. */
     private final Point a;
     private final Point b;
     private final Point c;
@@ -14,24 +15,21 @@ public class Triangle {
     double ab, bc, ac;
 
     /**
-     * Конструктор с добавлением вершин треугольника
-     * @param a
-     * @param b
-     * @param c
+     * Constructor. Adds the vertices of the triangle.
+     * @param a Vertex A.
+     * @param b Vertex B.
+     * @param c Vertex C.
      */
     Triangle(Point a, Point b, Point c){
         this.a = a;
         this.b = b;
         this.c = c;
     }
-
-
     /**
-     * Расчет площади треугольника
-     * @return Площадь; -1 - если такой треугольник не существует
+     * Calculate the trinagle area
+     * @return Area; -1 if this triangel not exists
      */
     public double area(){
-
         double result = 0;
 
         this.ab = getSideA();
@@ -49,65 +47,29 @@ public class Triangle {
             // Такой треугольник не существует
             result = -1;
         }
-
         return result;
     }
 
     /**
-     * Длина стороны А
-     * @return
+     * Length of side A
+     * @return length
      */
     public double getSideA(){
         return this.a.distanceTo(this.b);
     }
 
     /**
-     * Длина стороны B
+     * Length of side B
      * @return
      */
     public double getSideB(){
         return this.b.distanceTo(this.c);
     }
     /**
-     * Длина стороны С
+     * Length of side C
      * @return
      */
     public double getSideC(){
         return this.a.distanceTo(this.c);
     }
-
-    /**
-     * Максимальная длина стороны
-     * @return Длина стороны ; -1 - если такой треугольник не существует
-     */
-/*
-    public double max(){
-        // Стороны треугольника
-        double ab, bc, ac;
-        double result = 0;
-
-        ab = a.distanceTo(b);
-        bc = b.distanceTo(c);
-        ac = a.distanceTo(c);
-
-        // Условие существование треугольника - сумма любых двух сторон больше третей
-        if ((ab+bc) > ac) {
-            if (ab >= bc && ab >= ac) {
-
-                result = ab;
-            } else if ((bc >= bc && bc >= ac)){
-
-                result = bc;
-            }
-            else{
-
-                result = ac;
-            }
-        }else{
-            // Такой треугольник не существует
-            result = -1;
-        }
-        return result;
-    }
-*/
 }

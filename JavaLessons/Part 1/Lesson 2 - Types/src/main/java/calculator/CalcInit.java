@@ -3,6 +3,7 @@ package calculator;
 
 /**
  * Created by Алексей on 06.07.2016.
+ * Class whitch use Calculator and prints results on the screen.
  */
 public class CalcInit{
 

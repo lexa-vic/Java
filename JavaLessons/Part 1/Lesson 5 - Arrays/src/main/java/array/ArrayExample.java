@@ -4,9 +4,6 @@ package array;
  * Created by Алексей on 11.07.2016.
  */
 public class ArrayExample {
-
-
-
     /**
      * Сортировка массива по возрастанию
      * @param array
@@ -41,7 +38,6 @@ public class ArrayExample {
                 newArray[i][j] = array[j][i];
             }
         }
-
         // Переворачиваем кажду строку нового массива
         for(int i = 0; i < columnNum; i++){
             for (int j = 0; j < stringNum/2; j++){
@@ -50,10 +46,7 @@ public class ArrayExample {
                 newArray[i][stringNum-1] = tmp;
             }
         }
-
-
-
-        return newArray;
+      return newArray;
     }
 
     /**

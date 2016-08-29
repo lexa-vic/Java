@@ -6,11 +6,11 @@ package equation;
 public class SquareInit {
 
     public static void main(String[] args) {
-        /** Коэффициенты уравнения */
+        /** Coefficents of eqution */
         double a = 0, b = 0, c = 0;
-        /** Отрехок на которов расчитывается функция */
+        /** Calculation interval */
         double x1, x2;
-        /** Шаг расчета */
+        /** Calculation step */
         double step;
 
         if (args.length == 6)
@@ -36,7 +36,6 @@ public class SquareInit {
                     System.out.printf("Func(%.3f): %.3f \n", x1, func.calculate(x1));
                     x1 += step;
                 }
-
             }
         }else{
 

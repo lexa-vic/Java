@@ -1,6 +1,7 @@
 package factorial;
 
 /**
+ * This class implements calculation a factorial.
  * Created by Алексей on 11.07.2016.
  */
 public class Factorial {
@@ -11,8 +12,8 @@ public class Factorial {
     }
 
     /**
-     * Расчет факториала
-     * @return
+     * Factorial calculation
+     * @return result of factorial
      */
     public int calculate(){
         int result = 1;

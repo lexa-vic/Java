@@ -2,49 +2,51 @@ package calculator;
 
 /**
  * Created by Алексей on 06.07.2016.
+ * Calculator.
+ * Calculates any math operations.
  */
 public class Calculator{
 
-    /** Результат операций*/
+    /** Result of operation. */
     private double result;
 
     /**
-     *	Сложение
-     *	@param first  - первый аргумент
-     *	@param second - второй аргумент
+     *	Sum.
+     *	@param first first argument.
+     *	@param second second argument.
      */
     public void add(double first, double second){
         this.result = first+second;
     }
     /**
-     *	Вычитание
-     *	@param first  - первый аргумент
-     *	@param second - второй аргумент
+     *	Subtraction.
+     *	@param first first argument.
+     *	@param second second argument.
      */
     public void subtract(double first, double second){
         this.result = first-second;
     }
     /**
-     *	Деление
-     *	@param first  - первый аргумент
-     *	@param second - второй аргумент
+     *	Divison.
+     *	@param first first argument.
+     *	@param second second argument.
      */
     public void div(double first, double second){
         this.result = first/second;
     }
 
     /**
-     *	Умножение
-     *	@param first  - первый аргумент
-     *	@param second - второй аргумент
+     *	Multiplication.
+     *	@param first first argument.
+     *	@param second second argument.
      */
     public void mult(double first, double second){
         this.result = first*second;
     }
 
     /**
-     *	Вывод результата
-     *	@return Результат оперции
+     *	Result output.
+     *	@return Result of operation.
      */
     public double getResult()
     {
