@@ -4,31 +4,30 @@ import java.util.Optional;
 
 
 /**
+ * This class implements a chess board.
+ * It can get a Cell and make move.
  * Created by Алексей on 26.07.2016.
  */
 public class Board {
-    /** Размер доски */
+    /** Board size */
     private final int BOARD_SIZE = 8;
 
-    /** Непосредственно сама игровая доска */
+    /** Chess board */
     private Cell[][] board = new Cell[BOARD_SIZE][BOARD_SIZE];
 
     public Board(){
 
-        /** Заполняем массив алфавитом по порядку*/
-        /* Именование ячеек по горизонтали доски */
+        /** Horizonatal name Cells  */
         char[] horizontalAxisNames = new char[BOARD_SIZE];
         for(int size = 0; size < this.BOARD_SIZE; size++){
             horizontalAxisNames[size] = (char)((int)'a' + size);
         }
-        /** Заполняем массив номерами по порядку*/
-        /* Именование ячеек по вертикали доски */
+        /** Vertical name Cells  */
         char[] vertivalAxisNames = new char[BOARD_SIZE];
         for(int size = 0; size < this.BOARD_SIZE; size++){
             vertivalAxisNames[size] = (char)((int)'1' + size);
         }
-
-        /** Создаем ячейки поля - присваиваем им имена */
+        /** Create Cell - fill it name */
         for(int i = 0; i < BOARD_SIZE; i++){
             for(int j = 0; j < BOARD_SIZE; j++){
 
@@ -39,10 +38,9 @@ public class Board {
     }
 
     /**
-     * Взятие ячейки по имени
-     * @param cellName Имя ячейки
-     * @return Cell    ячейка
-     * @throws BoardExeption исключение выбрасываемое если ячейка не найдена
+     * Give Cell by it name
+     * @param cellName Name of Cell
+     * @return Optional<Cell> Cell 
      */
 
     public Optional<Cell> getCell(String cellName){
@@ -64,20 +62,19 @@ public class Board {
     }
 
     /**
-     * Ход из одной ячейки в другую
-     * @param cellFrom  ячейка из которой делается ход
-     * @param cellTo    ячейка в которую делается ход
-     * @return boolean false - ход не верный, true ход сделан
+     * Move from one Cell to another
+     * @param cellFrom  Cell from which move starts
+     * @param cellTo    Cell where we want to go
+     * @return boolean false - move is wrong, true - move is done successfully
      */
     public boolean move(Cell cellFrom, Cell cellTo) {
         boolean result = false;
 
-        /** Возможные ходы фигуры */
+        /** All figure moves */
         Cell[] moves;
-        // Просчитываем все возможные ходы
-
+        
         moves = cellFrom.calcAllMoves(board);
-        // Если ячейки куда и откуда не равны, можно ходить
+        
         if (!cellFrom.getName().equals(cellTo.getName())){
             for(Cell move: moves){
                 if(move != null && move.getName().equals(cellTo.getName())){

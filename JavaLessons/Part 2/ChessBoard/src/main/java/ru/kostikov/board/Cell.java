@@ -5,23 +5,27 @@ import ru.kostikov.figures.Figure;
 
 
 /**
+ * This class implements a cell in chess board.
+ * It has name(E2, A1,..), and can manage figure whitch set in this cell
+ * 
  * Created by Алексей on 27.07.2016.
  */
 public class Cell {
-    /** Имя(идентификатор) ячейки*/
+    /** Cell's name*/
     private String name;
 
-    /** Фигура расположенная в этой ячейке */
+    /** Figure is set in the cell */
     private Figure figure = null;
 
     private int x;
     private int y;
 
     /**
-     * Конструктор ячейки поля
-     * @param name Имя ячейки
-     * @param x    Её координата х на поле
-     * @param y    Её координата у на поле
+     * Constructor.
+     * Create Cell with name and coordinats on board.
+     * @param name Cell's name
+     * @param x    х-coordinate on board
+     * @param y    у-coordinate on board
      */
     Cell(String name, int x, int y){
         this.name = name;
@@ -29,7 +33,7 @@ public class Cell {
         this.y    = y;
     }
     /**
-     * Вызов имени ячейки
+     * Give Cell's name
      * @return String name
      */
     public String getName(){
@@ -37,9 +41,9 @@ public class Cell {
     }
 
     /**
-     * Установка фигуры в ячейку
+     * Set a figure in the cell.
      * @param figure
-     * @return
+     * @return true - sucsess, false - fail.
      */
     public boolean setFigure(Figure figure){
         boolean result = false;
@@ -52,7 +56,7 @@ public class Cell {
         return result;
     }
     /**
-     * Достает фигуру которая находится в ячейке
+     * Give figure in the cell.
      * @return Figure
      */
     public Figure getFigure(){
@@ -60,15 +64,14 @@ public class Cell {
     }
 
     /**
-     * Расчет всех возможных ходов для фигуры в текущей ячейке
-     * @param board    - поле в котором будут просчитываться ходы
-     * @return Cell[] - возможные ходы
+     * It calculate all possible movements in the cell. 
+     * @param board Playing borad.
+     * @return Cell[] Possible movements.
      */
     public Cell[] calcAllMoves(Cell[][] board) throws NullPointerException{
 
         Cell[] allMoves = new Cell[25];
 
-        // Проверка на Null
         Optional<Figure> o = Optional.of(this.getFigure());
 
         int[] offsetSideX = this.getFigure().getOffsetSideX();
@@ -78,7 +81,6 @@ public class Cell {
 
         for(int side = 0; side < offsetSideX.length; side++){
             for(int  i = 1; i <= stepsCnt; i++){
-                // Проверяем выход за границы поля
                 if (((this.x + offsetSideX[side]*i) >= 0 && (this.x + offsetSideX[side]*i) < board.length) &&
                     ((this.y + offsetSideY[side]*i) >= 0 && (this.y + offsetSideY[side]*i) < board[this.x].length)){
 
@@ -98,15 +100,14 @@ public class Cell {
         return allMoves;
     }
     /**
-     * Перемещяет фигур с текущей ячейки в ячеку, задаваемую параметром
-     * @param cellTo ячека куда перемещается фигура
-     * @return boolean - true если фигура переместилась
+     * It moves figure from current Cell to another Cell
+     * @param cellTo Cell-destination
+     * @return boolean true - sucsess, move is done.
      */
     public boolean moveFigure(Cell cellTo){
         boolean result = false;
 
         result = cellTo.setFigure(this.getFigure());
-        // Убираем из этой ячейки
         if (result){
             this.figure = null;
         }

@@ -3,25 +3,27 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This interface discrabes chess figure with its parameters 
+ * and behavior on board - how can it makes move.
  * Created by Алексей on 26.07.2016.
  */
 public abstract class Figure {
 
-    /** Тип фигуры белые\черные */
+    /** Figure's type.  */
     private Player  player;
 
-    /** Смещение по Х сторон в которые может ходить фигура*/
+    /** Possible X offset for moevement figures.*/
     private int[]   offsetSideX;
 
-    /** Смещение по Y сторон в которые может ходить фигура*/
+    /** Possible Y offset for moevement figures.*/
     private int[]   offsetSideY;
 
-    /** Кол-во ячеек на которое может шагнуть фигура*/
+    /** Max Cell quantity for moevement figures.*/
     private int stepsCnt;
 
-
     /**
-     * Конструктор, принимаем игрока(белые или черные)
+     * Constructor.
+     * Set a player(black or white)
      * @param player
      */
     Figure(Player player){
@@ -29,10 +31,10 @@ public abstract class Figure {
     }
 
     /**
-     * Установка поведения фигуры
-     * @param stepsCnt      кол-во клеток на которое может ходить фигура за ход
-     * @param offsetSideX   Смещение по Х сторон в которые может ходить фигура
-     * @param offsetSideY   Смещение по Y сторон в которые может ходить фигура
+     * Set figure behavior.
+     * @param stepsCnt      Max Cell quantity for moevement figures.
+     * @param offsetSideX   Possible X offset for moevement figures.
+     * @param offsetSideY   Possible Y offset for moevement figures.
      */
     protected void setBehavior(int stepsCnt, int[] offsetSideX, int[] offsetSideY){
         this.stepsCnt    = stepsCnt;
