@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This class implements a Pawn figure.
  * Created by Алексей on 26.07.2016.
  */
 public class Pawn extends Figure {
@@ -16,10 +17,9 @@ public class Pawn extends Figure {
         this.offsetSideY = new int[]{1, -1};
         this.offsetSideX = new int[]{0, 0};
     }
-
     /**
-     * Конструктор фигуры пешки
-     * @param player Передаем игрока белые/черные
+     * Constructor.
+     * @param player Set player(balck/white)
      */
     public Pawn( Player player){
         super(player);

@@ -1,13 +1,11 @@
 package ru.kostikov.players;
 
 /**
+ * This class implements type of figure. (Blask or White)
  * Created by Алексей on 26.07.2016.
  */
 public abstract class Player {
 
-    /** Вид фигур белые\черные*/
+    /** Type of figure.*/
     public String name;
-    /**  Начальая позиция пешек по оси Y*/
-    public int defaultPawnPosition;
-
 }

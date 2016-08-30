@@ -3,109 +3,85 @@ package ru.kostikov.models;
 import java.util.Arrays;
 
 /**
+ * This class implements common item of tracker.
  * Created by Алексей on 14.07.2016.
  */
 public class Item {
 
-    /**
-     *  Иденитификатор заявки
-     */
+    /** Identifier. */
     private   String id;
-
-    /**
-     *  Имя заявки
-     */
+    /** Request name. */
     protected String name;
-
-
-    /**
-     *  Описание завки
-     */
+    /** Request description. */
     protected String description;
-
-    /**
-     *  Дата создания
-     */
+    /** Create date. */
     protected long create_time;
-
-    /**
-     *  Размер хранилища комментариев к заявке
-     */
+    /** Size of commnts array. */
     private int commentStorageSize = 5;
-    /**
-     *  Текущее кол-во комментариев
-     */
+    /** Current commnts quantity. */
     private int currentCommentSize = 0;
-
-    /**
-     *  Комментарии к заявке
-     */
+    /** Comments to the request. */
     protected Comment[] comments = new Comment[this.commentStorageSize];
 
-
+    /**
+     *  Default constructor.
+     */
     public Item(){
-
     }
 
     /**
-     * Конструктор заявки
-     * @param name
-     * @param description
-     * @param create_time
+     * Constructor.
+     * @param name Request name.
+     * @param description Request description.
+     * @param create_time Create date.
      */
     public Item(String name, String description, long create_time){
         this.name = name;
         this.description = description;
         this.create_time = create_time;
     }
-
     /**
-     * Получение имени
-     * @return
+     * Get request name.
+     * @return name.
      */
     public String getName(){
 
         return this.name;
     }
-
     /**
-     * Запись имени
-     * @param name
+     * Set request name.
+     * @param name name.
      */
     public void setName(String name){
 
         this.name = name;
     }
-
     /**
-     * Получить описание заявки
-     * @return
+     * Get request description.
+     * @return description
      */
     public String getDescription(){
 
         return this.description;
     }
-
     /**
-     * Запись описания заявки
+     * Set description.
      * @param description
      */
     public void setDescription(String description){
 
         this.description = description;
     }
-
     /**
-     * Получение даты создания
-     * @return
+     * Get create date.
+     * @return create date.
      */
     public long getCreateTime(){
 
         return this.create_time;
     }
-
     /**
-     * Установка id
+     * Set id.
      * @param id
      */
     public void setId(String id){
@@ -113,7 +89,7 @@ public class Item {
     }
 
     /**
-     * Чтение id
+     * Get id.
      * @return
      */
     public String getId() {
@@ -121,9 +97,9 @@ public class Item {
     }
 
     /**
-     * Добавить комментарий
+     * Add comment.
      * @param comment
-     * @return
+     * @return true - if comment has been added successfully.
      */
     public boolean addComment(Comment comment){
         boolean result = false;
@@ -142,8 +118,8 @@ public class Item {
     }
 
     /**
-     * Чтение всех комментариев
-     * @return
+     * Read all comments.
+     * @return array of comments.
      */
     public Comment[] getAllComments(){
         Comment[] result = new Comment[this.currentCommentSize];

@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This class implements a Castle figure.
  * Created by Алексей on 26.07.2016.
  */
 public class Castle extends Figure{
@@ -18,13 +19,11 @@ public class Castle extends Figure{
     }
 
     /**
-     * Конструктор фигуры ладьи
-     * @param player Передаем игрока белые/черные
+     * Constructor.
+     * @param player Set player(balck/white)
      */
     public Castle(Player player){
         super(player);
-
-        // Устанавливаем поведение ладьи: ходит только по вертикали и горизонтали
         super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
     }
 

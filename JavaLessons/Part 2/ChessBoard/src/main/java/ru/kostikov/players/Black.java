@@ -7,7 +7,6 @@ public class Black extends Player {
 
     public Black(){
         super();
-        super.defaultPawnPosition = 6;
         super.name                = "Black";
     }
 }

@@ -42,7 +42,6 @@ public class Board {
      * @param cellName Name of Cell
      * @return Optional<Cell> Cell 
      */
-
     public Optional<Cell> getCell(String cellName){
 
         Optional<Cell> result = Optional.empty();
@@ -69,12 +68,9 @@ public class Board {
      */
     public boolean move(Cell cellFrom, Cell cellTo) {
         boolean result = false;
-
         /** All figure moves */
         Cell[] moves;
-        
         moves = cellFrom.calcAllMoves(board);
-        
         if (!cellFrom.getName().equals(cellTo.getName())){
             for(Cell move: moves){
                 if(move != null && move.getName().equals(cellTo.getName())){
@@ -83,7 +79,6 @@ public class Board {
                 }
             }
         }
-
         return result;
     }
 }

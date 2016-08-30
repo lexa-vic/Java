@@ -7,20 +7,20 @@ package ru.kostikov.start;
 public interface UserAction {
 
     /**
-     * Ключ меню - номер меню в общем списке
+     * Get key - index in menu array.
      * @return
      */
     int key();
 
     /**
-     * Выполнение действий подменю
+     * Execute menu item.
      * @param input
      * @param tracker
      */
     void execute(Input input, Tracker tracker);
 
     /**
-     * Отображение имени подменю
+     * Get submenu name.
      * @return
      */
     String info();

@@ -11,7 +11,7 @@ public class StartUI {
     private Tracker tracker;
 
     /**
-     *
+     * Constructor.
      * @param input
      * @param tracker
      */
@@ -21,7 +21,7 @@ public class StartUI {
     }
 
     /**
-     *  Запуск меню и трекера
+     *  Start menu and tracker.
      */
     public void run(){
 

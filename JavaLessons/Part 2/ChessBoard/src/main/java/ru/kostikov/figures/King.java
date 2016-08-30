@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This class implements a King figure.
  * Created by Алексей on 26.07.2016.
  */
 public class King extends Figure {
@@ -18,13 +19,11 @@ public class King extends Figure {
     }
 
     /**
-     * Конструктор фигуры короля
-     * @param player Передаем игрока белые/черные
+     * Constructor.
+     * @param player Set player(balck/white)
      */
     public King(Player player){
         super(player);
-
-        // Устанавливаем поведение короля: ходит во все стороны на одну клетку
         super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
     }
 

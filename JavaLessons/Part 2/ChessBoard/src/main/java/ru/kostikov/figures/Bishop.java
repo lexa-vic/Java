@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This class implements a Bishop figure
  * Created by Алексей on 26.07.2016.
  */
 public class Bishop  extends Figure {
@@ -18,13 +19,11 @@ public class Bishop  extends Figure {
     }
 
     /**
-     * Конструктор фигуры слона
-     * @param player Передаем игрока белые/черные
+     * Constructor.
+     * @param player Set player(balck/white)
      */
     public Bishop(Player player){
         super(player);
-
-        // Устанавливаем поведение слона: ходит только диагонали
         super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
     }
 

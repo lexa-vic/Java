@@ -1,17 +1,14 @@
 package ru.kostikov.models;
 
 /**
+ * The class implements comments for a request.
  * Created by Алексей on 18.07.2016.
  */
 public class Comment {
-    /**
-     * Комментарий
-     */
+    /** Comment*/
     private String comment;
-
     /**
-     * Создание комментария
-     *
+     * Constructor.
      * @param comment
      */
     public Comment(String comment) {
@@ -19,8 +16,7 @@ public class Comment {
     }
 
     /**
-     * Исправление комментария
-     *
+     * Edit comment.
      * @param newComment
      */
     public void editComment(String newComment) {
@@ -28,8 +24,7 @@ public class Comment {
     }
 
     /**
-     * Получение комментария
-     *
+     * Get comment.
      * @return
      */
     public String getComment() {

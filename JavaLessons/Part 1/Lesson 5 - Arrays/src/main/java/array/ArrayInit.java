@@ -15,11 +15,8 @@ public class ArrayInit {
         ArrayExample arrayChange = new ArrayExample();
 
         arrayChange.sort(inBuf);
-
         Arrays.equals(inBuf, expectBuf);
-
         int[][] inBuf2     = new int[][] {{1, 2}, {3, 4}};
-
         arrayChange.rotate(inBuf2);
 
     }

@@ -1,12 +1,13 @@
 package array;
 
 /**
+ * This class implements different manipulations whis array.
  * Created by Алексей on 11.07.2016.
  */
 public class ArrayExample {
     /**
-     * Сортировка массива по возрастанию
-     * @param array
+     * Array sort ascending
+     * @param array imnput array for sort
      */
     public void sort(int array[]){
 
@@ -23,8 +24,8 @@ public class ArrayExample {
     }
 
     /**
-     * Поворот двумерного массива на 90 градусов
-     * @param array
+     * 90 degree rotates array
+     * @param array input array
      */
     public int[][] rotate(int array[][]){
 
@@ -50,7 +51,7 @@ public class ArrayExample {
     }
 
     /**
-     * Удаление дубликатов строк
+     * Deleting dublicate strings
      * @param array
      */
     public void duplicateDelete(String[] array){
@@ -59,9 +60,7 @@ public class ArrayExample {
         for (int n = 0; n < currentLines; n++){
 
             for(int i = n+1; i < currentLines;){
-                // Нашли совпадения
                 if (array[n].equals(array[i])){
-                    // Подвигаем все элементы
                     for(int j = i; j < (array.length-1);j++){
                         array[j] = array[j+1];
                     }

@@ -3,6 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
+ * This class implements a Knight figure.
  * Created by Алексей on 26.07.2016.
  */
 public class Knight extends Figure{
@@ -18,13 +19,11 @@ public class Knight extends Figure{
     }
 
     /**
-     * Конструктор фигуры коня
-     * @param player Передаем игрока белые/черные
+     * Constructor.
+     * @param player Set player(balck/white)
      */
     public Knight(Player player){
         super(player);
-
-        // Устанавливаем поведение коня: ходит буквой Г
         super.setBehavior(this.stepsCnt, this.offsetSideX, this.offsetSideY );
     }
 }

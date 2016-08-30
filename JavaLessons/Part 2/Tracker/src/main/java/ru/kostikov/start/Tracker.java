@@ -7,30 +7,25 @@ import java.util.Random;
 
 
 /**
+ * This class implements tracker logic.
  * Created by Алексей on 14.07.2016.
  */
 public class Tracker {
-    /**
-     * Размер хранилища заявок
-     */
+    /** Size of request storage. */
     private int storageSize = 10;
     /**
-     * Хранилище заявок
-     */
+     * Request storage */
     private Item[] items = new Item[this.storageSize];
     /**
-     * Текущая позиция в хранилище
-     */
+     * Current position in storage */
     private int position = 0;
-    /**
-     * Класс для генерации рандомного числа для Id
-     */
+    /** Random number for Id. */
     private static final Random RN = new Random();
 
     /**
-     * Добавление новой заявки
-     * @param item
-     * @return true - добавление успешно, false - не успешно
+     * Add new requst.
+     * @param item new request.
+     * @return true - success, false - fail.
      */
     public boolean add(Item item){
 
@@ -54,9 +49,9 @@ public class Tracker {
     }
 
     /**
-     * Удаление заявки
-     * @param delItem
-     * @return true - успешно, false - не успешно
+     * Delete request.
+     * @param delItem Request for del.
+     * @return true - success, false - fail.
      */
     public boolean del(Item delItem){
 
@@ -82,9 +77,9 @@ public class Tracker {
     }
 
     /**
-     * Поиск задачи по id
-     * @param id
-     * @return Найденая задача, если не найдена NULL
+     * Find request by Id.
+     * @param id Id
+     * @return Request, if it not found return NULL
      */
     protected Item findById(String id){
         Item result = null;
@@ -98,9 +93,9 @@ public class Tracker {
     }
 
     /**
-     * Получение заявок по фильтру - если есть в имени или описании строка фильтра
-     * @param filter
-     * @return
+     * Get request by filter
+     * @param filter Filter - substring in request.
+     * @return request.
      */
     public Item[] findByFilter(String filter){
         Item[] result = new Item[this.position];
@@ -126,15 +121,15 @@ public class Tracker {
     }
 
     /**
-     * Генерация id
-     * @return
+     * Generate Id.
+     * @return id.
      */
     String generateId() {
         return String.valueOf(RN.nextInt());
     }
 
     /**
-     * Получение всех заявок
+     * Get all requests.
      * @return
      */
     public Item[] getAll(){

@@ -3,7 +3,7 @@ package ru.kostikov.figures;
 import ru.kostikov.players.Player;
 
 /**
- * This interface discrabes chess figure with its parameters 
+ * This interface describes chess figure with its parameters
  * and behavior on board - how can it makes move.
  * Created by Алексей on 26.07.2016.
  */
@@ -18,7 +18,7 @@ public abstract class Figure {
     /** Possible Y offset for moevement figures.*/
     private int[]   offsetSideY;
 
-    /** Max Cell quantity for moevement figures.*/
+    /** Max Cell quantity for movement figures.*/
     private int stepsCnt;
 
     /**
@@ -51,7 +51,7 @@ public abstract class Figure {
     }
 
     /**
-     * Смещение по Х сторон в которые может ходить фигура
+     * Possible X offset for moevement figures.
      * @return int[]
      */
     public int[] getOffsetSideX(){
@@ -59,7 +59,7 @@ public abstract class Figure {
     }
 
     /**
-     * Смещение по Y сторон в которые может ходить фигура
+     * Possible Y offset for moevement figures.
      * @return int[]
      */
     public int[] getOffsetSideY(){

@@ -7,26 +7,31 @@ import ru.kostikov.models.Task;
 import java.util.Arrays;
 
 /**
+ * This class implements user menu logic for Tracker.
  * Created by Алексей on 21.07.2016.
  */
 public class MenuTracker {
-    /** Интерфейс входа */
+    /** Input interface. */
     private Input   input;
-    /** Трекер */
+    /** Tracker. */
     private Tracker tracker;
-    /** Хранилище пукнтов меню */
+    /** Menu stages array. */
     private UserAction[] actions = new UserAction[4];
-    /** Флаг выхода из меню */
+    /** Exit flag menu. */
     private boolean exit;
 
+    /**
+     * Constructor.
+     * @param input  Input interface.
+     * @param tracker Tracker.
+     */
     public MenuTracker(Input input, Tracker tracker){
         this.input   = input;
         this.tracker = tracker;
         this.exit    = false;
     }
-
     /**
-     *  Добавление подклассов(пунктов) в меню
+     *  Adda submenu to main menu.
      */
     public void fillActions(){
         this.actions[0] = new AddItem  ("Add the new item." );
@@ -36,8 +41,8 @@ public class MenuTracker {
     }
 
     /**
-     * Создает и возвращает последовательность значений валидных для приема меню
-     * @return
+     * It creates and get sequence int value - valid menu stages.
+     * @return int[]
      */
     public int[] getMenuRange(){
         int[] range = new int[this.actions.length];
@@ -55,7 +60,7 @@ public class MenuTracker {
     }
 
     /**
-     * Выбор пункта меню
+     * Choose menu.
      * @param key
      */
     public void select(int key){
@@ -68,7 +73,7 @@ public class MenuTracker {
     }
 
     /**
-     *  Отображение меню
+     *  Print menu.
      */
     public void show(){
         for(UserAction action: this.actions){
@@ -83,17 +88,18 @@ public class MenuTracker {
     }
 
     /**
-     *  Класс - выход из главного меню
+     *  The class is submenu for exit in the program.
      */
     private class ExitMenu extends BaseAction{
         /**
-         * Добавляем имя меню
+         * Add menu name.
          * @param name
          */
         ExitMenu(String name){
             super(name);
         }
         /**
+         * Key.
          * @return
          */
         public int key(){
@@ -112,30 +118,29 @@ public class MenuTracker {
 
 }
 /**
- * Пункт меню добавления заявки
- *
+ * Menu item - add request
  */
 class AddItem extends BaseAction{
 
     /**
-     * Добавляем имя меню
+     * Add menu name.
      * @param name
      */
     AddItem(String name){
         super(name);
     }
     /**
-     * Получение ключа пункта - место в хранилище пунктов меню
-     * @return
+     * Get key - index in menu array.
+     * @return key.
      */
     public int key(){
         return 1;
     }
 
     /**
-     * Добавление комментария к заявке
-     * @param item
-     * @param input
+     * Add comments to the request.
+     * @param item tracker request.
+     * @param input input stream.
      */
     private void addCommentMenu(Item item, Input input){
 
@@ -150,9 +155,9 @@ class AddItem extends BaseAction{
     }
 
     /**
-     * Выполнение пункта меню
-     * @param input
-     * @param tracker
+     * Execute menu item.
+     * @param input tracker request.
+     * @param tracker input stream.
      */
     public void execute(Input input, Tracker tracker){
         String name = input.ask("Please enter task's name ");
@@ -167,34 +172,31 @@ class AddItem extends BaseAction{
 
         }
         tracker.add(task);
-
     }
-
 }
 /**
- * Пункт меню отображения всех заявок
- *
+ * Menu item - show all request.
  */
  class ShowItems extends BaseAction{
     /**
-     * Добавляем имя меню
+     * Add menu name.
      * @param name
      */
     ShowItems(String name){
         super(name);
     }
     /**
-     * Получение ключа пункта - место в хранилище пунктов меню
-     * @return
+     * Get key - index in menu array.
+     * @return key.
      */
     public int key(){
         return 2;
     }
 
     /**
-     * Выполнение пункта меню
-     * @param input
-     * @param tracker
+     * Execute menu item.
+     * @param input tracker request.
+     * @param tracker input stream.
      */
     public void execute(Input input, Tracker tracker){
         Item[] allItem = tracker.getAll();
@@ -214,28 +216,28 @@ class AddItem extends BaseAction{
 }
 
 /**
- * Пункт меню поиска заявки
- *
+ * Menu item - find request.
  */
 class FindItem extends BaseAction{
     /**
-     * Добавляем имя меню
+     * Add menu name.
      * @param name
      */
     FindItem(String name){
         super(name);
     }
     /**
-     * Получение ключа пункта - место в хранилище пунктов меню
-     * @return
+     * Get key - index in menu array.
+     * @return key.
      */
     public int key(){
         return 3;
     }
+
     /**
-     * Выполнение пункта меню
-     * @param input
-     * @param tracker
+     * Execute menu item.
+     * @param input tracker request.
+     * @param tracker input stream.
      */
     public void execute(Input input, Tracker tracker){
 
@@ -269,9 +271,9 @@ class FindItem extends BaseAction{
         }
     }
      /**
-     *  Подменю после выбора конкретной заявки
-     *  Выполняем операции модификации или удаления
-     */
+      * Submenu - choose request.
+      * Where we can modify and delete request.
+      */
     private class EditSubMenu{
         private Item    item;
         private Input   input;
@@ -286,7 +288,7 @@ class FindItem extends BaseAction{
             this.exit    = false;
         }
         /**
-         *  Добавление подклассов(пунктов) в меню
+         *  Add submenu to menu.
          */
         private void fillActions(){
             this.subActions[0] = new ChangeName("Change name.");
@@ -297,8 +299,8 @@ class FindItem extends BaseAction{
         }
 
         /**
-         * Создает и возвращает последовательность значений валидных для приема меню
-         * @return
+         * It creates and get sequence int value - valid menu stages.
+         * @return valid number for menu
          */
         public int[] getMenuRange(){
             int[] range = new int[this.subActions.length];
@@ -316,7 +318,7 @@ class FindItem extends BaseAction{
         }
 
         /**
-         * Выбор подпункта
+         * Choose submenu.
          * @param key
          */
         private void select(int key){
@@ -325,9 +327,8 @@ class FindItem extends BaseAction{
                 this.subActions[key].execute(this.input, this.tracker);
             }
         }
-
         /**
-         *  Отображения подпуктнов
+         *  Print submenu.
          */
         private void show(){
             for(UserAction action: subActions){
@@ -336,9 +337,8 @@ class FindItem extends BaseAction{
                 }
             }
         }
-
         /**
-         *  Запуск подменю
+         *  Start menu.
          */
         public void run(){
             this.fillActions();
@@ -349,17 +349,18 @@ class FindItem extends BaseAction{
         }
 
         /**
-         *  Класс - пункт подменю изменения имени заявки
+         *  The class for modify request name.
          */
         private class ChangeName extends BaseAction{
             /**
-             * Добавляем имя меню
+             * Add request name.
              * @param name
              */
             ChangeName(String name){
                 super(name);
             }
             /**
+             * Key.
              * @return
              */
             public int key(){
@@ -367,6 +368,7 @@ class FindItem extends BaseAction{
             }
 
             /**
+             * Execute menu.
              * @param input
              * @param tracker
              */
@@ -376,11 +378,11 @@ class FindItem extends BaseAction{
             }
         }
         /**
-         *  Класс - пункт подменю изменения описания заявки
+         *  The class for modify request description.
          */
         private class ChangeDesc extends BaseAction{
             /**
-             * Добавляем имя меню
+             * Add menu name.
              * @param name
              */
             ChangeDesc(String name){
@@ -396,17 +398,18 @@ class FindItem extends BaseAction{
             }
         }
         /**
-         *  Класс - пункт подменю добавления комментария к заявке
+         * The class - submenu for add comment to the request.
          */
         private class AddComment extends BaseAction{
             /**
-             * Добавляем имя меню
+             * Add request name.
              * @param name
              */
             AddComment(String name){
                 super(name);
             }
             /**
+             * Key.
              * @return
              */
             public int key(){
@@ -414,6 +417,7 @@ class FindItem extends BaseAction{
             }
 
             /**
+             * Execute name.
              * @param input
              * @param tracker
              */
@@ -430,17 +434,18 @@ class FindItem extends BaseAction{
 
         }
         /**
-         *  Класс - пункт подменю удаление заявки
+         * The class - submenu for delete request.
          */
         private class DeleteItem extends BaseAction{
             /**
-             * Добавляем имя меню
+             * Add request name.
              * @param name
              */
             DeleteItem(String name){
                 super(name);
             }
             /**
+             * Key.
              * @return
              */
             public int key(){
@@ -448,6 +453,7 @@ class FindItem extends BaseAction{
             }
 
             /**
+             * Execute name.
              * @param input
              * @param tracker
              */
@@ -460,17 +466,18 @@ class FindItem extends BaseAction{
 
         }
         /**
-         *  Класс - пункт подменю выход из подменю
+         *  The class - submenu for exit from submenu.
          */
         private class ExitSubMenu extends BaseAction{
             /**
-             * Добавляем имя меню
+             * Add request name.
              * @param name
              */
             ExitSubMenu(String name){
                 super(name);
             }
             /**
+             * Key.
              * @return
              */
             public int key(){
@@ -478,6 +485,7 @@ class FindItem extends BaseAction{
             }
 
             /**
+             * Execute name.
              * @param input
              * @param tracker
              */
