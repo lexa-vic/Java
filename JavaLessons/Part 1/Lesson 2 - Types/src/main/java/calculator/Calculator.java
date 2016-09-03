@@ -7,6 +7,11 @@ package calculator;
  */
 public class Calculator{
 
+    /* List of available functions */
+    private final String[] FUNCTIONS = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
+    /* List of available operators */
+    private final String OPERATORS = "+-*/";
+
     /** Result of operation. */
     private double result;
 
@@ -42,6 +47,22 @@ public class Calculator{
      */
     public void mult(double first, double second){
         this.result = first*second;
+    }
+
+    /**
+     * Get support math functions.
+     * @return String array support functions.
+     */
+    public String[] getSupportFunctions(){
+        return FUNCTIONS;
+    }
+
+    /**
+     * Get support math operators.
+     * @return String with support operators.
+     */
+    public String getSupportOperators(){
+        return OPERATORS;
     }
 
     /**

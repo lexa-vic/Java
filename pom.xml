@@ -30,6 +30,8 @@
 
         <module>JavaLessons/Part_3/Socket</module>
 		<module>JavaLessons/Part_3/FileFinder</module>
+		
+		<module>JavaLessons/Part_4/InteractCalculator</module>
 				
     </modules>
   
