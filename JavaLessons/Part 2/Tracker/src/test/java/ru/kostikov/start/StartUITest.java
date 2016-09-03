@@ -42,7 +42,7 @@ public class StartUITest {
 
         });
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input,  new MenuTracker(input,this.tracker));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
 
@@ -91,21 +91,7 @@ public class StartUITest {
                                             "4. Exit.\r\n",
                                             "Select: \r\n");
 
-//        expectedString = "1. Add the new item.\r\n" +
-//                         "2. Show all items.\r\n" +
-//                         "3. Find item.\r\n" +
-//                         "4. Exit.\r\n" +
-//                         "Select: \r\n" +
-//                         "Task id: "+ task.getId() +
-//                         " name: Problem with printer, description: Printer do not print \n" +
-//                         "Please enter any key... \r\n"+
-//                         "1. Add the new item.\r\n" +
-//                         "2. Show all items.\r\n" +
-//                         "3. Find item.\r\n" +
-//                         "4. Exit.\r\n" +
-//                         "Select: \r\n";
-
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input,  new MenuTracker(input, this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
@@ -142,7 +128,7 @@ public class StartUITest {
 
         findString = "1. Task id: "+ task.getId() + " name: Problem with printer, description: Printer do not print \n";
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input, new MenuTracker(input, this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
@@ -181,7 +167,7 @@ public class StartUITest {
 
         expectString = "Printer crashed";
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input,  new MenuTracker(input, this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
@@ -218,7 +204,7 @@ public class StartUITest {
 
         expectString = "Printer do not work";
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input, new MenuTracker(input, this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
@@ -256,7 +242,7 @@ public class StartUITest {
 
         expectString = "bla bla bla";
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input, new MenuTracker(input,this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);
@@ -293,7 +279,7 @@ public class StartUITest {
         Item task = new Task("Problem with printer", "Printer do not print");
         this.tracker.add(task);
 
-        StartUI ui = new StartUI(input, this.tracker);
+        StartUI ui = new StartUI(input,  new MenuTracker(input,this.tracker));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream             ps = new PrintStream(baos);

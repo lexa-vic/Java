@@ -38,7 +38,6 @@ public class FileFinder extends SimpleFileVisitor<Path> {
     private void compare(Path file) {
         if(this.matcher.compare(file.getFileName().toString())){
             try {
-
                 output.write(Joiner.on("").join(file.toAbsolutePath().toString(),"\r\n").getBytes());
                 output.flush();
             } catch (IOException e) {

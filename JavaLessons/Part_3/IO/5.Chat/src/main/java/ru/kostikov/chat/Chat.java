@@ -53,9 +53,22 @@ public class Chat {
      *  Конструктор, устанавливаем слова-командв
      */
     public Chat( Reader input, Writer output, Reader answers) {
+        String line;
+
         this.input   = input;
         this.output  = output;
         this.answers = answers;
+
+        // Читаем кол-во строк в файле
+        try{
+            BufferedReader br = new BufferedReader(this.answers);
+            while ((line = br.readLine()) != null) {
+                stringBuf.add(line);
+            }
+        }
+        catch (IOException ioe){
+            ioe.getStackTrace();
+        }
     }
 
     /**
@@ -82,19 +95,6 @@ public class Chat {
      * @return Считанная рандомная строка из потока
      */
     private String getAnswer(){
-        String line;
-        if (stringBuf.size() == 0){
-            // Читаем кол-во строк в файле
-            try{
-                BufferedReader br = new BufferedReader(this.answers);
-                while ((line = br.readLine()) != null) {
-                    stringBuf.add(line);
-                }
-            }
-            catch (IOException ioe){
-                ioe.getStackTrace();
-            }
-        }
         int lineNumber = new Random().nextInt(stringBuf.size());
         return stringBuf.get(lineNumber);
     }

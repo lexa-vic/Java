@@ -35,8 +35,6 @@ public class Ui {
         this.options.addOption(optName);
         this.options.addOption(optRegExp);
         this.options.addOption(optFileOut);
-
-
     }
 
 

@@ -6,30 +6,27 @@ import ru.kostikov.models.*;
  * Created by Алексей on 18.07.2016.
  */
 public class StartUI {
-
     private Input input;
-    private Tracker tracker;
+    private MenuTracker menu;
 
     /**
      * Constructor.
      * @param input
-     * @param tracker
+     * @param menu
      */
-    public StartUI(Input input, Tracker tracker){
-        this.input  = input;
-        this.tracker = tracker;
+    public StartUI(Input input, MenuTracker menu ){
+        this.input = input;
+        this.menu = menu;
+        this.menu.fillActions();
     }
 
     /**
-     *  Start menu and tracker.
+     *  Start menu
      */
     public void run(){
-
-        MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        menu.fillActions();
         do{
-            menu.show();
-            menu.select(input.ask("Select: ", menu.getMenuRange()));
+            this.menu.show();
+            this.menu.select(input.ask("Select: ", menu.getMenuRange()));
         }while(!menu.exit());
 
 
@@ -38,7 +35,7 @@ public class StartUI {
     public static void main(String[] args) {
 
         Input input = new ValidateInput();
-        StartUI ui = new StartUI(input, new Tracker());
+        StartUI ui = new StartUI(input,  new MenuTracker(input, new Tracker()));
 
         ui.run();
 
