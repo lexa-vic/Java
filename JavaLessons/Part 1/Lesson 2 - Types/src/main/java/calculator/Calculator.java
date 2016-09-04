@@ -8,9 +8,9 @@ package calculator;
 public class Calculator{
 
     /* List of available functions */
-    private final String[] FUNCTIONS = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
+    private final String[] functions = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
     /* List of available operators */
-    private final String OPERATORS = "+-*/";
+    private final String operators = "+-*/";
 
     /** Result of operation. */
     private double result;
@@ -54,7 +54,7 @@ public class Calculator{
      * @return String array support functions.
      */
     public String[] getSupportFunctions(){
-        return FUNCTIONS;
+        return functions;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Calculator{
      * @return String with support operators.
      */
     public String getSupportOperators(){
-        return OPERATORS;
+        return operators;
     }
 
     /**

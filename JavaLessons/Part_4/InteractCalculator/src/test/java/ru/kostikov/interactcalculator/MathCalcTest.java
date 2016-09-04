@@ -33,20 +33,12 @@ public class MathCalcTest {
         assertThat(expect,  is(result));
     }
 
-    @Test
+    @Test(expected=ArithmeticException.class)
     public void calcErr() throws Exception {
         String mathExpression = "(10-2)/0";
-        boolean expect = true;
-        boolean result = false;
         MathCalc mathCalc = new MathCalc();
 
-        try{
-            mathCalc.calc(mathExpression);
-        }catch (ArithmeticException pbe)
-        {
-            result = true;
-        }
-        assertThat(expect,  is(result));
+        mathCalc.calc(mathExpression);
     }
 
 }

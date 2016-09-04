@@ -9,9 +9,9 @@ import java.util.StringTokenizer;
  */
 public class MathParser {
     /** List of available functions */
-    private String[] FUNCTIONS = { };
+    private String[] functions = { };
     /** List of available operators */
-    private String OPERATORS = "";
+    private String operators = "";
     /* Temporary stack that holds operators, functions and brackets */
     private Stack<String> stackOperations = new Stack<String>();
     /* Stack for holding expression converted to reversed polish notation */
@@ -20,8 +20,8 @@ public class MathParser {
     private Stack<String> stackAnswer = new Stack<String>();
 
     public MathParser(String[] supportFuctions, String supportOperators){
-        FUNCTIONS = supportFuctions;
-        OPERATORS = supportOperators;
+        functions = supportFuctions;
+        operators = supportOperators;
     }
 
     /**
@@ -49,7 +49,7 @@ public class MathParser {
         }
 		/* Splitting input string into tokens. */
         StringTokenizer stringTokenizer = new StringTokenizer(expression,
-                this.OPERATORS + "()", true);
+                this.operators + "()", true);
 
 		/* Loop for handling each token - shunting-yard algorithm. */
         while (stringTokenizer.hasMoreTokens()) {
@@ -122,7 +122,7 @@ public class MathParser {
      * @return boolean output
      */
     public boolean isFunction(String token) {
-        for (String item : FUNCTIONS) {
+        for (String item : functions) {
             if (item.equals(token)) {
                 return true;
             }
@@ -157,7 +157,7 @@ public class MathParser {
      * @return boolean output
      */
     public boolean isOperator(String token) {
-        return OPERATORS.contains(token);
+        return operators.contains(token);
     }
 
     /**

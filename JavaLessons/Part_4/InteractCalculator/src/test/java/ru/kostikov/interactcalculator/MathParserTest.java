@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  */
 public class MathParserTest {
     /* List of available functions */
-    private final String[] FUNCTIONS = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
+    private final String[] functions = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
     /* List of available operators */
-    private final String OPERATORS = "+-*/";
+    private final String operators = "+-*/";
 
     @Test
     public void parse() throws Exception {
@@ -21,78 +21,34 @@ public class MathParserTest {
         String outputExpect = "23+5*";
         String outputResult = "";
 
-        MathParser mathParser = new MathParser(FUNCTIONS, OPERATORS);
+        MathParser mathParser = new MathParser(functions, operators);
 
-        try {
-            outputResult = mathParser.parse(mathExpression).toString().replace("[", "").replace("]", "").replace(",","").replace(" ", "");
-        }catch (ParseBracketsExpetion pbe)
-        {
-            pbe.printStackTrace();
-        }catch (ParseUndefineTokenExpetion pute)
-        {
-            pute.printStackTrace();
-        }
+        outputResult = mathParser.parse(mathExpression).toString().replace("[", "").replace("]", "").replace(",","").replace(" ", "");
         assertThat(outputExpect,  is(outputResult));
     }
 
-    @Test
+    @Test(expected=ParseBracketsExpetion.class)
     public void parseOpenBracketMissing() throws Exception {
         String mathExpression = "(2+3))*5";
-        boolean result = false;
-        boolean expect = true;
 
-        MathParser mathParser = new MathParser(FUNCTIONS, OPERATORS);
-
-        try {
-            mathParser.parse(mathExpression);
-        }catch (ParseBracketsExpetion pbe)
-        {
-            result = true;
-        }catch (ParseUndefineTokenExpetion pute)
-        {
-            pute.printStackTrace();
-        }
-        assertThat(expect,  is(result));
+        MathParser mathParser = new MathParser(functions, operators);
+        mathParser.parse(mathExpression);
     }
 
-    @Test
+    @Test(expected=ParseBracketsExpetion.class)
     public void parseCloseBracketMissing() throws Exception {
         String mathExpression = "((2+3)*5";
-        boolean result = false;
-        boolean expect = true;
 
-        MathParser mathParser = new MathParser(FUNCTIONS, OPERATORS);
-
-        try {
-            mathParser.parse(mathExpression);
-        }catch (ParseBracketsExpetion pbe)
-        {
-            result = true;
-        }catch (ParseUndefineTokenExpetion pute)
-        {
-            pute.printStackTrace();
-        }
-        assertThat(expect,  is(result));
+        MathParser mathParser = new MathParser(functions, operators);
+        mathParser.parse(mathExpression);
     }
 
-    @Test
+    @Test(expected=ParseUndefineTokenExpetion.class)
     public void parseUndefToken() throws Exception {
         String mathExpression = "a(2+3)*5";
-        boolean result = false;
-        boolean expect = true;
 
-        MathParser mathParser = new MathParser(FUNCTIONS, OPERATORS);
-
-        try {
-            mathParser.parse(mathExpression);
-        }catch (ParseBracketsExpetion pbe)
-        {
-            pbe.printStackTrace();
-        }catch (ParseUndefineTokenExpetion pute)
-        {
-            result = true;
-        }
-        assertThat(expect,  is(result));
+        MathParser mathParser = new MathParser(functions, operators);
+        mathParser.parse(mathExpression);
     }
 
 }
