@@ -12,23 +12,27 @@ import java.io.InputStreamReader;
  */
 public class InteractCalculator {
 
-    BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private MathCalc mathCalc;
+
+    public InteractCalculator(MathCalc mathCalc){
+        this.mathCalc = mathCalc;
+    }
 
     public void userInterract(){
         String inputStr = "";
         while(true){
             System.out.println("Введите математическое выражение. Для выходы введите: q ");
-            MathCalc mathCalc = new MathCalc();
 
             try {
-                inputStr = input.readLine();
+                inputStr = this.input.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             if(!inputStr.equals("q")){
                 try {
-                    System.out.format("Результат: %.2f\n", mathCalc.calc(inputStr)) ;
+                    System.out.format("Результат: %.2f\n", this.mathCalc.calc(inputStr)) ;
                 }catch (ParseBracketsExpetion pbe){
                     System.out.println("Пропущена скобка.");
                 }catch (ParseUndefineTokenExpetion pute){
@@ -46,8 +50,10 @@ public class InteractCalculator {
     }
 
     public static void main(String[] args) {
-        InteractCalculator interactCalculator = new InteractCalculator();
+        InteractCalculator interactCalculator = new InteractCalculator(new MathCalc(new EngineerCalculator()));
 
         interactCalculator.userInterract();
+
+
     }
 }

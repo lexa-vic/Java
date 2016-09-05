@@ -8,7 +8,7 @@ package calculator;
 public class Calculator{
 
     /* List of available functions */
-    private final String[] functions = { "abs", "cos", "log", "neg", "pow", "sin", "sqrt", "tan"};
+    private final String[] functions = {};
     /* List of available operators */
     private final String operators = "+-*/";
 
@@ -63,6 +63,36 @@ public class Calculator{
      */
     public String getSupportOperators(){
         return operators;
+    }
+
+    /**
+     * Performs the selected operation
+     * @param operator
+     * @param a
+     * @param b
+     * @return Result of operation
+     */
+    public double calcOperation(String operator, double a, double b){
+        if (operator.equals("+")) {
+            this.add(a, b);
+        } else if (operator.equals("-")) {
+            this.subtract(a, b);
+        } else if (operator.equals("*")) {
+            this.mult(a, b);
+        } else if (operator.equals("/")) {
+            this.div(a, b);
+        }
+        return this.result;
+    }
+
+    /**
+     * Performs the selected function
+     * @param operator
+     * @param a
+     * @return Result of function
+     */
+    public double calcFunction(String operator, double a){
+        return this.result;
     }
 
     /**

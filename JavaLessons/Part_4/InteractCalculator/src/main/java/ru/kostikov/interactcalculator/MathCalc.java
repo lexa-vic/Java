@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public class MathCalc {
     /** Class with math functions*/
-    private Calculator calculator = new Calculator();
+    private Calculator calculator;
     /** Class expression parser*/
     private MathParser mathParser;
 
@@ -20,49 +20,55 @@ public class MathCalc {
      *  Constructor.
      *  Init expression parser class.
      */
-    public MathCalc(){
+    public MathCalc(Calculator calculator){
+        this.calculator = calculator;
         this.mathParser = new MathParser(this.calculator.getSupportFunctions(),
                                          this.calculator.getSupportOperators());
     }
 
     /**
-     * Calculates experession in Reverse Polish Notation(RPN).
-     * @param experessionRPN Stack with experession in RPN.
+     * Calculates expression in Reverse Polish Notation(RPN).
+     * @param expressionRPN Stack with expression in RPN.
      * @return result of expression.
      */
-    private double calcRPN(Stack<String> experessionRPN) throws ArithmeticException{
-        	/* stack for holding the calculations result */
+    private double calcRPN(Stack<String> expressionRPN) throws ArithmeticException{
+        /* stack for holding the calculations result */
         Stack<Double> stackAnswer = new Stack<Double>();
 
         /* reverse stack */
-        Collections.reverse(experessionRPN);
+        Collections.reverse(expressionRPN);
 
         /* Clean answer stack */
         stackAnswer.clear();
 
-        while (!experessionRPN.empty()){
-            String token = experessionRPN.pop();
+        while (!expressionRPN.empty()){
+            String token = expressionRPN.pop();
 
             if (this.mathParser.isNumber(token)){
                 stackAnswer.push(Double.valueOf(token));
             }else if (this.mathParser.isOperator(token)){
+                double result;
                 double b = stackAnswer.pop();
                 double a = stackAnswer.pop();
 
-                if (token.equals("+")) {
-                    this.calculator.add(a, b);
-                } else if (token.equals("-")) {
-                    this.calculator.subtract(a, b);
-                } else if (token.equals("*")) {
-                    this.calculator.mult(a, b);
-                } else if (token.equals("/")) {
-                    this.calculator.div(a, b);
-                }
-                if (this.calculator.getResult() == Double.POSITIVE_INFINITY ||
-                    this.calculator.getResult() == Double.NEGATIVE_INFINITY)
+                result = this.calculator.calcOperation(token, a, b);
+
+                if (result == Double.POSITIVE_INFINITY ||
+                    result == Double.NEGATIVE_INFINITY)
                     throw new ArithmeticException();
 
-                stackAnswer.push(this.calculator.getResult()) ;
+                stackAnswer.push(result) ;
+            }else if (this.mathParser.isFunction(token)){
+                double result;
+                double a = stackAnswer.pop();
+
+                result = this.calculator.calcFunction(token, a);
+
+                if (result == Double.POSITIVE_INFINITY ||
+                    result == Double.NEGATIVE_INFINITY)
+                    throw new ArithmeticException();
+
+                stackAnswer.push(result) ;
             }
         }
         return stackAnswer.pop();
