@@ -14,25 +14,25 @@
     <modules>
         <module>JavaLessons/Part 1/Lesson 1 - JVM. Byte code</module>
         <module>JavaLessons/Part 1/Lesson 2 - Types</module>
-		<module>JavaLessons/Part 1/Lesson 3 - Conditions</module>
-		<module>JavaLessons/Part 1/Lesson 4 - Loops</module>
-		<module>JavaLessons/Part 1/Lesson 5 - Arrays</module>
-		<module>JavaLessons/Part 1/Lesson 6 - Final task</module>
-		
-		<module>JavaLessons/Part 2/Tracker</module>
-		<module>JavaLessons/Part 2/ChessBoard</module>
-		
-		<module>JavaLessons/Part_3/IO/1. IntParity</module>
-		<module>JavaLessons/Part_3/IO/2. IntSum</module>
-		<module>JavaLessons/Part_3/IO/3. IntMin</module>
-		<module>JavaLessons/Part_3/IO/4. WordLength</module>
-		<module>JavaLessons/Part_3/IO/5.Chat</module>
+        <module>JavaLessons/Part 1/Lesson 3 - Conditions</module>
+        <module>JavaLessons/Part 1/Lesson 4 - Loops</module>
+        <module>JavaLessons/Part 1/Lesson 5 - Arrays</module>
+        <module>JavaLessons/Part 1/Lesson 6 - Final task</module>
+        
+        <module>JavaLessons/Part 2/Tracker</module>
+        <module>JavaLessons/Part 2/ChessBoard</module>
+        
+        <module>JavaLessons/Part_3/IO/1. IntParity</module>
+        <module>JavaLessons/Part_3/IO/2. IntSum</module>
+        <module>JavaLessons/Part_3/IO/3. IntMin</module>
+        <module>JavaLessons/Part_3/IO/4. WordLength</module>
+        <module>JavaLessons/Part_3/IO/5.Chat</module>
 
         <module>JavaLessons/Part_3/Socket</module>
-		<module>JavaLessons/Part_3/FileFinder</module>
-		
-		<module>JavaLessons/Part_4/InteractCalculator</module>
-		<module>JavaLessons/Part_4/FoodStore</module>
+        <module>JavaLessons/Part_3/FileFinder</module>
+        
+        <module>JavaLessons/Part_4/InteractCalculator</module>
+        <module>JavaLessons/Part_4/FoodStore</module>
     </modules>
   
 
@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
