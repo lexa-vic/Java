@@ -33,6 +33,7 @@
         
         <module>JavaLessons/Part_4/InteractCalculator</module>
         <module>JavaLessons/Part_4/FoodStore</module>
+		<module>JavaLessons/Part_4/Menu</module>
     </modules>
   
 

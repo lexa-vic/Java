@@ -19,6 +19,7 @@ public class ControlQualityReproductTest {
     Food bread = new Food("Bread");
     Food meat = new Food("Pork");
     ReproductFood apple = new ReproductFood("Apple");
+    ReproductFood potatoes = new ReproductFood("Potatoes");
 
     Store shop = new Shop();
     Store trash = new Trash();
@@ -41,6 +42,9 @@ public class ControlQualityReproductTest {
 
         apple.setReproductFlag(true);
         apple.setExpireDate("2016-09-06").setCreateDate("2016-09-01");
+
+        potatoes.setReproductFlag(true);
+        potatoes.setExpireDate("2016-09-30").setCreateDate("2016-09-01");
 
         milk.setExpireDate("2016-10-03").setCreateDate("2016-09-03");
         bread.setExpireDate("2016-09-06").setCreateDate("2016-09-01");
@@ -92,6 +96,19 @@ public class ControlQualityReproductTest {
 
         controlQuality.checkFoodQuality(apple);
         result = fridgeWarehouse.getFoodList().get(0);
+
+        assertThat(expect,  is(result));
+    }
+
+    @Test
+    public void checkReproductFoodQualityNotInFridgeWarehouse() throws Exception {
+        Food expect = potatoes;
+        Food result = null;
+        ControlQualityReproduct controlQuality = new ControlQualityReproduct(this.stores);
+        controlQuality.setReproductStores(this.repStores);
+
+        controlQuality.checkFoodQuality(potatoes);
+        result = warehouse.getFoodList().get(0);
 
         assertThat(expect,  is(result));
     }

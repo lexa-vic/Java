@@ -26,11 +26,16 @@ public class ControlQualityReproduct extends ControlQuality {
      * @param food
      */
     public void checkFoodQuality(ReproductFood food) {
+        boolean result = false;
         for (ReproductStore st :reproductStores) {
             if (st.foodRequirements(food)){
                 st.addFood(food);
+                result = true;
                 break;
             }
+        }
+        if(!result){
+            super.checkFoodQuality(food);
         }
     }
 }
