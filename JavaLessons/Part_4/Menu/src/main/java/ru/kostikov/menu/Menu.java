@@ -89,11 +89,11 @@ public class Menu implements Show, Select{
         int counter = 1;
         // if this is'n a root menu
         if (this.name != null){
-            output.write(Joiner.on("").join(new Integer(index).toString(), ".", this.name, "\n"));
+            output.write(Joiner.on("").join(String.valueOf(index), ".", this.name, "\n"));
         }
         for (Menu menu: this.subMenu) {
             if (this.index != 0){
-                output.write(Joiner.on("").join(prefix, new Integer(index).toString(), "."));
+                output.write(Joiner.on("").join(prefix, String.valueOf(index), "."));
             }
             menu.showMenu(output, Strings.repeat(prefix, 2));
             counter++;
@@ -115,24 +115,32 @@ public class Menu implements Show, Select{
         if (this.index == 0){
             refactorIndex = Joiner.on("").join("0 ", refactorIndex);
         }
-        Scanner scanner = new Scanner(refactorIndex);
 
-        if (scanner.hasNextInt()) {
-            menuIndex = scanner.nextInt();
-
+        try{
+            menuIndex = Integer.parseInt(refactorIndex.substring(0,1));
             if (this.index == menuIndex) {
-                if (scanner.hasNextInt()){
-                    String newIndexStr = scanner.nextLine();
-                    for (Menu menu : this.subMenu) {
-                        findMenu = menu.select(newIndexStr);
-                        if (findMenu != null){
-                            break;
+                if (refactorIndex.length() > 2){
+                    try{
+                        String nextNum = refactorIndex.substring(2, 3);
+                        Integer.parseInt(nextNum);
+
+                        for (Menu menu : this.subMenu) {
+                            findMenu = menu.select(refactorIndex.substring(2));
+                            if (findMenu != null){
+                                break;
+                            }
                         }
                     }
-                }else{
+                    catch (Exception e){
+                        findMenu = null;
+                    }
+                }
+                else {
                     findMenu = this;
                 }
             }
+        }catch (Exception e){
+            findMenu = null;
         }
         return findMenu;
     }

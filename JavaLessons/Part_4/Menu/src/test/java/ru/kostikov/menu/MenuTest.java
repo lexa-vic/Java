@@ -21,31 +21,23 @@ public class MenuTest {
     Menu menuPartIChapterI = new Menu("Chapter I");
     Menu menuPartIChapterISceneI = new Menu("Scene I");
     Menu menuPartIChapterII = new Menu("Chapter II");
-    Menu menuPartII = new Menu("Part II");
-    Menu menuChapterI = new Menu("Chapter I");
-    Menu menuChapterII = new Menu("Chapter II");
-    Menu menuEpiloge = new Menu("Epilogue");
 
     @Before
     public void init(){
         menuPartIChapterI.addMenu(menuPartIChapterISceneI);
         menuPartI.addMenu(menuPartIChapterI);
         menuPartI.addMenu(menuPartIChapterII);
-        menuPartII.addMenu(menuChapterI);
-        menuPartII.addMenu(menuChapterII);
         rootMenu.addMenu(menuInt);
         rootMenu.addMenu(menuPartI);
-        rootMenu.addMenu(menuPartII);
-        rootMenu.addMenu(menuEpiloge);
     }
 
     @Test
-    public void getName() throws Exception {
+    public void whenSetNameThenGetSameName() throws Exception {
         assertThat(name, is(menuInt.getName()));
     }
 
     @Test
-    public void getSubMenuListEmpty() throws Exception {
+    public void whenNoSubMenuThenGetsSubMenuListEmpty() throws Exception {
         int expected_size = 0;
         int result_size = 1;
         List<Menu> list = menuInt.getSubMenuList();
@@ -54,7 +46,7 @@ public class MenuTest {
     }
 
     @Test
-    public void getSubMenuList() throws Exception {
+    public void whenSetSubMenuThenGetRightSubMenuList() throws Exception {
         Menu resultSubMenu;
 
         resultSubMenu = rootMenu.getSubMenuList().get(0);
@@ -62,16 +54,12 @@ public class MenuTest {
     }
 
     @Test
-    public void showMenu() throws Exception {
+    public void whenSetsMenuThenShowCorrectMenu() throws Exception {
         String expected = Joiner.on("").join( "1.Introduction\n",
                                               "2.Part I\n",
                                                 "--2.1.Chapter I\n",
                                                 "----1.1.Scene I\n",
-                                                "--2.2.Chapter II\n",
-                                                "3.Part II\n",
-                                                "--3.1.Chapter I\n",
-                                                "--3.2.Chapter II\n",
-                                                "4.Epilogue\n");
+                                                "--2.2.Chapter II\n");
         String result;
 
         CharArrayWriter charArray = new CharArrayWriter();
@@ -83,7 +71,7 @@ public class MenuTest {
     }
 
     @Test
-    public void callBackMenu() throws Exception {
+    public void whenSetsCallbackThenIfItCallItPrints() throws Exception {
         String expected = "Hello\r\n";
         String result;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -104,24 +92,15 @@ public class MenuTest {
     }
 
     @Test
-    public void selectTest() throws Exception {
+    public void whenSelectMenuThenMenuReturnRightItem() throws Exception {
         Menu resultSubMenu;
         Menu expectedSubMenu = menuPartIChapterI;
         resultSubMenu = rootMenu.select("2.1");
 
         assertThat(expectedSubMenu, is(resultSubMenu));
     }
-
-    @Test
-    public void selectTestPart2() throws Exception {
-        Menu resultSubMenu;
-        Menu expectedSubMenu = menuPartI;
-        resultSubMenu = rootMenu.select("2.");
-
-        assertThat(expectedSubMenu, is(resultSubMenu));
-    }
-    @Test
-    public void selectnotExistMenuTest() throws Exception {
+   @Test
+    public void whenSelectWrongMenuThenMenuReturnNull() throws Exception {
         Menu resultSubMenu;
         Menu expectedSubMenu = null;
         resultSubMenu = rootMenu.select("2.3.5.");
