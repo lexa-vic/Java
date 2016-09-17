@@ -130,18 +130,18 @@ public class Menu implements Show, Select{
                                 break;
                             }
                         }
-                    }
-                    catch (Exception e){
-                        findMenu = null;
+                    }finally{
+                        // Nothing to do
                     }
                 }
                 else {
                     findMenu = this;
                 }
             }
-        }catch (Exception e){
-            findMenu = null;
+        }finally{
+            // Nothing to do
         }
+
         return findMenu;
     }
 }
