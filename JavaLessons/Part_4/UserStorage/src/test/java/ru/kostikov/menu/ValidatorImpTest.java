@@ -11,26 +11,49 @@ import static org.junit.Assert.*;
 public class ValidatorImpTest {
     @Test
     public void whenParamsRightThenReturnTrue() throws Exception {
-        boolean result = false;
+
         boolean expected = true;
         User user = new User("Aleksey", 27);
         user.setId(1);
 
         ValidatorImp validatorImp = new ValidatorImp();
-        result = validatorImp.checkParams(user);
+        boolean result = validatorImp.checkParams(user);
 
         assertThat(expected, is(result));
     }
 
     @Test
-    public void whenParamsWrongThenReturnFalse() throws Exception {
-        boolean result = true;
+    public void whenIdWrongThenReturnFalse() throws Exception {
         boolean expected = false;
 
         User user = new User("Aleksey", 27);
 
         ValidatorImp validatorImp = new ValidatorImp();
-        result = validatorImp.checkParams(user);
+        boolean result = validatorImp.checkParams(user);
+
+        assertThat(expected, is(result));
+    }
+
+    @Test
+    public void whenNameWrongThenValidatorReturnFalse() throws Exception {
+        boolean expected = false;
+
+        User user = new User(null, 27);
+
+        ValidatorImp validatorImp = new ValidatorImp();
+        boolean result = validatorImp.checkParams(user);
+
+        assertThat(expected, is(result));
+    }
+
+    @Test
+    public void whenAgeWrongThenValidatorReturnFalse() throws Exception {
+        boolean expected = false;
+
+        User user = new User("Aleksey", 0);
+
+        ValidatorImp validatorImp = new ValidatorImp();
+        boolean result = validatorImp.checkParams(user);
 
         assertThat(expected, is(result));
     }

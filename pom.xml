@@ -35,6 +35,8 @@
         <module>JavaLessons/Part_4/FoodStore</module>
 		<module>JavaLessons/Part_4/Menu</module>
 		<module>JavaLessons/Part_4/UserStorage</module>
+		<module>JavaLessons/Part_4/SimpleGenerator</module>
+		
     </modules>
   
 

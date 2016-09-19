@@ -37,18 +37,72 @@ public class UserStorageTest {
     }
 
     @Test
-    public void whenUpdateUserThenItUpdatesInStorage() throws Exception {
+    public void whenUpdateAgeUserThenUpdatesInStorage() throws Exception {
         int expectedAge = 28;
         int resultAge = 1;
         UserStorage userStorage = new UserStorage(new ValidatorImp());
         User user = new User("Aleksey", 27);
+        User newUser = new User("Aleksey", 28);
+        newUser.setId(1);
         user.setId(1);
-        user.setAge(28);
 
         userStorage.addUser(user);
+        userStorage.update(newUser);
         resultAge = userStorage.getUserList().get(0).getAge();
 
         assertThat(expectedAge, is(resultAge));
+    }
+
+    @Test
+    public void whenUpdateNameUserThenUpdatesInStorage() throws Exception {
+        String expectedName= "Ivan";
+        UserStorage userStorage = new UserStorage(new ValidatorImp());
+        User user = new User("Aleksey", 27);
+        User newUser = new User("Ivan", 27);
+        newUser.setId(1);
+        user.setId(1);
+
+        userStorage.addUser(user);
+        userStorage.update(newUser);
+        String resultAge = userStorage.getUserList().get(0).getName();
+
+        assertThat(expectedName, is(resultAge));
+    }
+
+    @Test
+    public void whenUpdateWrongAgeThenNoUpdatesInStorage() throws Exception {
+        int expectedAge = 27;
+        int resultAge = 1;
+        UserStorage userStorage = new UserStorage(new ValidatorImp());
+        User user = new User("Aleksey", 27);
+        User newUser = new User("Aleksey", 0);
+        newUser.setId(1);
+        user.setId(1);
+
+        userStorage.addUser(user);
+
+        userStorage.update(newUser);
+        resultAge = userStorage.getUserList().get(0).getAge();
+
+        assertThat(resultAge, is(expectedAge));
+    }
+
+    @Test
+    public void whenUpdateWrongNameThenNoUpdatesInStorage() throws Exception {
+        String expectedName = "Aleksey";
+        UserStorage userStorage = new UserStorage(new ValidatorImp());
+        User user = new User("Aleksey", 27);
+        User newUser = new User("Ivan", 0);
+        newUser.setId(1);
+        user.setId(1);
+
+        userStorage.addUser(user);
+
+        newUser.setName(null);
+        userStorage.update(newUser);
+        String resultName = userStorage.getUserList().get(0).getName();
+
+        assertThat(resultName, is(expectedName));
     }
 
 }
