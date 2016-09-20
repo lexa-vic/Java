@@ -101,6 +101,7 @@ public class Menu implements Show, Select{
         output.flush();
     }
 
+
     /**
      * Select menu by Index
      * @param index Index e.g 1.2.3.
@@ -116,30 +117,21 @@ public class Menu implements Show, Select{
             refactorIndex = Joiner.on("").join("0 ", refactorIndex);
         }
 
-        try{
-            menuIndex = Integer.parseInt(refactorIndex.substring(0,1));
-            if (this.index == menuIndex) {
-                if (refactorIndex.length() > 2){
-                    try{
-                        String nextNum = refactorIndex.substring(2, 3);
-                        Integer.parseInt(nextNum);
+        menuIndex = Integer.parseInt(refactorIndex.substring(0,1));
+        if (this.index == menuIndex) {
+            if (refactorIndex.length() > 2) {
+                String nextNum = refactorIndex.substring(2, 3);
+                Integer.parseInt(nextNum);
 
-                        for (Menu menu : this.subMenu) {
-                            findMenu = menu.select(refactorIndex.substring(2));
-                            if (findMenu != null){
-                                break;
-                            }
-                        }
-                    }finally{
-                        // Nothing to do
+                for (Menu menu : this.subMenu) {
+                    findMenu = menu.select(refactorIndex.substring(2));
+                    if (findMenu != null) {
+                        break;
                     }
                 }
-                else {
-                    findMenu = this;
-                }
+            }else {
+                findMenu = this;
             }
-        }finally{
-            // Nothing to do
         }
 
         return findMenu;

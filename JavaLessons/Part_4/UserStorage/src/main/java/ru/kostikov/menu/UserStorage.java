@@ -34,8 +34,7 @@ public class UserStorage {
      * @param user
      */
     public boolean update(User user){
-        boolean result = false;
-        result = this.validator.checkParams(user);
+        boolean result = this.validator.checkParams(user);
 
         if (result){
             for (User userInStorage: userStorage) {

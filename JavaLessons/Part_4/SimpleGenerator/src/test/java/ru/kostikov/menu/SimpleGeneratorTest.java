@@ -28,21 +28,9 @@ public class SimpleGeneratorTest {
         Assert.assertThat(result, is(expected));
     }
 
-    @Test
-    public void whenTwoParamsExpectedAndOneParamsSetsThenResultNull() throws Exception {
-        String pattern =  "I am a ${name}, Who are ${subject}? ";
-        String expected =  null;
-        Map<String, String> params = new HashMap<>();
-        params.put("name", "Aleksey");
 
-        SimpleGenerator generator = new SimpleGenerator();
 
-        String result = generator.generate(Optional.of(pattern), Optional.of(params));
-
-        Assert.assertThat(result, is(expected));
-    }
-
-    @Test
+    @Test(expected = GeneratorExeption.class)
     public void whenTwoParamsExpectedAndThreeParamsSetsThenResultCorrectPattern() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
         String expected =  "I am a Aleksey, Who are you? ";
@@ -54,10 +42,21 @@ public class SimpleGeneratorTest {
         SimpleGenerator generator = new SimpleGenerator();
 
         String result = generator.generate(Optional.of(pattern),Optional.of(params));
-
-        Assert.assertThat(result, is(expected));
     }
-    @Test
+
+    @Test(expected = GeneratorExeption.class)
+    public void whenTwoParamsExpectedAndOneParamsSetsThenResultNull() throws Exception {
+        String pattern =  "I am a ${name}, Who are ${subject}? ";
+        String expected =  null;
+        Map<String, String> params = new HashMap<>();
+        params.put("name", "Aleksey");
+
+        SimpleGenerator generator = new SimpleGenerator();
+
+        String result = generator.generate(Optional.of(pattern), Optional.of(params));
+    }
+
+    @Test(expected = GeneratorExeption.class)
     public void whenPatternNullThenReturnNull() throws Exception {
         String pattern = null;
         String expected = null;
@@ -69,10 +68,9 @@ public class SimpleGeneratorTest {
         SimpleGenerator generator = new SimpleGenerator();
 
         String result = generator.generate(Optional.empty(), Optional.of(params));
-
-        Assert.assertThat(result, is(expected));
     }
-    @Test
+
+    @Test(expected = GeneratorExeption.class)
     public void whenParamsNullThenReturnNull() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
         String expected = null;
@@ -80,8 +78,6 @@ public class SimpleGeneratorTest {
         SimpleGenerator generator = new SimpleGenerator();
 
         String result = generator.generate(Optional.of(pattern), Optional.empty());
-
-        Assert.assertThat(result, is(expected));
     }
 
 
