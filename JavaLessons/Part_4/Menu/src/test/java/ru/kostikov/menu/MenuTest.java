@@ -95,7 +95,7 @@ public class MenuTest {
     public void whenSelectMenuThenMenuReturnRightItem() throws Exception {
         Menu resultSubMenu;
         Menu expectedSubMenu = menuPartIChapterI;
-        resultSubMenu = rootMenu.select("2.1");
+        resultSubMenu = rootMenu.select("2.1.");
 
         assertThat(expectedSubMenu, is(resultSubMenu));
     }
@@ -107,4 +107,11 @@ public class MenuTest {
 
         assertThat(expectedSubMenu, is(resultSubMenu));
     }
+
+    @Test (expected = MenuExeption.class)
+    public void whenSelectIncorrectMenuThenThrowsExeprion() throws Exception {
+        rootMenu.select("2.3.5.a");
+    }
+
+
 }

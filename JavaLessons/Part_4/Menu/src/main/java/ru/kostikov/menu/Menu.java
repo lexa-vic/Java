@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class implements menu item.
@@ -108,16 +109,21 @@ public class Menu implements Show, Select{
      * @return
      */
     @Override
-    public Menu select(String index){
-        int menuIndex;
+    public Menu select(String index) throws MenuExeption{
         String refactorIndex = index.replace(".", " ");
         Menu findMenu = null;
+
+        // Check correct menu string
+        if (!refactorIndex.matches("(\\d\\s)*")){
+            throw new MenuExeption("Invalid menu");
+        }
 
         if (this.index == 0){
             refactorIndex = Joiner.on("").join("0 ", refactorIndex);
         }
 
-        menuIndex = Integer.parseInt(refactorIndex.substring(0,1));
+
+        int menuIndex = Integer.parseInt(refactorIndex.substring(0,1));
         if (this.index == menuIndex) {
             if (refactorIndex.length() > 2) {
                 String nextNum = refactorIndex.substring(2, 3);
