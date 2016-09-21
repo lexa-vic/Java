@@ -14,7 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
  */
 public class SimpleGeneratorTest {
     @Test
-    public void whenTwoParamsExpectedAndTwoParamsSetsThenResultCorrect() throws Exception {
+    public void whenPatternHaveTwoParamsAndTwoParamsSetsThenTwoParamsSubstitution() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
         String expected =  "I am a Aleksey, Who are you? ";
         Map<String, String> params = new HashMap<>();
@@ -28,12 +28,9 @@ public class SimpleGeneratorTest {
         Assert.assertThat(result, is(expected));
     }
 
-
-
     @Test(expected = GeneratorExeption.class)
-    public void whenTwoParamsExpectedAndThreeParamsSetsThenResultCorrectPattern() throws Exception {
+    public void whenPatternHaveTwoParamsAndThreeParamsSetsThenGeneratesException() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
-        String expected =  "I am a Aleksey, Who are you? ";
         Map<String, String> params = new HashMap<>();
         params.put("name", "Aleksey");
         params.put("subject", "you");
@@ -41,25 +38,22 @@ public class SimpleGeneratorTest {
 
         SimpleGenerator generator = new SimpleGenerator();
 
-        String result = generator.generate(Optional.of(pattern),Optional.of(params));
+        generator.generate(Optional.of(pattern),Optional.of(params));
     }
 
     @Test(expected = GeneratorExeption.class)
-    public void whenTwoParamsExpectedAndOneParamsSetsThenResultNull() throws Exception {
+    public void whenPatternHaveTwoParamsAndOneParamSetsThenGeneratesException() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
-        String expected =  null;
         Map<String, String> params = new HashMap<>();
         params.put("name", "Aleksey");
 
         SimpleGenerator generator = new SimpleGenerator();
 
-        String result = generator.generate(Optional.of(pattern), Optional.of(params));
+        generator.generate(Optional.of(pattern), Optional.of(params));
     }
 
     @Test(expected = GeneratorExeption.class)
-    public void whenPatternNullThenReturnNull() throws Exception {
-        String pattern = null;
-        String expected = null;
+    public void whenPatternNullAndThreeParamSetsThenGeneratesException() throws Exception {
         Map<String, String> params = new HashMap<>();
         params.put("name", "Aleksey");
         params.put("subject", "you");
@@ -67,17 +61,15 @@ public class SimpleGeneratorTest {
 
         SimpleGenerator generator = new SimpleGenerator();
 
-        String result = generator.generate(Optional.empty(), Optional.of(params));
+        generator.generate(Optional.empty(), Optional.of(params));
     }
 
     @Test(expected = GeneratorExeption.class)
-    public void whenParamsNullThenReturnNull() throws Exception {
+    public void whenParamsNullThenGeneratesException() throws Exception {
         String pattern =  "I am a ${name}, Who are ${subject}? ";
-        String expected = null;
-
         SimpleGenerator generator = new SimpleGenerator();
 
-        String result = generator.generate(Optional.of(pattern), Optional.empty());
+        generator.generate(Optional.of(pattern), Optional.empty());
     }
 
 

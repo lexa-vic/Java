@@ -18,14 +18,12 @@ public class SimpleGenerator {
      * @return
      */
     String generate(Optional<String> pattern, Optional<Map<String, String>>  params) throws GeneratorExeption{
-        String result = null;
         Pattern regExp = Pattern.compile("\\$\\{(\\w+)\\}");
-        Matcher matcher = null;
+        StringBuffer sb = new StringBuffer();
 
         if (pattern.isPresent() && params.isPresent()){
             int counter = 0;
-            StringBuffer sb = new StringBuffer();
-            matcher = regExp.matcher(pattern.get());
+            Matcher matcher = regExp.matcher(pattern.get());
 
             while (matcher.find()){
                 counter++;
@@ -37,13 +35,12 @@ public class SimpleGenerator {
             }
             if (counter != params.get().size()){
                 throw new GeneratorExeption("Have extra params");
-            }else {
-                matcher.appendTail(sb);
-                result = sb.toString();
             }
+            matcher.appendTail(sb);
         }else {
             throw new GeneratorExeption("Params or pattern was not found");
         }
-        return result;
+
+        return sb.toString();
     }
 }
