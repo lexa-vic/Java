@@ -56,55 +56,24 @@ public class TicTacToeField extends Field implements Rules {
             throw new IllegalArgumentException("Некорректная длина выигрышной длины.");
         }
         this.winLength = winLength;
+        this.field = field;
 
-        this.field = field;//Arrays.copyOf(field, field.length);
-//        for (int i = 0; i < field.length; i++) {
-//            this.field[i] = Arrays.copyOf(field[i], field[i].length);
-//        }
         reviewState();
     }
 
-    /**
-     * Возвращает значение ячейки игрового поля.
-     * @param row
-     *            номер строки.
-     * @param col
-     *            номер столбца.
-     * @return значение ячейки игрового поля.
-     */
-    public int get(int row, int col) {
-        return field[row][col];
-    }
 
     /**
      * Текущее состояние поля
      * @return State состояние поля
      */
-    public State getState() {
+    private State getState() {
         return state;
     }
-
-    /**
-     * Кол-во строк в поле
-     * @return
-     */
-    public int getRowCount() {
-        return field.length;
-    }
-
-    /**
-     * Кол-во столбцов в поле
-     * @return
-     */
-    public int getColCount() {
-        return field[0].length;
-    }
-
     /**
      * Установка состояния поля
      * @param state
      */
-    protected void setState(State state) {
+    private void setState(State state) {
         this.state = state;
     }
 
@@ -112,12 +81,10 @@ public class TicTacToeField extends Field implements Rules {
     /**
      * Возвращает массив допустимых ходов.
      *
-     * @param player
-     *            идентификатор игрока, для которого возращаются допустимые ходы.
      * @return массив допустимых ходов.
      */
     @Override
-    public Move[] getMoves(int player) {
+    public Move[] getMoves() {
         List<Move> moves = new ArrayList<Move>();
         for (int r = 0; r < field.length; r++) {
             for (int c = 0; c < field.length; c++) {
@@ -159,11 +126,11 @@ public class TicTacToeField extends Field implements Rules {
      * @param player
      *            идентификатор игрока, чей ход отменяется.
      */
-    public void undoMove(Move m, int player) {
-        field[m.row][m.col] = 0;
-        winLine = null;
-        setState(State.NONE);
-    }
+//    public void undoMove(Move m, int player) {
+//        field[m.row][m.col] = 0;
+//        winLine = null;
+//        setState(State.NONE);
+//    }
 
     /**
      * Проверяет поле на предмет окончания игры.
@@ -174,9 +141,9 @@ public class TicTacToeField extends Field implements Rules {
         return state != State.NONE;
     }
 
-    public int getWinner() {
-        return (state == State.WIN_X) ? PLAYER_X : (state == State.WIN_O) ? PLAYER_O : 0;
-    }
+//    public int getWinner() {
+//        return (state == State.WIN_X) ? PLAYER_X : (state == State.WIN_O) ? PLAYER_O : 0;
+//    }
 
     /**
      * Возвращает список клеток, составляющих выигрышную комбинацию. Или null, если
@@ -204,23 +171,6 @@ public class TicTacToeField extends Field implements Rules {
             return res;
         return null;
     }
-
-
-//    @Override
-//    public TicTacToeField clone() {
-//        TicTacToeField clone = new TicTacToeField(field.length, winLength);
-//        for (int r = 0; r < field.length; r++) {
-//            for (int c = 0; c < field.length; c++) {
-//                clone.field[r][c] = this.field[r][c];
-//            }
-//        }
-//        clone.state = this.state;
-//        clone.winLength = this.winLength;
-//        clone.winLine = (this.winLine != null) ? new ArrayList<Cell>(this.winLine) : null;
-//        return clone;
-//    }
-
-
 
     /**
      * Проверяет, не изменилось ли состояние игрового поля.

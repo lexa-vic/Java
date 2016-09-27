@@ -24,12 +24,12 @@ public interface TicTacToeView {
     /**
      * Сообщает об окончании игры.
      * 
-     * @param result
-     *            результат окончания.
+     * @param winner
+     *            Возвращает победителя, если ничья - NULL
      * @param winLine
      *            список ячеек в выигрышной комбинации. null, если ничья.
      */
-    void gameOver(State result, List<Cell> winLine);
+    void gameOver(Player winner, List<Cell> winLine);
 
 
     /**
