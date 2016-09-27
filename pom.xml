@@ -36,7 +36,8 @@
 		<module>JavaLessons/Part_4/Menu</module>
 		<module>JavaLessons/Part_4/UserStorage</module>
 		<module>JavaLessons/Part_4/SimpleGenerator</module>
-		
+        <module>JavaLessons/Part_4/TicTacToe</module>
+
     </modules>
   
 

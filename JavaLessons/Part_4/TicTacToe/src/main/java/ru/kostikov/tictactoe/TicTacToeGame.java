@@ -78,46 +78,46 @@ public class TicTacToeGame {
         }
     }
 
-    public static void main(String[] args) {
-        TicTacToeGame game = new TicTacToeGame(new TicTacToeView() {
-            @Override
-            public void updateWithField(TicTacToeField field) {
-
-            }
-
-            @Override
-            public void gameOver(TicTacToeField.State result, List<Cell> winLine) {
-                System.out.println("Win");
-                System.exit(1);
-            }
-
-            @Override
-            public void animateMove(Move move, int player) {
-                System.out.printf("Player %d x: %d y: %d\n",player, move.getRow(), move.getCol());
-            }
-        }, 3, 3, 3);
-
-        game.newGame();
-        BufferedReader inp =  new BufferedReader( new InputStreamReader(System.in));
-        Scanner scanner = new Scanner(inp);
-
-        while(true){
-
-            try {
-
-                int x = Integer.parseInt(inp.readLine());
-                int y = Integer.parseInt(inp.readLine());
-                Move m = new Move(x, y);
-
-                game.movePlayer(m);
-                game.moveAI();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
+//    public static void main(String[] args) {
+//        TicTacToeGame game = new TicTacToeGame(new TicTacToeView() {
+//            @Override
+//            public void updateWithField(TicTacToeField field) {
+//
+//            }
+//
+//            @Override
+//            public void gameOver(TicTacToeField.State result, List<Cell> winLine) {
+//                System.out.println("Win");
+//                System.exit(1);
+//            }
+//
+//            @Override
+//            public void animateMove(Move move, int player) {
+//                System.out.printf("Player %d x: %d y: %d\n",player, move.getRow(), move.getCol());
+//            }
+//        }, 3, 3, 3);
+//
+//        game.newGame();
+//        BufferedReader inp =  new BufferedReader( new InputStreamReader(System.in));
+//        Scanner scanner = new Scanner(inp);
+//
+//        while(true){
+//
+//            try {
+//
+//                int x = Integer.parseInt(inp.readLine());
+//                int y = Integer.parseInt(inp.readLine());
+//                Move m = new Move(x, y);
+//
+//                game.movePlayer(m);
+//                game.moveAI();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//    }
 
 
 }
