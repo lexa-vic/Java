@@ -40,5 +40,5 @@ public interface TicTacToeView {
      * @param player
      *            идентификатор игрока, выполнившего ход.
      */
-    void animateMove(Move move, int player);
+    void animateMove(Move move, Player player);
 }

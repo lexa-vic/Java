@@ -9,14 +9,11 @@ public class TicTacToeGame {
 
     private TicTacToeView view;
 
-//    private static final int PLAYER = TicTacToeField.PLAYER_X;
-//
-//    private static final int AI = TicTacToeField.PLAYER_O;
-
     public TicTacToeGame(TicTacToeView view, int size, int winLength) {
         this.view = view;
 
         field = new TicTacToeField(size, winLength);
+        this.view = view;
         view.updateWithField(field);
     }
 
@@ -24,12 +21,22 @@ public class TicTacToeGame {
         PlayerX.setField(field);
         PlayerO.setField(field);
 
+        PlayerX.setPlayerType(TicTacToeField.PLAYER_X);
+        PlayerO.setPlayerType(TicTacToeField.PLAYER_O);
+
         while (field.isGameOver()) {
-            field.doMove(PlayerX.getMove(field.getMoves()), TicTacToeField.PLAYER_X);
-            field.doMove(PlayerO.getMove(field.getMoves()), TicTacToeField.PLAYER_O);
+            field.doMove(PlayerX.getMove(), TicTacToeField.PLAYER_X);
+            field.doMove(PlayerO.getMove(), TicTacToeField.PLAYER_O);
         }
         List<Cell> winLine = field.getWinLine();
-        //view.gameOver(field.getState(), winLine);
+
+        Player winner = null;
+        if (field.getState() == TicTacToeField.State.WIN_X){
+            winner = PlayerX;
+        }else if (field.getState() == TicTacToeField.State.WIN_O){
+            winner = PlayerO;
+        }
+        view.gameOver(winner, winLine);
     }
 
 //    public void movePlayer(Move m) {

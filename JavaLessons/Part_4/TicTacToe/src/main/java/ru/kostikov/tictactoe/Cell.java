@@ -24,4 +24,14 @@ public class Cell {
         this.row = row;
         this.col = col;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Cell))
+            return false;
+        Cell m = (Cell) obj;
+        return this.row == m.row && this.col == m.col;
+    }
 }

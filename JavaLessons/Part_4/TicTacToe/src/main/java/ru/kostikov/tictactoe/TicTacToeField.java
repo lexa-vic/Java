@@ -10,7 +10,7 @@ import java.util.List;
  * @author dok
  * 
  */
-public class TicTacToeField extends Field implements Rules {
+public class TicTacToeField extends Field {
 
     protected TicTacToeField.State state = TicTacToeField.State.NONE;
 
@@ -66,7 +66,7 @@ public class TicTacToeField extends Field implements Rules {
      * Текущее состояние поля
      * @return State состояние поля
      */
-    private State getState() {
+    public State getState() {
         return state;
     }
     /**
@@ -108,7 +108,7 @@ public class TicTacToeField extends Field implements Rules {
      * @throws IllegalMoveException
      */
     public void doMove(Move m, int player) throws IllegalMoveException {
-        if (field[m.row][m.col] != 0) {
+        if (m.col >= field.length || m.row >= field.length || field[m.row][m.col] != 0) {
             throw new IllegalMoveException(m.row, m.col, player);
         }
         if (getState() != State.NONE) {

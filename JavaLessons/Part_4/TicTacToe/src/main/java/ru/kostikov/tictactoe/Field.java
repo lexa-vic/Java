@@ -27,4 +27,11 @@ public abstract class Field {
      * @return true если игра закончена.
      */
     public abstract boolean isGameOver();
+
+    /**
+     * Возвращает массив допустимых ходов.
+     *
+     * @return массив допустимых ходов.
+     */
+    public abstract Move[] getMoves();
 }

@@ -7,5 +7,7 @@ public interface Player {
 
     void setField(Field field);
 
-    Move getMove(Move[] availableMoves);
+    void setPlayerType(int figure);
+
+    Move getMove();
 }
