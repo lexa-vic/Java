@@ -12,6 +12,11 @@ public class HumanPlayer implements Player{
     }
 
     @Override
+    public void setPlayerType(int figure) {
+
+    }
+
+    @Override
     public Move getMove() {
         return null;
     }

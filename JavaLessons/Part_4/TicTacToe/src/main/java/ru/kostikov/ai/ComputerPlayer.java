@@ -28,5 +28,6 @@ public class ComputerPlayer implements Player {
     public Move getMove() {
 
         this.field.getMoves();
+        return null;
     }
 }
