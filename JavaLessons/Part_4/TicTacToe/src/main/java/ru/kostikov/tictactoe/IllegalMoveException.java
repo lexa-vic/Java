@@ -3,7 +3,7 @@ package ru.kostikov.tictactoe;
 /**
  * Генерируется при попытке совершить недопустимый ход.
  */
-public class IllegalMoveException extends RuntimeException {
+public class IllegalMoveException extends Exception {
 
     /**
      * @return номер строки некорректного хода.

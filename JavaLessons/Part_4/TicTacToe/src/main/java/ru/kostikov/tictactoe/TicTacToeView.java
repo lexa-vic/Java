@@ -35,10 +35,8 @@ public interface TicTacToeView {
     /**
      * Анимирование сделанного хода.
      * 
-     * @param move
-     *            описание хода.
-     * @param player
-     *            идентификатор игрока, выполнившего ход.
+     * @param field  поле
+     * @param player идентификатор игрока, выполнившего ход.
      */
-    void animateMove(Move move, Player player);
+    void animateMove(TicTacToeField field, Player player);
 }

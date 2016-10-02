@@ -12,14 +12,13 @@ public abstract class Field {
 
     /**
      * Выполняет ход, описанный объектом move за игрока с идентификатором player.
-     * 
-     * @param move
-     *            содержит координаты хода. 
-     * @param player
-     *            идентификатор игрока, совершающего ход.
-     * @throws IllegalMoveException  
+     *
+     * @param move содержит координаты хода.
+     * @param player идентификатор игрока, совершающего ход.
+     *
+     * @return true - ход выполнен, false = неверный ход
      */
-    public abstract void doMove(Move move, int player) throws IllegalMoveException;
+    public abstract boolean doMove(Move move, int player);
 
     /**
      * Проверяет поле на предмет окончания игры.

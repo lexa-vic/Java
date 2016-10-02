@@ -98,24 +98,23 @@ public class TicTacToeField extends Field {
     }
 
     /**
-     *
      * Выполняет ход, описанный объектом move за игрока с идентификатором player.
      *
-     * @param m
-     *            содержит координаты хода.
-     * @param player
-     *            идентификатор игрока, совершающего ход.
-     * @throws IllegalMoveException
+     * @param m содержит координаты хода.
+     * @param player идентификатор игрока, совершающего ход.
+     *
+     * @return true - ход выполнен, false = неверный ход
      */
-    public void doMove(Move m, int player) throws IllegalMoveException {
+    public boolean doMove(Move m, int player){
         if (m.col >= field.length || m.row >= field.length || field[m.row][m.col] != 0) {
-            throw new IllegalMoveException(m.row, m.col, player);
+            return false;
         }
         if (getState() != State.NONE) {
-            throw new IllegalMoveException("Игра уже закончена.", m.row, m.col, player);
+            return false;
         }
         field[m.row][m.col] = player;
         reviewState();
+        return true;
     }
 
     /**

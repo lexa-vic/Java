@@ -30,4 +30,22 @@ public class ComputerPlayer implements Player {
         this.field.getMoves();
         return null;
     }
+
+    /**
+     * Имя игрока
+     *
+     * @return
+     */
+    @Override
+    public String getName() {
+        return "Computer";
+    }
+
+    /**
+     * Callback ошибки хода
+     */
+    @Override
+    public void badMove() {
+
+    }
 }
