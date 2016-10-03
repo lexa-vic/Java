@@ -93,7 +93,6 @@ public class ComputerPlayer implements Player {
         int diag_y = y - winLength;
         // Собираем линию по диагонали(/)
         for (int i = x - winLength; i < x + winLength; i++){
-            diag_y +=1;
             if (i >= 0 && i < field.length &&
                     diag_y >= 0 && diag_y < field.length ){
                 if(field[i][diag_y] == 1){
@@ -102,6 +101,7 @@ public class ComputerPlayer implements Player {
                     line.append("0");
                 }
             }
+            diag_y +=1;
         }
         lines[2] = line.toString();
         line = new StringBuilder();
@@ -109,7 +109,7 @@ public class ComputerPlayer implements Player {
         diag_y = y + winLength;
         // Собираем линию по диагонали(/)
         for (int i = x - winLength; i <= x + winLength; i++){
-            diag_y -=1;
+
             if (i >= 0 && i < field.length &&
                     diag_y >= 0 && diag_y < field.length ){
                 if(field[i][diag_y] == 1){
@@ -118,6 +118,7 @@ public class ComputerPlayer implements Player {
                     line.append("0");
                 }
             }
+            diag_y -=1;
         }
         lines[3] = line.toString();
 
