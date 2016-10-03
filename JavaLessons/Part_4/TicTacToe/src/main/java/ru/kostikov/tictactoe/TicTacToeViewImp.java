@@ -17,7 +17,7 @@ public class TicTacToeViewImp implements TicTacToeView, PlayerInput, PlayerOutpu
     private Scanner input;
 
     private Player player1 = new HumanPlayer("Man1",this, this);
-    private Player player2 = new HumanPlayer("Man2",this, this);
+    private Player player2 =  new ComputerPlayer();//new HumanPlayer("Man2",this, this);
     private String player1Figure = "";
 //    private Player computerPlayer = new ComputerPlayer();
 

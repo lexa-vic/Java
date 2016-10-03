@@ -25,8 +25,9 @@ public class ComputerPlayerTest {
         computerPlayer.setPlayerType(ticTacToeField.PLAYER_X);
 
         Move expectedMove = new Move(2,2);
+        Move resultMove = computerPlayer.getMove();
 
-        Assert.assertThat(expectedMove, is(computerPlayer.getMove()));
+        Assert.assertThat(expectedMove, is(resultMove));
 
     }
 

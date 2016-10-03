@@ -12,10 +12,20 @@ public class ComputerPlayer implements Player {
     private Field field;
     /** За кого играет фигура Х или О*/
     private int player;
+    /** Паттерны игры */
+    private GamePattern gamePatternX;
+    private GamePattern gamePatternO;
+
 
     @Override
     public void setField(Field field) {
         this.field = field;
+        this.createPatterns();
+    }
+
+    private void createPatterns(){
+        this.gamePatternX = new GamePatternImp(field.winLength, field.PLAYER_X);
+        this.gamePatternO = new GamePatternImp(field.winLength, field.PLAYER_O);
     }
 
     @Override
@@ -23,21 +33,26 @@ public class ComputerPlayer implements Player {
         player = figure;
     }
 
-
     @Override
     public Move getMove() {
-
+        int score = 0;
+        Move bestMove = null;
         for (Move move: this.field.getMoves()){
             String [] lines = getLines(this.field.field, this.field.winLength, move);
 
             for (String line : lines ){
-                if (line != null && line.equals("")){
+                if (line != null && !line.equals("")){
+                    int lineScore = 0;
+                    lineScore += this.gamePatternX.getLineScore(line);
+                    lineScore += this.gamePatternO.getLineScore(line);
 
+                    if (lineScore > score){
+                        bestMove = move;
+                    }
                 }
             }
-
         }
-        return null;
+        return bestMove;
     }
 
     /**
@@ -67,11 +82,7 @@ public class ComputerPlayer implements Player {
         // Собираем линию по вертикали (|)
         for (int i = x - winLength; i <= x + winLength; i++){
             if (i >= 0 && i < field.length){
-                if(field[i][y] == 1){
-                    line.append("x");
-                } else if (field[i][y] == 0) {
-                    line.append("0");
-                }
+                line.append(String.valueOf(field[i][y]));
             }
         }
         lines[0] = line.toString();
@@ -80,11 +91,7 @@ public class ComputerPlayer implements Player {
         // Собираем линию по горизонтали(-)
         for (int i = y - winLength; i <= y + winLength; i++){
             if (i >= 0 && i < field.length){
-                if(field[x][i] == 1){
-                    line.append("x");
-                } else if (field[x][i] == 0) {
-                    line.append("0");
-                }
+                line.append(String.valueOf(field[x][i]));
             }
         }
         lines[1] = line.toString();
@@ -95,11 +102,7 @@ public class ComputerPlayer implements Player {
         for (int i = x - winLength; i < x + winLength; i++){
             if (i >= 0 && i < field.length &&
                     diag_y >= 0 && diag_y < field.length ){
-                if(field[i][diag_y] == 1){
-                    line.append("x");
-                } else if (field[i][diag_y] == 0) {
-                    line.append("0");
-                }
+                line.append(String.valueOf(field[i][diag_y]));
             }
             diag_y +=1;
         }
@@ -112,11 +115,7 @@ public class ComputerPlayer implements Player {
 
             if (i >= 0 && i < field.length &&
                     diag_y >= 0 && diag_y < field.length ){
-                if(field[i][diag_y] == 1){
-                    line.append("x");
-                } else if (field[i][diag_y] == 0) {
-                    line.append("0");
-                }
+                line.append(String.valueOf(field[i][diag_y]));
             }
             diag_y -=1;
         }

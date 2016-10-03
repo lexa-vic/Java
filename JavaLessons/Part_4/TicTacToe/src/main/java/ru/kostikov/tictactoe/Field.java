@@ -10,6 +10,13 @@ public abstract class Field {
 
     public List<Cell> winLine;
 
+    /** Идентификатор игрока Крестики */
+    public static final int PLAYER_X = 1;
+
+    /** Идентификатор игрока Нолики */
+    public static final int PLAYER_O = -1;
+
+
     /**
      * Выполняет ход, описанный объектом move за игрока с идентификатором player.
      *
