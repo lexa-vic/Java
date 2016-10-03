@@ -17,9 +17,8 @@ public class TicTacToeViewImp implements TicTacToeView, PlayerInput, PlayerOutpu
     private Scanner input;
 
     private Player player1 = new HumanPlayer("Man1",this, this);
-    private Player player2 =  new ComputerPlayer();//new HumanPlayer("Man2",this, this);
+    private Player player2 =  new ComputerPlayer();
     private String player1Figure = "";
-//    private Player computerPlayer = new ComputerPlayer();
 
     /**
      * Коснтруктор, передаем входной и выходной потоки
@@ -122,6 +121,9 @@ public class TicTacToeViewImp implements TicTacToeView, PlayerInput, PlayerOutpu
         return new Move(x, y);
     }
 
+    /**
+     *  Сообщение при неверном ходе
+     */
     @Override
     public void outputMove() {
         output.println("Неверный ход. Повторите ввод.");

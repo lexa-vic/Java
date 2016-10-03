@@ -14,13 +14,7 @@ public interface Player {
      * Установка поля на котором играем игрок
      * @param field
      */
-    void setField(Field field);
-
-    /**
-     * Установка фигуры за которую играет игрок
-     * @param figure
-     */
-    void setPlayerType(int figure);
+    void init(Field field);
 
     /**
      * Запрос хода у игрока

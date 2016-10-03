@@ -39,7 +39,7 @@ public class GamePatternImpTest {
     @Test
     public void whenPatternX0XThenScore400() throws Exception {
         int expectedScore = 400;
-        int resultScore = gamePatternImp.getLineScore("1011");
+        int resultScore = gamePatternImp.getLineScore("101");
 
         Assert.assertThat(expectedScore, is(resultScore) );
     }

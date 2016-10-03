@@ -43,13 +43,6 @@ public class TicTacToeFieldTest {
         Assert.assertThat(field.field[0][0], is(TicTacToeField.PLAYER_X));
     }
 
-    @Test(expected = IllegalMoveException.class)
-    public void whenDoIncorrectMoveThenThrowExeptions() throws Exception {
-        TicTacToeField field = new TicTacToeField(2, 1);
-
-        field.doMove(new Move(0,10), TicTacToeField.PLAYER_X);
-    }
-
     @Test
     public void whenPlayerWinThenGameOverTrue() throws Exception {
         int[][] field = new int[][]{{1, 0 }, {0, 1}};

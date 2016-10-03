@@ -13,6 +13,7 @@ import java.util.List;
 public class TicTacToeField extends Field {
 
     protected TicTacToeField.State state = TicTacToeField.State.NONE;
+    private  List<Move> nearMoves = null;
 
     /**
      * Возможные состояния игрового поля.
@@ -73,22 +74,62 @@ public class TicTacToeField extends Field {
 
     /**
      * Возвращает массив допустимых ходов.
+     * Возвращает ходы рядом с суще
      *
      * @return массив допустимых ходов.
      */
     @Override
     public Move[] getMoves() {
-        List<Move> moves = new ArrayList<Move>();
-        for (int r = 0; r < field.length; r++) {
-            for (int c = 0; c < field.length; c++) {
-                if (field[r][c] == 0) {
-                    moves.add(new Move(r, c));
+        List<Move> allMoves = new ArrayList<Move>();
+        Move[] moves = new Move[0];
+
+        if (nearMoves == null || nearMoves.size() == 0){
+            for (int r = 0; r < field.length; r++) {
+                for (int c = 0; c < field.length; c++) {
+                    if (field[r][c] == 0) {
+                        allMoves.add(new Move(r, c));
+                    }
+                }
+            }
+            nearMoves = new ArrayList<Move>();
+            moves = new Move[allMoves.size()];
+            allMoves.toArray(moves);
+        } else {
+            moves = new Move[nearMoves.size()];
+            nearMoves.toArray(moves);
+        }
+
+        return moves;
+    }
+
+    /**
+     * Вычисляем ближайшие к фигурам клетки куда можно сделать ход
+     * @param move
+     */
+    private void nearMovesCalc(Move move){
+        if (nearMoves == null){
+            nearMoves = new ArrayList<Move>();
+        } else {
+            for (int i = 0; i < nearMoves.size(); i++) {
+                if (nearMoves.get(i).equals(move)){
+                    nearMoves.remove(i);
                 }
             }
         }
-        Move[] a = new Move[moves.size()];
-        return moves.toArray(a);
+
+        for (int i = move.getRow() - 1;  i <= move.getRow() + 1; i++ ){
+            if (i >= 0 && i < field.length){
+                for (int j = move.getCol() - 1; j <= move.getCol() + 1; j++){
+                    if (j >= 0 && j < field.length){
+                        if (field[i][j] == 0) {
+                            nearMoves.add(new Move(i, j));
+                        }
+                    }
+                }
+            }
+        }
     }
+
 
     /**
      * Выполняет ход, описанный объектом move за игрока с идентификатором player.
@@ -107,22 +148,9 @@ public class TicTacToeField extends Field {
         }
         field[m.row][m.col] = player;
         reviewState();
+        nearMovesCalc(m);
         return true;
     }
-
-    /**
-     * Отменяет ход, описанный объектом move за игрока с идентификатором player.
-     *
-     * @param m
-     *            содержит координаты хода.
-     * @param player
-     *            идентификатор игрока, чей ход отменяется.
-     */
-//    public void undoMove(Move m, int player) {
-//        field[m.row][m.col] = 0;
-//        winLine = null;
-//        setState(State.NONE);
-//    }
 
     /**
      * Проверяет поле на предмет окончания игры.
@@ -132,10 +160,6 @@ public class TicTacToeField extends Field {
     public boolean isGameOver() {
         return state != State.NONE;
     }
-
-//    public int getWinner() {
-//        return (state == State.WIN_X) ? PLAYER_X : (state == State.WIN_O) ? PLAYER_O : 0;
-//    }
 
     /**
      * Возвращает список клеток, составляющих выигрышную комбинацию. Или null, если

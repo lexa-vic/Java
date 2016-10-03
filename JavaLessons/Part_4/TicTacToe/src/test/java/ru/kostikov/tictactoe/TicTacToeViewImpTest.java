@@ -17,7 +17,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterCoorectSizeThenPrintsOnlyOneStr() throws Exception {
         String inputStr = "5";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -35,7 +34,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterSize1ThenPrintsReenterSize() throws Exception {
         String inputStr = "1\n5\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -52,7 +50,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterIncorrectSizeThenPrintsWarning() throws Exception {
         String inputStr = "q\n5\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -69,7 +66,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterCoorectWinLengthThenPrintsOnlyOneStr() throws Exception {
         String inputStr = "5";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -87,7 +83,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterWinLength1ThenPrintsReenterWinLength() throws Exception {
         String inputStr = "1\n5\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -104,7 +99,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterIncorrectWinLengthThenPrintsWarning() throws Exception {
         String inputStr = "q\n5\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -121,7 +115,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterCoorectPlayerXThenPrintsOnlyOneStr() throws Exception {
         String inputStr = "x\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -137,7 +130,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterCoorectPlayerOThenPrintsOnlyOneStr() throws Exception {
         String inputStr = "o\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -153,7 +145,6 @@ public class TicTacToeViewImpTest {
     public void whenEnterIncorrectPlayerThenPrintsWarning() throws Exception {
         String inputStr = "q\no\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -169,7 +160,6 @@ public class TicTacToeViewImpTest {
     public void whenPlayeAgainYThenReturnTrue() throws Exception {
         String inputStr = "y\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -186,7 +176,6 @@ public class TicTacToeViewImpTest {
     public void whenPlayeAgainNThenReturnTrue() throws Exception {
         String inputStr = "n\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);
@@ -203,7 +192,6 @@ public class TicTacToeViewImpTest {
     public void whenPlayeAgainIncorrectThenReAsk() throws Exception {
         String inputStr = "q\nn\n";
         InputStream input = new ByteArrayInputStream(inputStr.getBytes());
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         TicTacToeViewImp view = new TicTacToeViewImp(input, baos);

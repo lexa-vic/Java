@@ -15,12 +15,7 @@ public class HumanPlayer implements Player{
     }
 
     @Override
-    public void setField(Field field) {
-
-    }
-
-    @Override
-    public void setPlayerType(int figure) {
+    public void init(Field field) {
 
     }
 

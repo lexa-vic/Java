@@ -18,11 +18,8 @@ public class TicTacToeGame {
     }
 
     public void newGame(Player PlayerX, Player PlayerO) {
-        PlayerX.setField(field);
-        PlayerO.setField(field);
-
-        PlayerX.setPlayerType(TicTacToeField.PLAYER_X);
-        PlayerO.setPlayerType(TicTacToeField.PLAYER_O);
+        PlayerX.init(field);
+        PlayerO.init(field);
 
         while (!field.isGameOver()) {
             while(!field.doMove(PlayerX.getMove(), TicTacToeField.PLAYER_X)){

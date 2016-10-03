@@ -10,49 +10,66 @@ import ru.kostikov.tictactoe.Player;
 public class ComputerPlayer implements Player {
     /** Игровое поле */
     private Field field;
-    /** За кого играет фигура Х или О*/
-    private int player;
     /** Паттерны игры */
     private GamePattern gamePatternX;
     private GamePattern gamePatternO;
 
-
+    /**
+     * Установка нового поля
+     * Создание паттернов
+     * @param field
+     */
     @Override
-    public void setField(Field field) {
+    public void init(Field field) {
         this.field = field;
         this.createPatterns();
     }
 
+    /**
+     *  Создание паттернов для Х и О
+     */
     private void createPatterns(){
         this.gamePatternX = new GamePatternImp(field.winLength, field.PLAYER_X);
         this.gamePatternO = new GamePatternImp(field.winLength, field.PLAYER_O);
     }
 
-    @Override
-    public void setPlayerType(int figure) {
-        player = figure;
-    }
-
+    /**
+     * Ход копьютера
+     * @return Move лучший по мнению копьютера ход
+     */
     @Override
     public Move getMove() {
         int score = 0;
         Move bestMove = null;
-        for (Move move: this.field.getMoves()){
-            String [] lines = getLines(this.field.field, this.field.winLength, move);
+        if (checkFirstMove()){
+            bestMove = this.field.getMoves()[this.field.getMoves().length/2];
+        }else {
+            for (Move move: this.field.getMoves()){
+                String [] lines = getLines(this.field.field, this.field.winLength, move);
 
-            for (String line : lines ){
-                if (line != null && !line.equals("")){
-                    int lineScore = 0;
-                    lineScore += this.gamePatternX.getLineScore(line);
-                    lineScore += this.gamePatternO.getLineScore(line);
+                for (String line : lines ){
+                    if (line != null && !line.equals("")){
+                        int lineScore = 0;
+                        lineScore += this.gamePatternX.getLineScore(line);
+                        lineScore += this.gamePatternO.getLineScore(line);
 
-                    if (lineScore > score){
-                        bestMove = move;
+                        if (lineScore > score){
+                            score = lineScore;
+                            bestMove = move;
+                        }
                     }
                 }
             }
         }
         return bestMove;
+    }
+
+    /**
+     * Проверка первый ли это ход
+     * @return boolean true - это первый ход на поле
+     */
+    private boolean checkFirstMove(){
+        return this.field.getMoves().length == this.field.field.length*this.field.field.length ? true : false;
     }
 
     /**
@@ -69,10 +86,15 @@ public class ComputerPlayer implements Player {
      * Callback ошибки хода
      */
     @Override
-    public void badMove() {
+    public void badMove() {}
 
-    }
-
+    /**
+     * Создает 4 линии для сравнения с игровыми паттернами
+     * @param field поле
+     * @param winLength размер выйгрышной комбинации
+     * @param move Ход
+     * @return Массив линий(/\-|)
+     */
     private String[] getLines(int[][] field, int winLength, Move move){
         String[] lines = new String[4];
         StringBuilder line = new StringBuilder();

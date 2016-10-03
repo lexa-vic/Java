@@ -46,15 +46,13 @@ public class GamePatternImp implements GamePattern{
             generex = new Generex(p1);
             patterns.add(new PatternScore(generex.getFirstMatch(), 500));
 
-            // 500, p: ['xxxx0']}, // Полузакрытая четверка. Один ход до победы, но соперник может заблокировать
-            p1 = String.format("(%d){%d}0", player, winLength-1);
-            generex = new Generex(p1);
-            patterns.add(new PatternScore(generex.getFirstMatch(), 500));
+            patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 500));
 
             // 400, p: ['x0xxx']}, // Четверка с брешью. Один ход до победы, но соперник может заблокировать
             p1 = String.format("%d0(%d){%d}", player, player, winLength-2);
             generex = new Generex(p1);
             patterns.add(new PatternScore(generex.getFirstMatch(),  400));
+            patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 400));
 
             if (winLength > 3){
                 // 400, p: ['xx0xx']}, // Четверка с брешью. Один ход до победы, но соперник может заблокировать
@@ -66,6 +64,7 @@ public class GamePatternImp implements GamePattern{
             p1 = String.format("00(%d){%d}000",player,  winLength-2);
             generex = new Generex(p1);
             patterns.add(new PatternScore(generex.getFirstMatch(), 100));
+            patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 100));
 
             //80, p: ['00xxx00']}, // Открытая тройка (как 2 полузакрытых)
             p1 = String.format("00(%d){%d}00",player,  winLength-2);
@@ -76,6 +75,7 @@ public class GamePatternImp implements GamePattern{
             p1 = String.format("0(%d){%d}00",player,  winLength-2);
             generex = new Generex(p1);
             patterns.add(new PatternScore(generex.getFirstMatch(), 75));
+            patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 75));
 
             // 50, p: ['0xxx0','xxx00']}, // Полузакрытая тройка
             p1 = String.format("0(%d){%d}0",player,  winLength-2);
@@ -87,31 +87,44 @@ public class GamePatternImp implements GamePattern{
                 p1 = String.format("%d0(%d){%d}0",player, player, winLength - 3);
                 generex = new Generex(p1);
                 patterns.add(new PatternScore(generex.getFirstMatch(), 50));
+                patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 50));
 
                 p1 = String.format("%d{%d}0%d0", player, winLength - 3, player);
                 generex = new Generex(p1);
                 patterns.add(new PatternScore(generex.getFirstMatch(), 50));
+                patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 50));
 
                 p1 = String.format("%d00(%d){%d}", player, player, winLength - 3);
                 generex = new Generex(p1);
                 patterns.add(new PatternScore(generex.getFirstMatch(), 50));
+                patterns.add(new PatternScore(new StringBuffer(generex.getFirstMatch()).reverse().toString() , 50));
             }
             if (winLength > 4) {
                 // 10, p: ['000xx000']}, // Открытая двойка
-                p1 = String.format("000(%d){%d}000", player, player, winLength - 3);
+                p1 = String.format("000(%d){%d}000", player, winLength - 3);
                 generex = new Generex(p1);
                 patterns.add(new PatternScore(generex.getFirstMatch(), 50));
 
                 // 5, p: ['0xx0']} // Открытая двойка
-                p1 = String.format("0(%d){%d}0", player, player, winLength - 3);
+                p1 = String.format("0(%d){%d}0", player, winLength - 3);
                 generex = new Generex(p1);
                 patterns.add(new PatternScore(generex.getFirstMatch(), 50));
             }
+            p1 = String.format("0%d0", player);
+            generex = new Generex(p1);
+            patterns.add(new PatternScore(generex.getFirstMatch(), 5));
+
+            patterns.add(new PatternScore("0", 1));
 
         }
 
     }
 
+    /**
+     * Счет линии изходя из того какой шаблон подошел
+     * @param line
+     * @return очки - счет для этого хода
+     */
     public int getLineScore(String line){
         for (PatternScore pattern: patterns){
             if (line.contains(pattern.pattern)){
