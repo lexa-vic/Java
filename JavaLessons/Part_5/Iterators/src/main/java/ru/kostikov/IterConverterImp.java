@@ -17,6 +17,7 @@ public class IterConverterImp implements IterConverter{
 
             @Override
             public boolean hasNext() {
+                boolean result = false;
 
                 while (it.hasNext() || subIter != null){
                     if (subIter == null){
@@ -24,12 +25,13 @@ public class IterConverterImp implements IterConverter{
                     }
 
                     if (subIter.hasNext()){
-                        return subIter.hasNext();
+                        result =  subIter.hasNext();
+                        break;
                     } else {
                         subIter = null;
                     }
                 }
-                return false;
+                return result;
             }
 
             @Override
