@@ -12,6 +12,12 @@ public interface SimpleContainer<E> extends Iterable<E> {
     void add(E e);
 
     /**
+     * Add new item by index
+     * @param e - new item
+     */
+    void add(int index, E e);
+
+    /**
     * Gets element by index
     * @param index index of element
     * @return element value

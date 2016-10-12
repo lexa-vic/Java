@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 /**
  * Created by Алексей on 12.10.2016.
  */
-public class SimpleArrayListTest {
+public class SimpleLinkedListTest {
 
     @Test
     public void whenAddNewItemThenGetsNewItem(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>();
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         int result = list.get(0);
@@ -26,7 +26,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddNewItemInCenterThenGetsNewItem(){
-        SimpleArrayList<Integer> list = new SimpleArrayList<>();
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.add(2);
@@ -39,7 +39,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddNewItemInCenterThenGetsOffsetItemCorrect(){
-        SimpleArrayList<Integer> list = new SimpleArrayList<>();
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.add(2);
@@ -50,21 +50,18 @@ public class SimpleArrayListTest {
         Assert.assertThat(result, is(3));
     }
 
-    @Test
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenDeleteLastItemThenGetsNullIn(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>();
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.delete(0);
-        Integer result = list.get(0);
-        Integer expect = null;
-
-        Assert.assertThat(result, is(expect));
+        list.get(0);
     }
 
     @Test
     public void whenAddMoreThanSizetThenGetsLastItemCorrect(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>(1);
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.add(2);
@@ -77,7 +74,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenArrayHasElementThenIteratorsGiveIt(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>(3);
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
         int[] expectedArray = new int[]{1, 2, 3};
         int[] resultArray = new int[3];
 
@@ -97,7 +94,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenArrayHasNotEvenNumbersAndThenIteratorsGiveNoNum(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>(3);
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
         Integer[] expectedArray = new Integer[3];
         Integer[] resultArray = new Integer[3];
 
@@ -113,7 +110,7 @@ public class SimpleArrayListTest {
 
     @Test(expected = NoSuchElementException.class)
     public void whenArrayHasNotElementThenThrowsExeption(){
-        SimpleContainer<Integer> list = new SimpleArrayList<>(3);
+        SimpleContainer<Integer> list = new SimpleLinkedList<>();
         int[] expectedArray = new int[]{1, 2, 3};
         int[] resultArray = new int[3];
 
@@ -123,8 +120,5 @@ public class SimpleArrayListTest {
         it.next();
         it.next();
     }
-
-
-
 
 }

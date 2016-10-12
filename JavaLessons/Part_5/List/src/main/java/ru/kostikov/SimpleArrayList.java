@@ -31,13 +31,13 @@ public class SimpleArrayList<E> implements SimpleContainer<E> {
      */
     private void rangeCheck(int index) {
         if (index >=  this.array.length){
-            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+this.index );
+            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+index );
         }
     }
 
 
     /**
-     * Add new item
+     * Add new item at end of array
      *
      * @param e - new item
      */
@@ -49,6 +49,27 @@ public class SimpleArrayList<E> implements SimpleContainer<E> {
         }
         this.array[this.index++] = e;
 
+    }
+
+    /**
+     * Add new item by index
+     *
+     * @param e - new item
+     */
+    @Override
+    public void add(int index, E e) {
+
+        if (index >= this.array.length){
+            this.array = Arrays.copyOf(this.array, this.array.length*2);
+        }
+
+        int numMoved = this.index - index;
+        if (numMoved > 0)
+            System.arraycopy(this.array, index, this.array, index+1,
+                    numMoved);
+
+        this.array[index] = e;
+        this.index++;
     }
 
     /**
