@@ -26,7 +26,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddNewItemInCenterThenGetsNewItem(){
-        SimpleContainer<Integer> list = new SimpleLinkedList<>();
+        SimpleList<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.add(2);
@@ -39,7 +39,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddNewItemInCenterThenGetsOffsetItemCorrect(){
-        SimpleContainer<Integer> list = new SimpleLinkedList<>();
+        SimpleList<Integer> list = new SimpleLinkedList<>();
 
         list.add(1);
         list.add(2);

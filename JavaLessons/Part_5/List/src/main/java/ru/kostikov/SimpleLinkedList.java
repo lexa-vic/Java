@@ -1,16 +1,14 @@
 package ru.kostikov;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import javax.naming.OperationNotSupportedException;
+import java.util.*;
 
 /**
  * Created by Алексей on 12.10.2016.
  */
-public class SimpleLinkedList<E> implements SimpleContainer<E>{
+public class SimpleLinkedList<E> implements SimpleList<E>{
 
-    private class Node<E>{
+    protected class Node<E>{
         public E data;
         public Node prevNode;
         public Node nextNode;
@@ -22,14 +20,14 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
         }
     }
 
-    private Node<E> first = null;
-    private Node<E> last = null;
-    private int size = 0;
+    protected Node<E> first = null;
+    protected Node<E> last = null;
+    protected int size = 0;
 
     /**
      * Tells if the argument is the index of an existing element.
      */
-    private boolean isElementIndex(int index) {
+    protected boolean isElementIndex(int index) {
         return index >= 0 && index < size;
     }
 
@@ -37,7 +35,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
      * Tells if the argument is the index of a valid position for an
      * iterator or an add operation.
      */
-    private boolean isPositionIndex(int index) {
+    protected boolean isPositionIndex(int index) {
         return index >= 0 && index <= size;
     }
 
@@ -46,16 +44,16 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
      * Of the many possible refactorings of the error handling code,
      * this "outlining" performs best with both server and client VMs.
      */
-    private String outOfBoundsMsg(int index) {
+    protected String outOfBoundsMsg(int index) {
         return "Index: "+index+", Size: "+size;
     }
 
-    private void checkElementIndex(int index) {
+    protected void checkElementIndex(int index) {
         if (!isElementIndex(index))
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
 
-    private void checkPositionIndex(int index) {
+    protected void checkPositionIndex(int index) {
         if (!isPositionIndex(index))
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
@@ -81,7 +79,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
     /**
      * Links e as last element.
      */
-    private void linkLast(E e){
+    protected void linkLast(E e){
         final Node<E> l = last;
         final Node<E> newNode = new Node<>(e,l, null);
 
@@ -96,7 +94,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
     /**
      * Inserts element e before non-null Node succ.
      */
-    private void linkBefore(E e, Node<E> node) {
+    protected void linkBefore(E e, Node<E> node) {
 
         final Node<E> pred = node.prevNode;
         final Node<E> newNode = new Node<>(e, pred, node);
@@ -111,7 +109,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
     /**
      * Unlinks non-null node x.
      */
-    private void unlink(Node<E> x) {
+    protected void unlink(Node<E> x) {
         // assert x != null;
         final E element = x.data;
         final Node<E> next = x.nextNode;
@@ -152,7 +150,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
      * @param e     - new item
      */
     @Override
-    public void add(int index, E e) {
+    public void add(int index, E e){
         checkPositionIndex(index);
 
         if (index == size)
@@ -169,7 +167,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
      * @throws IndexOutOfBoundsException
      */
     @Override
-    public E get(int index) {
+    public E get(int index){
         checkElementIndex(index);
         return node(index).data;
     }
@@ -181,7 +179,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E>{
      * @throws IndexOutOfBoundsException
      */
     @Override
-    public void delete(int index) {
+    public void delete(int index){
         checkElementIndex(index);
         unlink(node(index));
     }

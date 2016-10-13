@@ -1,5 +1,7 @@
 package ru.kostikov;
 
+import javax.naming.OperationNotSupportedException;
+
 /**
  * Created by Алексей on 11.10.2016.
  */
@@ -11,11 +13,6 @@ public interface SimpleContainer<E> extends Iterable<E> {
      */
     void add(E e);
 
-    /**
-     * Add new item by index
-     * @param e - new item
-     */
-    void add(int index, E e);
 
     /**
     * Gets element by index

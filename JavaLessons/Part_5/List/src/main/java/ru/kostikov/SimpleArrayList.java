@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 /**
  * Created by Алексей on 12.10.2016.
  */
-public class SimpleArrayList<E> implements SimpleContainer<E> {
+public class SimpleArrayList<E> implements SimpleList<E> {
     /** Array of items  */
     private Object[] array;
 
