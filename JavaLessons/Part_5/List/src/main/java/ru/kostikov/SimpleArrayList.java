@@ -1,6 +1,5 @@
 package ru.kostikov;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -10,10 +9,10 @@ import java.util.NoSuchElementException;
  */
 public class SimpleArrayList<E> implements SimpleList<E> {
     /** Array of items  */
-    private Object[] array;
+    protected Object[] array;
 
     /** Current index of storage */
-    private int index;
+    protected int index;
 
     private final int DEFAULT_SIZE = 10;
 
@@ -48,7 +47,6 @@ public class SimpleArrayList<E> implements SimpleList<E> {
             this.array = Arrays.copyOf(this.array, this.array.length*2);
         }
         this.array[this.index++] = e;
-
     }
 
     /**

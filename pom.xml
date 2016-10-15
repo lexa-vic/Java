@@ -41,6 +41,7 @@
 		<module>JavaLessons/Part_5/Iterators</module>
 		<module>JavaLessons/Part_5/Generic</module>
 		<module>JavaLessons/Part_5/List</module>
+		<module>JavaLessons/Part_5/Set</module>
 		
 
     </modules>
