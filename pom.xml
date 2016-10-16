@@ -42,6 +42,7 @@
 		<module>JavaLessons/Part_5/Generic</module>
 		<module>JavaLessons/Part_5/List</module>
 		<module>JavaLessons/Part_5/Set</module>
+		<module>JavaLessons/Part_5/Map</module>
 		
 
     </modules>
