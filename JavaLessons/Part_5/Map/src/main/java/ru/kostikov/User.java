@@ -35,6 +35,18 @@ public class User {
         System.out.println(userMap);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (children != user.children) return false;
+        if (!name.equals(user.name)) return false;
+        return birthday.equals(user.birthday);
+
+    }
 
     @Override
     public int hashCode() {
