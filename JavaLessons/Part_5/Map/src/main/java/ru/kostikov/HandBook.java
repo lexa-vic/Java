@@ -16,25 +16,6 @@ public class HandBook<K, V> implements Iterable<V>{
             this.value = value;
             this.key = key;
         }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Entity entity = (Entity) o;
-
-            if (!key.equals(entity.key)) return false;
-            return value.equals(entity.value);
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = key.hashCode();
-            result = 31 * result + value.hashCode();
-            return result;
-        }
     }
     /**
      * Ratio if there is no place to add.
