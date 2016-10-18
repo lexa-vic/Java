@@ -1,19 +1,19 @@
 package ru.kostikov;
 
-
-
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
- * Created by Алексей on 15.10.2016.
+ * Created by Алексей on 18.10.2016.
  */
-public class SimpleArraySet<E> extends SimpleArrayList<E> {
-    public SimpleArraySet() {
+public class SimpleArraySortedSet<E> extends SimpleArrayList<E> {
+    public SimpleArraySortedSet() {
         super();
     }
 
-    public SimpleArraySet(int size) {
+    public SimpleArraySortedSet(int size) {
         super(size);
     }
 
@@ -24,9 +24,8 @@ public class SimpleArraySet<E> extends SimpleArrayList<E> {
      */
     @Override
     public void add(E e) {
-
-
-        if (!Arrays.asList(super.array).contains(e)){
+        Arrays.sort(super.array, 0, super.index);
+        if (Arrays.binarySearch(super.array, 0, super.index, e) < 0) {
             super.add(e);
         }
     }

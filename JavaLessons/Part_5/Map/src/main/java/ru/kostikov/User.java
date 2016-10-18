@@ -21,20 +21,6 @@ public class User {
         this.birthday = birthday;
     }
 
-    public static void main(String[] args) {
-        User first = new User("Aleksey", 0, new GregorianCalendar(1989,
-                Calendar.MARCH, 06));
-        User second = new User("Aleksey", 0, new GregorianCalendar(1989,
-                Calendar.MARCH, 06));
-
-        Map<User, Object> userMap = new HashMap<>();
-
-        userMap.put(first, new Object());
-        userMap.put(second, new Object());
-
-        System.out.println(userMap);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

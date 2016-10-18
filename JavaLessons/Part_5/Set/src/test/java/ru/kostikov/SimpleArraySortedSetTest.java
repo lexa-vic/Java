@@ -1,8 +1,10 @@
 package ru.kostikov;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -11,13 +13,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /**
- * Created by Алексей on 15.10.2016.
+ * Created by Алексей on 18.10.2016.
  */
-public class SimpleArraySetTest {
-
+public class SimpleArraySortedSetTest {
     @Test
     public void whenAddNewItemThenGetsNewItem(){
-        SimpleArraySet<Integer> set = new SimpleArraySet<>();
+        SimpleArraySortedSet<Integer> set = new SimpleArraySortedSet<>();
 
         set.add(1);
 
@@ -30,7 +31,7 @@ public class SimpleArraySetTest {
 
     @Test
     public void whenAddTwoSameItemThenSameNorAdd(){
-        SimpleArraySet<Integer> set = new SimpleArraySet<>();
+        SimpleArraySortedSet<Integer> set = new SimpleArraySortedSet<>();
 
         set.add(1);
         set.add(1);
@@ -45,7 +46,7 @@ public class SimpleArraySetTest {
 
     @Test
     public void whenSetHasElementThenIteratorsPollIt(){
-        SimpleArraySet<Integer> set = new SimpleArraySet<>();
+        SimpleArraySortedSet<Integer> set = new SimpleArraySortedSet<>();
         int[] expectedArray = new int[]{1, 2, 3};
         int[] resultArray = new int[3];
 
@@ -67,7 +68,7 @@ public class SimpleArraySetTest {
 
     @Test
     public void whenArrayHasNotEvenNumbersAndThenIteratorsGiveNoNum(){
-        SimpleArraySet<Integer> set = new SimpleArraySet<>();
+        SimpleArraySortedSet<Integer> set = new SimpleArraySortedSet<>();
         Integer[] expectedArray = new Integer[3];
         Integer[] resultArray = new Integer[3];
 
@@ -83,7 +84,7 @@ public class SimpleArraySetTest {
 
     @Test(expected = NoSuchElementException.class)
     public void whenArrayHasNotElementThenThrowsExeption(){
-        SimpleArraySet<Integer> set = new SimpleArraySet<>();
+        SimpleArraySortedSet<Integer> set = new SimpleArraySortedSet<>();
         int[] expectedArray = new int[]{1, 2, 3};
         int[] resultArray = new int[3];
 
@@ -93,16 +94,13 @@ public class SimpleArraySetTest {
         it.next();
         it.next();
     }
-
     @Test
     public void SpeedTest() throws Exception {
-        SimpleArraySet<Integer> set= new SimpleArraySet<>(20);
+        SimpleArraySortedSet<Integer> set= new SimpleArraySortedSet<>(20);
 
         Random r = new Random();
         for(int index = 0 ; index < 50000 ; index ++ ){
             set.add(r.nextInt(index+1));
         }
     }
-
-
 }
