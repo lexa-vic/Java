@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Orders>
+<AddOrder book="book-1" operation="SELL" price="100.50" volume="81" orderId="1" />
+<AddOrder book="book-3" operation="BUY" price=" 99.50" volume="86" orderId="2" />
+<AddOrder book="book-1" operation="BUY" price=" 99.70" volume="16" orderId="3" />
+<AddOrder book="book-3" operation="SELL" price="100.00" volume="80" orderId="4" />
+<AddOrder book="book-2" operation="SELL" price="100.50" volume="79" orderId="5" />
+<AddOrder book="book-2" operation="BUY" price=" 99.40" volume="78" orderId="6" />
+<AddOrder book="book-3" operation="SELL" price="100.00" volume="82" orderId="7" />
+<AddOrder book="book-2" operation="SELL" price="100.20" volume="42" orderId="8" />
+<AddOrder book="book-3" operation="SELL" price="100.40" volume="75" orderId="9" />
+<AddOrder book="book-1" operation="BUY" price=" 99.80" volume="64" orderId="10" />
+<AddOrder book="book-2" operation="SELL" price="100.50" volume="46" orderId="11" />
+<AddOrder book="book-3" operation="SELL" price="100.00" volume="48" orderId="12" />
+<AddOrder book="book-2" operation="SELL" price="100.20" volume="99" orderId="13" />
+<AddOrder book="book-3" operation="SELL" price="100.40" volume="23" orderId="14" />
+<AddOrder book="book-3" operation="BUY" price="100.00" volume="55" orderId="15" />
+<AddOrder book="book-2" operation="SELL" price="100.10" volume="29" orderId="16" />
+<AddOrder book="book-3" operation="SELL" price="100.00" volume="24" orderId="17" />
+<AddOrder book="book-1" operation="SELL" price="100.20" volume="24" orderId="18" />

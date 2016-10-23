@@ -44,7 +44,7 @@
 		<module>JavaLessons/Part_5/Set</module>
 		<module>JavaLessons/Part_5/Map</module>
 		<module>JavaLessons/Part_5/Tree</module>
-		
+		<module>JavaLessons/Part_5/OrderBook</module>
 
     </modules>
   
