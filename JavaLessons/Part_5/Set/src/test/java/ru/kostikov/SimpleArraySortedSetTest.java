@@ -96,7 +96,7 @@ public class SimpleArraySortedSetTest {
     }
     @Test
     public void SpeedTest() throws Exception {
-        SimpleArraySortedSet<Integer> set= new SimpleArraySortedSet<>(20);
+        SimpleArraySortedSet<Integer> set= new SimpleArraySortedSet<>();
 
         Random r = new Random();
         for(int index = 0 ; index < 50000 ; index ++ ){

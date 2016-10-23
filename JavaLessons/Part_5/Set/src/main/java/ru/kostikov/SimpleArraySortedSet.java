@@ -1,21 +1,21 @@
 package ru.kostikov;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Created by Алексей on 18.10.2016.
  */
-public class SimpleArraySortedSet<E> extends SimpleArrayList<E> {
+public class SimpleArraySortedSet<E extends Comparable> extends SimpleLinkedList<E> {
     public SimpleArraySortedSet() {
         super();
     }
 
-    public SimpleArraySortedSet(int size) {
-        super(size);
-    }
+//    public SimpleArraySortedSet(int size) {
+//        super(size);
+//    }
+
+    List<E> list = new LinkedList<E>();
+    int index = 0;
 
     /**
      * Add new item at end of array
@@ -24,9 +24,9 @@ public class SimpleArraySortedSet<E> extends SimpleArrayList<E> {
      */
     @Override
     public void add(E e) {
-        Arrays.sort(super.array, 0, super.index);
-        if (Arrays.binarySearch(super.array, 0, super.index, e) < 0) {
-            super.add(e);
+        if (Collections.binarySearch(list, e, null) < 0) {
+            list.add(e);
+            Collections.sort(list);
         }
     }
 
