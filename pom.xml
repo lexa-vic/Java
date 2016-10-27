@@ -46,7 +46,10 @@
 		<module>JavaLessons/Part_5/Tree</module>
 		<module>JavaLessons/Part_5/OrderBook</module>
 		<module>JavaLessons/Part_5/Coins</module>
-
+		
+		<module>JavaLessons/Part_6/GarbageCollector</module>
+		
+		
     </modules>
   
 
