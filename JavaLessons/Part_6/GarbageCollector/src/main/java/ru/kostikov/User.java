@@ -32,15 +32,17 @@ public class User {
 
     public static void main(String[] args) {
         for (int index = 0; index < 10000; index++){
-         System.out.println(new User(index, String.valueOf(index),index));
+            System.out.println(new User(index, String.valueOf(index),index));
         }
         int mb = 1024 * 1024;
+
         Runtime runtime = Runtime.getRuntime();
+
         System.out.println("##### Heap utilization statistics [MB] #####");
-        System.out.println("Used memory: "+ (runtime.totalMemory() - runtime.freeMemory())/mb + "Mb");
-        System.out.println("Free memory: "+ (runtime.freeMemory())/mb + "Mb");
-        System.out.println("Total memory: "+ (runtime.totalMemory() )/mb + "Mb");
-        System.out.println("Max memory: "+ (runtime.maxMemory() )/mb + "Mb");
+        System.out.println("Used memory: "+ (runtime.totalMemory() - runtime.freeMemory())/mb + " Mbyte");
+        System.out.println("Free memory: "+ (runtime.freeMemory())/mb + " Mbyte");
+        System.out.println("Total memory: "+ (runtime.totalMemory()/mb) + " Mbyte");
+        System.out.println("Max memory: "+ (runtime.maxMemory()/mb) + " Mbyte");
 
     }
 }
