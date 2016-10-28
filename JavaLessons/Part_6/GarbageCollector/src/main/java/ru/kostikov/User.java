@@ -1,5 +1,7 @@
 package ru.kostikov;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by Алексей on 25.10.2016.
  */
@@ -31,10 +33,17 @@ public class User {
     }
 
     public static void main(String[] args) {
-        for (int index = 0; index < 10000; index++){
-            System.out.println(new User(index, String.valueOf(index),index));
-        }
+//        for (int index = 0; index < 10000; index++){
+//            System.out.println(new User(index, String.valueOf(index),index));
+//        }
         int mb = 1024 * 1024;
+        User user = new User(1, "1", 2);
+
+        WeakReference<User> weakUser = new WeakReference<User>(user);
+
+        user = null;
+
+        System.gc();
 
         Runtime runtime = Runtime.getRuntime();
 
