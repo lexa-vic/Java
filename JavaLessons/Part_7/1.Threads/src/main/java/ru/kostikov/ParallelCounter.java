@@ -1,9 +1,9 @@
 package ru.kostikov;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 /**
  * Created by Алексей on 31.10.2016.
@@ -21,23 +21,52 @@ public class ParallelCounter {
         return inputFileStream;
     }
 
-    public void startThread(Counter counter){
-        new Thread(new Runnable() {
+    private Thread getThread(Counter counter){
+        return new Thread(new Runnable() {
             @Override
             public void run() {
                 counter.count();
             }
-        }).start();
+        });
+    }
+
+    public Thread mainThread(){
+        SpaceCounter spaceCounter = new SpaceCounter(System.out,ParallelCounter.setSourceFile("Example.txt"));
+        WordCounter  wordCounter = new WordCounter(System.out,ParallelCounter.setSourceFile("Example2.txt"));
+
+        Thread mainThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Start parallel counters");
+
+                Thread spaceThread = getThread(spaceCounter);
+                Thread wordThread = getThread(wordCounter);
+
+                spaceThread.start();
+                wordThread.start();
+
+                spaceThread.interrupt();
+
+                try {
+                    spaceThread.join();
+                    wordThread.join();
+                } catch (InterruptedException e) {
+                    System.out.println("Main thread is stopped");
+                }
+                System.out.println("Finish parallel counters");
+            }
+        });
+
+        return mainThread;
     }
 
     public static void main(String[] args) {
 
-        SpaceCounter spaceCounter = new SpaceCounter(System.out,ParallelCounter.setSourceFile("Example.txt"));
-        WordCounter  wordCounter = new WordCounter(System.out,ParallelCounter.setSourceFile("Example2.txt"));
-
         ParallelCounter parallelCounter = new ParallelCounter();
 
-        parallelCounter.startThread(spaceCounter);
-        parallelCounter.startThread(wordCounter);
+        Thread mainThread = parallelCounter.mainThread();
+
+        mainThread.start();
+        mainThread.interrupt();
     }
 }
