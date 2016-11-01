@@ -21,7 +21,7 @@ public class WordCounterTest {
         WordCounter spaceCounter = new WordCounter(baos, inputStream);
         String expected = "Word count 3\n";
 
-        spaceCounter.count();
+        spaceCounter.run();
 
         Assert.assertThat(expected, is(baos.toString()));
     }

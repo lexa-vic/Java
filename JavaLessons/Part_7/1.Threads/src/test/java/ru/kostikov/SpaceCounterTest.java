@@ -23,7 +23,7 @@ public class SpaceCounterTest {
         SpaceCounter spaceCounter = new SpaceCounter(baos, inputStream);
         String expected = "Space count 5\n";
 
-        spaceCounter.count();
+        spaceCounter.run();
 
         Assert.assertThat(expected, is(baos.toString()));
     }
