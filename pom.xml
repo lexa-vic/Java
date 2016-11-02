@@ -51,6 +51,7 @@
 		
 		<module>JavaLessons/Part_7/1.Threads</module>
 		<module>JavaLessons/Part_7/2. JMM</module>
+		<module>JavaLessons/Part_7/3.Monitore, Synchronizy</module>
 	
     </modules>
   
