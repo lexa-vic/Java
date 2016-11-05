@@ -16,10 +16,6 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -42,8 +38,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + amount;
-        return result;
+        return name.hashCode();
     }
 }
