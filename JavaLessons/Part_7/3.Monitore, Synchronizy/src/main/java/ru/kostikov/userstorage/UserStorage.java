@@ -15,7 +15,7 @@ public class UserStorage {
      * Puts User to storage
      * @param user
      */
-    public void add(User user){
+    public synchronized void add(User user){
         storage.put(user.getName(), user);
     }
 
@@ -23,7 +23,7 @@ public class UserStorage {
      * Deletes User from storage
      * @param name
      */
-    public void delete(String name){
+    public synchronized void delete(String name){
         storage.remove(name);
     }
 
@@ -32,7 +32,7 @@ public class UserStorage {
      * @param name User's name
      * @return User or null if no users whis this value
      */
-    public User getUser(String name){
+    public synchronized User getUser(String name){
         return storage.get(name);
     }
 

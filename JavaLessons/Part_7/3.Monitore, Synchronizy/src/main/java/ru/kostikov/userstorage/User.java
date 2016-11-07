@@ -12,15 +12,15 @@ public class User {
         this.name = name;
     }
 
-    public String getName() {
+    public synchronized String getName() {
         return name;
     }
 
-    public int getAmount() {
+    public synchronized int getAmount() {
         return amount;
     }
 
-    public void setAmount(int account) {
+    public synchronized void setAmount(int account) {
         this.amount = account;
     }
 
